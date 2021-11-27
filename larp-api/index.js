@@ -5,7 +5,9 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-//app.use(express.json());
+//Настраиваем пути для api
+app.use(express.json());
 app.use('/api', userRouter);
 
+//Запускаем созданный сервер
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));
