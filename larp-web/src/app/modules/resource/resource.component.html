@@ -1,0 +1,185 @@
+<h1>Добавить новый объект</h1>
+<p-toast position="top-center"></p-toast>
+<div class="resource-form" [formGroup]="resourceForm">
+  <div>
+    <span class="p-float-label">
+      <input id="float-input" type="text" pInputText formControlName="name" />
+      <label for="float-input">Name</label>
+    </span>
+  </div>
+  <div>
+    <span class="p-float-label">
+      <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" formControlName="description"></textarea>
+      <label for="float-input">Description</label>
+    </span>
+  </div>
+  <div>
+    <span class="p-float-label">
+      <p-inputNumber [showButtons]="true"  formControlName="min"></p-inputNumber>
+      <label for="float-input">Min</label>
+    </span>
+  </div>
+  <div>
+    <span class="p-float-label">
+      <p-inputNumber [showButtons]="true" formControlName="max"></p-inputNumber>
+      <label for="float-input">max</label>
+    </span>
+  </div>
+  <div>
+    <span class="p-float-label">
+      <p-inputNumber [showButtons]="true" formControlName="min"></p-inputNumber>
+      <label for="float-input">step</label>
+    </span>
+  </div>
+</div>
+<br />
+<p-button label="Добавить" (click)="onAddResource()"></p-button>
+
+<h1>Таблица с данными</h1>
+
+<p-table
+  #dt
+  class="resource-list"
+  [value]="resources"
+  [rowHover]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0"
+  [globalFilterFields]="['name']"
+>
+<ng-template pTemplate="caption">
+  <div class="resource-list_header">
+    Список resources
+      <p-button icon="pi pi-refresh" (click)="onRefresh()"></p-button>
+  <!-- <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input
+      pInputText
+      type="text"
+      (input)="dt.filterGlobal($event.target.value, 'contains')"
+      placeholder="Поиск"
+    />
+  </span> -->
+  </div>
+</ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th class="resource-list_name" field="name" pSortableColumn="name">Имя</th>
+      <th class="resource-list_name" field="description">description</th>
+      <th class="resource-list_name" field="min">min</th>
+      <th class="resource-list_name" field="max">max</th>
+      <th class="resource-list_name" field="step">step</th>
+      <th class="resource-list_options"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-resource>
+    <tr>
+      <td class="resource-list_name">
+        <span class="p-column-title">Имя</span>
+        {{ resource.name }}
+      </td>
+      <td class="resource-list_description">
+        <span class="p-column-title">description</span>
+        {{ resource.description }}
+      </td>
+      <td class="resource-list_min">
+        <span class="p-column-title">min</span>
+        {{ resource.min }}
+      </td>
+      <td class="resource-list_max">
+        <span class="p-column-title">max</span>
+        {{ resource.max }}
+      </td>
+      <td class="resource-list_step">
+        <span class="p-column-title">step</span>
+        {{ resource.step }}
+      </td>
+      <td class="resource-list_options">
+        <p-button (click)="onRemove(resource)">
+          <i class="pi pi-trash"></i>
+        </p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<h1>Редактировать объект</h1>
+<p-dropdown
+  [options]="resourcesList"
+  [(ngModel)]="selectedResource"
+  (ngModelChange)="onResourceChange()"
+  optionLabel="name"
+></p-dropdown>
+<p-card>
+  <ng-template pTemplate="header"> Информация об обекте </ng-template>
+  <div *ngIf="!selectedResource">
+    <p>Объект не выбран</p>
+  </div>
+  <div *ngIf="selectedResource">
+    <p><b>Имя:</b> {{ oneResource.name }}</p>
+    <p><b>Description:</b> {{ oneResource.description }}</p>
+    <p><b>Min:</b> {{ oneResource.min }}</p>
+    <p><b>Max:</b> {{ oneResource.max }}</p>
+    <p><b>Step:</b> {{ oneResource.step }}</p>
+
+    <p-button (click)="onRemove(oneResource)">
+      <i class="pi pi-trash"></i>
+    </p-button>
+    <p-button (click)="onEdit(oneResource)">
+      <i class="pi pi-user-edit"></i>
+    </p-button>
+  </div>
+  <div *ngIf="editResourceForm">
+    <div class="resource-form" [formGroup]="editResourceForm">
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        formControlName="id"
+        type="hidden"
+      />
+      <div>
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            pInputText
+            formControlName="name"
+          />
+          <label for="float-input">Имя</label>
+        </span>
+      </div>
+      <div>
+        <span class="p-float-label">
+          <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" formControlName="description"></textarea>
+          <label for="float-input">Description</label>
+        </span>
+      </div>
+      <div>
+        <span class="p-float-label">
+          <p-inputNumber [showButtons]="true"  formControlName="min"></p-inputNumber>
+          <label for="float-input">Min</label>
+        </span>
+      </div>
+      <div>
+        <span class="p-float-label">
+          <p-inputNumber [showButtons]="true" formControlName="max"></p-inputNumber>
+          <label for="float-input">max</label>
+        </span>
+      </div>
+      <div>
+        <span class="p-float-label">
+          <p-inputNumber [showButtons]="true" formControlName="step"></p-inputNumber>
+          <label for="float-input">step</label>
+        </span>
+      </div>
+    </div>
+    <br />
+    <p-button label="Обновить" (click)="onEditResource()"></p-button>
+  </div>
+  <ng-template pTemplate="footer"> Footer content here </ng-template>
+</p-card>

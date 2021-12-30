@@ -1,16 +1,8 @@
 <div class="layout-wrapper">
-  <div class="topbar">
-    <p-button
-      class="topbar_menu-btn"
-      type="button"
-      (click)="toggleSideBar()"
-      icon="pi pi-bars"
-    ></p-button>
-  </div>
-  <div class="sidebar">
-    <div class="sidebar_minify"></div>
-    <!-- <div class="sidebar_expanded"></div> -->
-  </div>
+  <p-menubar [model]="menuItems">
+    <!-- <input type="text" pInputText placeholder="Search" />
+    <button pButton label="Logout" icon="pi pi-power-off"></button> -->
+  </p-menubar>
   <div class="content">
     <router-outlet></router-outlet>
   </div>

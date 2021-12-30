@@ -1,0 +1,185 @@
+<h1>Добавить новый объект</h1>
+<p-toast position="top-center"></p-toast>
+<div class="user-form" [formGroup]="userForm">
+  <div>
+    <span class="p-float-label">
+      <input id="float-input" type="text" pInputText formControlName="login" />
+      <label for="float-input">Логин</label>
+    </span>
+  </div>
+  <div>
+    <span class="p-float-label">
+      <input id="float-input" type="text" pInputText formControlName="name" />
+      <label for="float-input">Имя</label>
+    </span>
+  </div>
+  <div>
+    <span class="p-float-label">
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        formControlName="surname"
+      />
+      <label for="float-input">Фамилия</label>
+    </span>
+  </div>
+  <div>
+    <span class="p-float-label">
+      <input
+        id="float-input"
+        type="text"
+        pInputText
+        formControlName="password"
+      />
+      <label for="float-input">Пароль</label>
+    </span>
+  </div>
+</div>
+<br />
+<p-button label="Добавить" (click)="onAddUser()"></p-button>
+
+<h1>Таблица с данными</h1>
+<p-table
+  #dt
+  class="user-list"
+  [value]="users"
+  [rowHover]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0"
+  [globalFilterFields]="['name', 'login']"
+>
+  <ng-template pTemplate="caption">
+      <div class="user-list_header">
+                Список пользователей
+          <p-button icon="pi pi-refresh" (click)="onRefresh()"></p-button>
+      <!-- <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Поиск"
+        />
+      </span> -->
+      </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th class="user-list_login" field="login" pSortableColumn="login">
+        Логин
+      </th>
+      <th class="user-list_name" field="name">Имя</th>
+      <th class="user-list_surname" field="surname">Фамилия</th>
+      <th class="user-list_password" field="password">Пароль</th>
+      <th class="user-list_characters" field="characters">Персонажи</th>
+      <th class="user-list_options"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td class="user-list_login">
+        <span class="p-column-title">Логин</span>
+        {{ user.login }}
+      </td>
+      <td class="user-list_name">
+        <span class="p-column-title">Имя</span>
+        {{ user.name }}
+      </td>
+      <td class="user-list_surname">
+        <span class="p-column-title">Фамилия</span>
+        {{ user.surname }}
+      </td>
+      <td class="user-list_password">
+        <span class="p-column-title">Пароль</span>
+        {{ user.password }}
+      </td>
+      <td class="user-list_characters">
+        <span class="p-column-title">Персонажи</span>
+        <div *ngFor="let character of user.characters">
+          <p> id: {{character.id}} </p>
+          <p> name: {{character.name}} </p>
+        </div>
+      </td>
+      <td class="user-list_options">
+        <p-button (click)="onRemove(user)">
+          <i class="pi pi-trash"></i>
+        </p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<h1>Редактировать объект</h1>
+<p-dropdown [options]="usersList" [(ngModel)]="selectedUser"  (ngModelChange)="onUserChange()" optionLabel="name"></p-dropdown>
+<p-card>
+  <ng-template pTemplate="header">
+      Информация об обекте
+  </ng-template>
+  <div *ngIf="!selectedUser">
+    <p>Объект не выбран</p>
+  </div>
+  <div *ngIf="selectedUser">
+    <p><b>Логин:</b> {{oneUser.login}} </p>
+    <p><b>Имя:</b> {{oneUser.name}} </p>
+    <p><b>Фамилия:</b> {{oneUser.surname}} </p>
+    <p><b>Пароль:</b> {{oneUser.password}} </p>
+
+    <p-button (click)="onRemove(oneUser)">
+      <i class="pi pi-trash"></i>
+    </p-button>
+    <p-button (click)="onEdit(oneUser)">
+      <i class="pi pi-user-edit"></i>
+    </p-button>
+
+  </div>
+  <div *ngIf="editUserForm">
+    <div class="user-form" [formGroup]="editUserForm">
+          <input id="float-input" type="text" pInputText formControlName="id" type="hidden" />
+      <div>
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText formControlName="login" />
+          <label for="float-input">Логин</label>
+        </span>
+      </div>
+      <div>
+        <span class="p-float-label">
+          <input id="float-input" type="text" pInputText formControlName="name" />
+          <label for="float-input">Имя</label>
+        </span>
+      </div>
+      <div>
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            pInputText
+            formControlName="surname"
+          />
+          <label for="float-input">Фамилия</label>
+        </span>
+      </div>
+      <div>
+        <span class="p-float-label">
+          <input
+            id="float-input"
+            type="text"
+            pInputText
+            formControlName="password"
+          />
+          <label for="float-input">Пароль</label>
+        </span>
+      </div>
+    </div>
+    <br />
+    <p-button label="Обновить" (click)="onEditUser()"></p-button>
+  </div>
+  <ng-template pTemplate="footer">
+      Footer content here
+  </ng-template>
+</p-card>

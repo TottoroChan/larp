@@ -1,10 +1,14 @@
+import { ResourceModule } from './modules/resource/resource.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GameModule } from './modules/game/game.module';
+import { CharacterModule } from './modules/character/character.module';
+import { UserModule } from './modules/user/user.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'games', pathMatch: 'full' },
-  { path: 'games', loadChildren: () => GameModule },
+  { path: '', redirectTo: 'users', pathMatch: 'full' },
+  { path: 'users', loadChildren: () => UserModule },
+  { path: 'characters', loadChildren: () => CharacterModule },
+  { path: 'resources', loadChildren: () => ResourceModule },
 ];
 
 @NgModule({

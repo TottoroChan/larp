@@ -1,0 +1,89 @@
+<p-toast position="top-center"></p-toast>
+<h1>Таблица с данными</h1>
+<p-table
+  #dt
+  class="user-list"
+  [value]="users"
+  [rowHover]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [filterDelay]="0"
+  [globalFilterFields]="['name', 'login']"
+>
+  <ng-template pTemplate="caption">
+    <div class="user-list_header">
+      Список пользователей
+
+      <div class="user-list_header_options">
+        <p-button icon="pi pi-plus-circle" (click)="onCreate()"></p-button>
+        <p-button icon="pi pi-refresh" (click)="onRefresh()"></p-button>
+        <!-- <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Поиск"
+        />
+      </span> -->
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th class="user-list_login" field="login" pSortableColumn="login">
+        Логин
+      </th>
+      <th class="user-list_name" field="name">Имя</th>
+      <th class="user-list_surname" field="surname">Фамилия</th>
+      <th class="user-list_password" field="password">Пароль</th>
+      <th class="user-list_characters" field="characters">Персонажи</th>
+      <th class="user-list_options"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td class="user-list_login">
+        <span class="p-column-title">Логин</span>
+        {{ user.login }}
+      </td>
+      <td class="user-list_name">
+        <span class="p-column-title">Имя</span>
+        {{ user.name }}
+      </td>
+      <td class="user-list_surname">
+        <span class="p-column-title">Фамилия</span>
+        {{ user.surname }}
+      </td>
+      <td class="user-list_password">
+        <span class="p-column-title">Пароль</span>
+        {{ user.password }}
+      </td>
+      <td class="user-list_characters">
+        <span class="p-column-title">Персонажи</span>
+        <div *ngFor="let character of user.characters">
+          <p>id: {{ character.id }}</p>
+          <p>name: {{ character.name }}</p>
+        </div>
+      </td>
+      <td class="user-list_options">
+        <p-button (click)="onRemove(user)">
+          <i class="pi pi-trash"></i>
+        </p-button>
+        <p-button (click)="onEdit(user.id)">
+          <i class="pi pi-user-edit"></i>
+        </p-button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<user-dialog
+  [display]="displayDialog"
+  [user]="user"
+  (displayChange)="onDialogClose($event)"
+></user-dialog>
