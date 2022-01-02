@@ -16,7 +16,6 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class UserComponent implements OnInit {
   displayDialog: boolean = false;
   users: User[] = [];
-  public usersList: { name: string; code: string }[] = [];
   public user!: User;
 
   loading: boolean = true;
@@ -27,6 +26,10 @@ export class UserComponent implements OnInit {
     private userService: UserService,
     private messageService: MessageService
   ) {}
+
+  ngOnInit() {
+    this.getUsersList();
+  }
 
   onCreate() {
     this.user = new User('', '', '', '', '', '', '', []);
@@ -45,10 +48,6 @@ export class UserComponent implements OnInit {
       this.showMessage(toastMessage);
     }
     this.displayDialog = false;
-  }
-
-  ngOnInit() {
-    this.getUsersList();
   }
 
   onRefresh() {
@@ -76,11 +75,6 @@ export class UserComponent implements OnInit {
     this.loading = true;
     this.userService.get().subscribe((response: User[]) => {
       this.users = response;
-
-      this.users.forEach((user) => {
-        this.usersList.push({ name: user.login, code: user.id });
-      });
-
       this.loading = false;
     });
   }

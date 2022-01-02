@@ -61,14 +61,14 @@ export class DialogComponent implements OnInit {
     const result = this.userForm.value;
 
     const user = new User(
-      '',
+      result.id,
       result.login,
       result.name,
       result.surname,
       result.password,
-      '',
-      '',
-      []
+      result.salt,
+      result.roles,
+      result.characters
     );
 
     if (result.id) {

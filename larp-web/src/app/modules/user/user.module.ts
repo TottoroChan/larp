@@ -6,9 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
-import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
-import { DropdownModule } from 'primeng/dropdown';
 import {DialogModule} from 'primeng/dialog';
 
 import { UserService } from 'src/app/shared/services/user.service';
@@ -27,8 +25,6 @@ const appRoutes: Routes = [{ path: '', component: UserComponent }];
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    DropdownModule,
-    CardModule,
     DialogModule
   ],
   declarations: [UserComponent, DialogComponent],

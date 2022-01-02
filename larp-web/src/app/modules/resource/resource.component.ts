@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Resource } from 'src/app/shared/models/resource.model';
+import {
+  ToastMessage,
+  ToastSeverities,
+} from 'src/app/shared/models/toast-message.model';
 import { ResourceService } from 'src/app/shared/services/resource.service';
 
 @Component({
@@ -11,12 +14,9 @@ import { ResourceService } from 'src/app/shared/services/resource.service';
   styleUrls: ['./resource.component.less'],
 })
 export class ResourceComponent implements OnInit {
+  displayDialog: boolean = false;
   resources: Resource[] = [];
-  public resourceForm: FormGroup;
-  public editResourceForm!: FormGroup;
-  public resourcesList: { name: string; code: string }[] = [];
-  public selectedResource!: { name: string; code: string };
-  public oneResource!: Resource;
+  public resource!: Resource;
 
   loading: boolean = true;
 
@@ -24,20 +24,30 @@ export class ResourceComponent implements OnInit {
 
   constructor(
     private resourceService: ResourceService,
-    private formBuilder: FormBuilder,
     private messageService: MessageService
-  ) {
-    this.resourceForm = formBuilder.group({
-      name: [null, Validators.required],
-      description: [null, Validators.required],
-      min: [null, Validators.required],
-      max: [null, Validators.required],
-      step: [null, Validators.required],
-    });
-  }
+  ) {}
 
   ngOnInit() {
     this.getResourcesList();
+  }
+
+  onCreate() {
+    this.resource = new Resource('', '', '', 0, 0, 0, 0);
+    this.openDialog();
+  }
+
+  onEdit(id: string) {
+    this.resourceService.getOne(id).subscribe((response: Resource) => {
+      this.resource = response;
+      this.openDialog();
+    });
+  }
+
+  onDialogClose(toastMessage: ToastMessage) {
+    if (toastMessage) {
+      this.showMessage(toastMessage);
+    }
+    this.displayDialog = false;
   }
 
   onRefresh() {
@@ -46,99 +56,34 @@ export class ResourceComponent implements OnInit {
 
   onRemove(resource: Resource) {
     this.resourceService.delete(resource.id).subscribe((response: Resource) => {
-      this.showMessage(
-        'success',
+      const toastMessage = new ToastMessage(
+        ToastSeverities.Success,
         'Успех!',
         `Юзер ${resource.name} был удален.`
       );
+
+      this.showMessage(toastMessage);
       this.getResourcesList();
     });
   }
 
-  onEdit(resource: Resource) {
-    this.editResourceForm = this.formBuilder.group({
-      id: [resource.id, Validators.required],
-      name: [resource.name, Validators.required],
-      description: [resource.description, Validators.required],
-      min: [resource.min, Validators.required],
-      max: [resource.max, Validators.required],
-      step: [resource.step, Validators.required],
-    });
-  }
-
-  onEditResource() {
-    const result = this.editResourceForm.value;
-
-    const resource = new Resource(
-      result.id,
-      result.name,
-      result.description,
-      result.min,
-      result.max,
-      result.step,
-      result.value
-    );
-
-    this.resourceService.update(resource).subscribe((response: Resource) => {
-      this.showMessage(
-        'success',
-        'Успех!',
-        `Юзер ${resource.name} был обновлен.`
-      );
-      this.getResourcesList();
-    });
-  }
-
-  onResourceChange() {
-    this.resourceService
-      .getOne(this.selectedResource.code)
-      .subscribe((response: Resource) => {
-        this.oneResource = response;
-      });
-  }
-
-  onAddResource() {
-    const result = this.resourceForm.value;
-
-    const resource = new Resource(
-      result.id,
-      result.name,
-      result.description,
-      result.min,
-      result.max,
-      result.step,
-      result.value
-    );
-
-    this.resourceService.create(resource).subscribe((response: Resource) => {
-      this.resourceForm.reset();
-      this.showMessage(
-        'success',
-        'Успех!',
-        `Юзер ${response.name} был создан.`
-      );
-      this.getResourcesList();
-    });
-  }
-
-  private showMessage(severity: string, summary: string, detail: string) {
-    this.messageService.add({
-      severity: severity,
-      summary: summary,
-      detail: detail,
-    });
+  private openDialog() {
+    this.displayDialog = true;
   }
 
   private getResourcesList() {
     this.loading = true;
     this.resourceService.get().subscribe((response: Resource[]) => {
       this.resources = response;
-
-      this.resources.forEach((resource) => {
-        this.resourcesList.push({ name: resource.name, code: resource.id });
-      });
-
       this.loading = false;
+    });
+  }
+
+  private showMessage(toastMesssage: ToastMessage) {
+    this.messageService.add({
+      severity: toastMesssage.severity,
+      summary: toastMesssage.summary,
+      detail: toastMesssage.detail,
     });
   }
 }

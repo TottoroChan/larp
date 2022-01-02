@@ -7,12 +7,9 @@
   [baseZIndex]="10000"
   [draggable]="false"
   [resizable]="false"
-  [closable]="false">
-  <div
-    class="user-form"
-    [formGroup]="userForm"
-    class="p-fluid"
-  >
+  [closable]="false"
+>
+  <div class="user-form" [formGroup]="userForm" class="p-fluid">
     <div class="p-field">
       <label for="login">Логин</label>
       <input id="login" type="text" pInputText formControlName="login" />
@@ -29,7 +26,13 @@
       <label for="surname">Фамилия</label>
       <input id="surname" type="text" pInputText formControlName="surname" />
     </div>
-    <input id="user_id" type="text" pInputText formControlName="id" type="hidden" />
+    <input
+      id="user_id"
+      type="text"
+      pInputText
+      formControlName="id"
+      type="hidden"
+    />
   </div>
   <ng-template pTemplate="footer">
     <p-button

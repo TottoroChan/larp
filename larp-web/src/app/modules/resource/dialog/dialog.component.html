@@ -1,0 +1,56 @@
+<p-dialog
+  header="New User"
+  [(visible)]="display"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [maximizable]="true"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="false"
+>
+  <div class="user-form" [formGroup]="resourceForm" class="p-fluid">
+    <div class="p-field">
+      <input id="float-input" type="text" pInputText formControlName="name" />
+      <label for="float-input">Name</label>
+    </div>
+    <div class="p-field">
+      <textarea
+        [rows]="5"
+        [cols]="30"
+        pInputTextarea
+        autoResize="autoResize"
+        formControlName="description"
+      ></textarea>
+      <label for="float-input">Description</label>
+    </div>
+    <div class="p-field">
+      <p-inputNumber [showButtons]="true" formControlName="min"></p-inputNumber>
+      <label for="float-input">Min</label>
+    </div>
+    <div class="p-field">
+      <p-inputNumber [showButtons]="true" formControlName="max"></p-inputNumber>
+      <label for="float-input">max</label>
+    </div>
+    <div class="p-field">
+      <p-inputNumber [showButtons]="true" formControlName="min"></p-inputNumber>
+      <label for="float-input">step</label>
+    </div>
+    <input
+      id="user_id"
+      type="text"
+      pInputText
+      formControlName="id"
+      type="hidden"
+    />
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-check"
+      (click)="onSave()"
+      label="Save"
+      class="p-button-text"
+    ></p-button>
+    <p-button icon="pi pi-times" (click)="onClose()" label="Close"></p-button>
+  </ng-template>
+</p-dialog>

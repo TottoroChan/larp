@@ -6,13 +6,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
-import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
-import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DialogModule } from 'primeng/dialog';
 
 import { ResourceService } from 'src/app/shared/services/resource.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogComponent } from './dialog/dialog.component';
 
 const appRoutes: Routes = [{ path: '', component: ResourceComponent }];
 
@@ -26,11 +26,10 @@ const appRoutes: Routes = [{ path: '', component: ResourceComponent }];
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    DropdownModule,
-    CardModule,
-    InputNumberModule
+    InputNumberModule,
+    DialogModule,
   ],
-  declarations: [ResourceComponent],
+  declarations: [ResourceComponent, DialogComponent],
   providers: [ResourceService, MessageService],
 })
 export class ResourceModule {}
