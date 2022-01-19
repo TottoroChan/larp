@@ -52,11 +52,11 @@ export class DialogComponent implements OnInit {
     this.displayChange.unsubscribe();
   }
 
-  onClose() {
+  close() {
     this.displayChange.emit(this.toastMessage);
   }
 
-  onSave() {
+  save() {
     var response = null;
     const result = this.userForm.value;
 
@@ -73,13 +73,13 @@ export class DialogComponent implements OnInit {
 
     if (result.id) {
       user.id = result.id;
-      response = this.Edit(user);
+      response = this.edit(user);
     } else {
-      response = this.Create(user);
+      response = this.create(user);
     }
   }
 
-  private Edit(user: User) {
+  private edit(user: User) {
     this.userService.update(user).subscribe((response: User) => {
       this.toastMessage = new ToastMessage(
         ToastSeverities.Success,
@@ -87,11 +87,11 @@ export class DialogComponent implements OnInit {
         `Юзер ${user.login} был обновлен.`
       );
 
-      this.CloseWithToastMessage(this.toastMessage);
+      this.closeWithToastMessage(this.toastMessage);
     });
   }
 
-  private Create(user: User) {
+  private create(user: User) {
     this.userService.create(user).subscribe((response: User) => {
       this.toastMessage = new ToastMessage(
         ToastSeverities.Success,
@@ -99,12 +99,12 @@ export class DialogComponent implements OnInit {
         `Юзер ${response.login} был создан.`
       );
 
-      this.CloseWithToastMessage(this.toastMessage);
+      this.closeWithToastMessage(this.toastMessage);
     });
   }
 
-  private CloseWithToastMessage(toastMessage: ToastMessage) {
+  private closeWithToastMessage(toastMessage: ToastMessage) {
     this.toastMessage = toastMessage;
-    this.onClose();
+    this.close();
   }
 }

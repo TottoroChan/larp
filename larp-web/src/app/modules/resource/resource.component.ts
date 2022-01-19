@@ -28,30 +28,30 @@ export class ResourceComponent implements OnInit {
     this.getResourcesList();
   }
 
-  onCreate() {
+  create() {
     this.resource = new Resource('', '', '', 0, 0, 0, 0);
     this.openDialog();
   }
 
-  onEdit(id: string) {
+  edit(id: string) {
     this.resourceService.getOne(id).subscribe((response: Resource) => {
       this.resource = response;
       this.openDialog();
     });
   }
 
-  onDialogClose(toastMessage: ToastMessage) {
+  closeDialog(toastMessage: ToastMessage) {
     if (toastMessage) {
       this.showMessage(toastMessage);
     }
     this.displayDialog = false;
   }
 
-  onRefresh() {
+  refresh() {
     this.getResourcesList();
   }
 
-  onRemove(resource: Resource) {
+  remove(resource: Resource) {
     this.resourceService.delete(resource.id).subscribe((response: Resource) => {
       const toastMessage = new ToastMessage(
         ToastSeverities.Success,

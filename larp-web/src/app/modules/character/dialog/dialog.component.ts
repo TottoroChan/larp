@@ -68,11 +68,11 @@ export class DialogComponent implements OnInit {
     this.displayChange.unsubscribe();
   }
 
-  onClose() {
+  close() {
     this.displayChange.emit(this.toastMessage);
   }
 
-  onSave() {
+  save() {
     var response = null;
     const result = this.characterForm.value;
 
@@ -80,12 +80,12 @@ export class DialogComponent implements OnInit {
 
     if (result.id) {
       character.id = result.id;
-      response = this.Edit(character);
+      response = this.edit(character);
       if (this.character.resources) {
         this.edirResource(this.character.resources)
       }
     } else {
-      response = this.Create(character);
+      response = this.create(character);
     }
   }
 
@@ -107,13 +107,13 @@ export class DialogComponent implements OnInit {
               `Ресурс ${resource.name} был обновлен.`
             );
 
-            this.CloseWithToastMessage(this.toastMessage);
+            this.closeWithToastMessage(this.toastMessage);
           });
       }
     });
   }
 
-  private Edit(character: Character) {
+  private edit(character: Character) {
     this.characterService.update(character).subscribe((response: Character) => {
       this.toastMessage = new ToastMessage(
         ToastSeverities.Success,
@@ -121,11 +121,11 @@ export class DialogComponent implements OnInit {
         `Юзер ${character.name} был обновлен.`
       );
 
-      this.CloseWithToastMessage(this.toastMessage);
+      this.closeWithToastMessage(this.toastMessage);
     });
   }
 
-  private Create(character: Character) {
+  private create(character: Character) {
     this.characterService.create(character).subscribe((response: Character) => {
       this.toastMessage = new ToastMessage(
         ToastSeverities.Success,
@@ -133,12 +133,12 @@ export class DialogComponent implements OnInit {
         `Юзер ${response.name} был создан.`
       );
 
-      this.CloseWithToastMessage(this.toastMessage);
+      this.closeWithToastMessage(this.toastMessage);
     });
   }
 
-  private CloseWithToastMessage(toastMessage: ToastMessage) {
+  private closeWithToastMessage(toastMessage: ToastMessage) {
     this.toastMessage = toastMessage;
-    this.onClose();
+    this.close();
   }
 }

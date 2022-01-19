@@ -54,11 +54,11 @@ export class DialogComponent implements OnInit {
     this.displayChange.unsubscribe();
   }
 
-  onClose() {
+  close() {
     this.displayChange.emit(this.toastMessage);
   }
 
-  onSave() {
+  save() {
     var response = null;
     const result = this.resourceForm.value;
 
@@ -74,13 +74,13 @@ export class DialogComponent implements OnInit {
 
     if (result.id) {
       resource.id = result.id;
-      response = this.Edit(resource);
+      response = this.edit(resource);
     } else {
-      response = this.Create(resource);
+      response = this.create(resource);
     }
   }
 
-  private Edit(resource: Resource) {
+  private edit(resource: Resource) {
     this.resourceService.update(resource).subscribe((response: Resource) => {
       this.toastMessage = new ToastMessage(
         ToastSeverities.Success,
@@ -88,11 +88,11 @@ export class DialogComponent implements OnInit {
         `Юзер ${resource.name} был обновлен.`
       );
 
-      this.CloseWithToastMessage(this.toastMessage);
+      this.closeWithToastMessage(this.toastMessage);
     });
   }
 
-  private Create(resource: Resource) {
+  private create(resource: Resource) {
     this.resourceService.create(resource).subscribe((response: Resource) => {
       this.toastMessage = new ToastMessage(
         ToastSeverities.Success,
@@ -100,12 +100,12 @@ export class DialogComponent implements OnInit {
         `Юзер ${response.name} был создан.`
       );
 
-      this.CloseWithToastMessage(this.toastMessage);
+      this.closeWithToastMessage(this.toastMessage);
     });
   }
 
-  private CloseWithToastMessage(toastMessage: ToastMessage) {
+  private closeWithToastMessage(toastMessage: ToastMessage) {
     this.toastMessage = toastMessage;
-    this.onClose();
+    this.close();
   }
 }

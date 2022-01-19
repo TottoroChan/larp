@@ -29,30 +29,30 @@ export class UserComponent implements OnInit {
     this.getUsersList();
   }
 
-  onCreate() {
+  create() {
     this.user = new User('', '', '', '', '', '', '', []);
     this.openDialog();
   }
 
-  onEdit(id: string) {
+  edit(id: string) {
     this.userService.getOne(id).subscribe((response: User) => {
       this.user = response;
       this.openDialog();
     });
   }
 
-  onDialogClose(toastMessage: ToastMessage) {
+  closeDialog(toastMessage: ToastMessage) {
     if (toastMessage) {
       this.showMessage(toastMessage);
     }
     this.displayDialog = false;
   }
 
-  onRefresh() {
+  refresh() {
     this.getUsersList();
   }
 
-  onRemove(user: User) {
+  remove(user: User) {
     this.userService.delete(user.id).subscribe((response: User) => {
       const toastMessage = new ToastMessage(
         ToastSeverities.Success,

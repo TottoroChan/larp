@@ -26,19 +26,19 @@ export class CharacterComponent implements OnInit {
     this.getCharactersList();
   }
 
-  onCreate() {
+  create() {
     this.character = new Character('', '', []);
     this.openDialog();
   }
 
-  onEdit(id: string) {
+  edit(id: string) {
     this.characterService.getOne(id).subscribe((response: Character) => {
       this.character = response;
       this.openDialog();
     });
   }
 
-  onDialogClose(toastMessage: ToastMessage) {
+  closeDialog(toastMessage: ToastMessage) {
     if (toastMessage) {
       this.showMessage(toastMessage);
     }
@@ -46,11 +46,11 @@ export class CharacterComponent implements OnInit {
     this.getCharactersList();
   }
 
-  onRefresh() {
+  refresh() {
     this.getCharactersList();
   }
 
-  onRemove(character: Character) {
+  remove(character: Character) {
     this.characterService.delete(character.id).subscribe((character: Character) => {
       const toastMessage = new ToastMessage(
         ToastSeverities.Success,

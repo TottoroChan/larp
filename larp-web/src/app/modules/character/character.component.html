@@ -19,8 +19,8 @@
     <div class="character-list_header">
       Список characters
       <div class="resource-list_header_options">
-        <p-button icon="pi pi-plus-circle" (click)="onCreate()"></p-button>
-        <p-button icon="pi pi-refresh" (click)="onRefresh()"></p-button>
+        <p-button icon="pi pi-plus-circle" (click)="create()"></p-button>
+        <p-button icon="pi pi-refresh" (click)="refresh()"></p-button>
         <!-- <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
     <input
@@ -57,10 +57,10 @@
         </div>
       </td>
       <td class="character-list_options">
-        <p-button (click)="onRemove(character)">
+        <p-button (click)="remove(character)">
           <i class="pi pi-trash"></i>
         </p-button>
-        <p-button (click)="onEdit(character.id)">
+        <p-button (click)="edit(character.id)">
           <i class="pi pi-user-edit"></i>
         </p-button>
       </td>
@@ -71,5 +71,5 @@
 <character-dialog
   [display]="displayDialog"
   [character]="character"
-  (displayChange)="onDialogClose($event)"
+  (displayChange)="closeDialog($event)"
 ></character-dialog>

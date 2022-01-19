@@ -20,8 +20,8 @@
       Список пользователей
 
       <div class="user-list_header_options">
-        <p-button icon="pi pi-plus-circle" (click)="onCreate()"></p-button>
-        <p-button icon="pi pi-refresh" (click)="onRefresh()"></p-button>
+        <p-button icon="pi pi-plus-circle" (click)="create()"></p-button>
+        <p-button icon="pi pi-refresh" (click)="refresh()"></p-button>
         <!-- <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input
@@ -72,10 +72,10 @@
         </div>
       </td>
       <td class="user-list_options">
-        <p-button (click)="onRemove(user)">
+        <p-button (click)="remove(user)">
           <i class="pi pi-trash"></i>
         </p-button>
-        <p-button (click)="onEdit(user.id)">
+        <p-button (click)="edit(user.id)">
           <i class="pi pi-user-edit"></i>
         </p-button>
       </td>
@@ -86,5 +86,5 @@
 <user-dialog
   [display]="displayDialog"
   [user]="user"
-  (displayChange)="onDialogClose($event)"
+  (displayChange)="closeDialog($event)"
 ></user-dialog>
