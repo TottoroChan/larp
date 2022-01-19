@@ -58,6 +58,21 @@ class CharacterController {
       });
   }
 
+  async updateResource(request, response) {
+    console.log(request.body);
+    const query = 'UPDATE public.character_resources SET value = $1 WHERE resource_id = $2 RETURNING *';
+    const values = [request.body.value, request.body.id];
+
+    postgres_db
+      .query(query, values)
+      .then((resp) => {
+        response.json(resp.rows[0]);
+      })
+      .catch((error) => {
+        response.json(error);
+      });
+  }
+
   async delete(request, response) {
     const query = 'DELETE FROM public.characters WHERE id = $1';
     const values = [request.params.id];
