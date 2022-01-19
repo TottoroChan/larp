@@ -8,32 +8,30 @@
   [draggable]="false"
   [resizable]="false"
   [closable]="false"
-  ng-if="!blocked"
 >
-  <div class="user-form" [formGroup]="resourceForm" class="p-fluid">
+  <div class="user-form" [formGroup]="characterForm" class="p-fluid">
     <div class="p-field">
       <label for="float-input">Name</label>
       <input id="float-input" type="text" pInputText formControlName="name" />
     </div>
-    <div class="p-field" flex>
-      <label for="float-input">Description</label>
-      <textarea
-        pInputTextarea
-        formControlName="description"
-      ></textarea>
+    <div *ngFor="let resource of resourceForms; index as i">
+      <div class="p-field" [formGroup]="resource">
+        <label for="float-input">{{character.resources[i].name}}</label>
+        <p-inputNumber
+          [showButtons]="true"
+          buttonLayout="horizontal"
+          spinnerMode="horizontal"
+          decrementButtonClass="p-button-danger"
+          incrementButtonClass="p-button-success"
+          incrementButtonIcon="pi pi-plus"
+          decrementButtonIcon="pi pi-minus"
+          formControlName="value"
+          [step]="character.resources[i].step"
+        ></p-inputNumber>
+        <p for="float-input">{{character.resources[i].description}}</p>
+      </div>
     </div>
-    <div class="p-field">
-      <label for="float-input">Min</label>
-      <p-inputNumber [showButtons]="true" formControlName="min"></p-inputNumber>
-    </div>
-    <div class="p-field">
-      <label for="float-input">max</label>
-      <p-inputNumber [showButtons]="true" formControlName="max"></p-inputNumber>
-    </div>
-    <div class="p-field">
-      <label for="float-input">step</label>
-      <p-inputNumber [showButtons]="true" formControlName="step"></p-inputNumber>
-    </div>
+
     <input
       id="user_id"
       type="text"

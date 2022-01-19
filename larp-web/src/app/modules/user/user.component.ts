@@ -2,9 +2,8 @@ import {
   ToastMessage,
   ToastSeverities,
 } from './../../shared/models/toast-message.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
 import { User } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -20,7 +19,6 @@ export class UserComponent implements OnInit {
 
   loading: boolean = true;
 
-  @ViewChild('dt') table: Table | undefined;
 
   constructor(
     private userService: UserService,

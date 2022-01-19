@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
 import { Resource } from 'src/app/shared/models/resource.model';
 import {
   ToastMessage,
@@ -19,8 +18,6 @@ export class ResourceComponent implements OnInit {
   public resource!: Resource;
 
   loading: boolean = true;
-
-  @ViewChild('dt') table: Table | undefined;
 
   constructor(
     private resourceService: ResourceService,

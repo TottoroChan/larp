@@ -2,7 +2,7 @@ import {
   ToastMessage,
   ToastSeverities,
 } from './../../../shared/models/toast-message.model';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Resource } from 'src/app/shared/models/resource.model';
 import { ResourceService } from 'src/app/shared/services/resource.service';
@@ -41,12 +41,12 @@ export class DialogComponent implements OnInit {
     }
 
     this.resourceForm.setValue({
-      id: [this.resource.id, Validators.required],
-      name: [this.resource.name, Validators.required],
-      description: [this.resource.description, Validators.required],
-      min: [this.resource.min, Validators.required],
-      max: [this.resource.max, Validators.required],
-      step: [this.resource.step, Validators.required],
+      id: this.resource.id,
+      name: this.resource.name,
+      description: this.resource.description,
+      min: this.resource.min,
+      max: this.resource.max,
+      step: this.resource.step,
     });
   }
 

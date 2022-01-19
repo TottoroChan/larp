@@ -1,18 +1,6 @@
-<h1>Добавить новый объект</h1>
 <p-toast position="top-center"></p-toast>
-<div class="character-form" [formGroup]="characterForm">
-  <div>
-    <span class="p-float-label">
-      <input id="float-input" type="text" pInputText formControlName="name" />
-      <label for="float-input">Имя</label>
-    </span>
-  </div>
-</div>
-<br />
-<p-button label="Добавить" (click)="onAddcharacter()"></p-button>
 
 <h1>Таблица с данными</h1>
-
 <p-table
   #dt
   class="character-list"
@@ -27,11 +15,13 @@
   [filterDelay]="0"
   [globalFilterFields]="['name']"
 >
-<ng-template pTemplate="caption">
-  <div class="character-list_header">
-    Список characters
-      <p-button icon="pi pi-refresh" (click)="onRefresh()"></p-button>
-  <!-- <span class="p-input-icon-left">
+  <ng-template pTemplate="caption">
+    <div class="character-list_header">
+      Список characters
+      <div class="resource-list_header_options">
+        <p-button icon="pi pi-plus-circle" (click)="onCreate()"></p-button>
+        <p-button icon="pi pi-refresh" (click)="onRefresh()"></p-button>
+        <!-- <span class="p-input-icon-left">
     <i class="pi pi-search"></i>
     <input
       pInputText
@@ -40,8 +30,9 @@
       placeholder="Поиск"
     />
   </span> -->
-  </div>
-</ng-template>
+      </div>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th class="character-list_name" field="name" pSortableColumn="name">
@@ -60,54 +51,25 @@
       <td class="user-list_resources">
         <span class="p-column-title">Resources</span>
         <div *ngFor="let resource of character.resources">
-          <p> id: {{resource.id}} </p>
-          <p> name: {{resource.name}} </p>
-          <p> value: {{resource.value}} </p>
+          <p>id: {{ resource.id }}</p>
+          <p>name: {{ resource.name }}</p>
+          <p>value: {{ resource.value }}</p>
         </div>
       </td>
       <td class="character-list_options">
         <p-button (click)="onRemove(character)">
           <i class="pi pi-trash"></i>
         </p-button>
+        <p-button (click)="onEdit(character.id)">
+          <i class="pi pi-user-edit"></i>
+        </p-button>
       </td>
     </tr>
   </ng-template>
 </p-table>
 
-<h1>Редактировать объект</h1>
-<p-dropdown [options]="charactersList" [(ngModel)]="selectedcharacter"  (ngModelChange)="oncharacterChange()" optionLabel="name"></p-dropdown>
-<p-card>
-  <ng-template pTemplate="header">
-      Информация об обекте
-  </ng-template>
-  <div *ngIf="!selectedcharacter">
-    <p>Объект не выбран</p>
-  </div>
-  <div *ngIf="selectedcharacter">
-    <p><b>Имя:</b> {{onecharacter.name}} </p>
-
-    <p-button (click)="onRemove(onecharacter)">
-      <i class="pi pi-trash"></i>
-    </p-button>
-    <p-button (click)="onEdit(onecharacter)">
-      <i class="pi pi-character-edit"></i>
-    </p-button>
-
-  </div>
-  <div *ngIf="editcharacterForm">
-    <div class="character-form" [formGroup]="editcharacterForm">
-          <input id="float-input" type="text" pInputText formControlName="id" type="hidden" />
-      <div>
-        <span class="p-float-label">
-          <input id="float-input" type="text" pInputText formControlName="name" />
-          <label for="float-input">Имя</label>
-        </span>
-      </div>
-    </div>
-    <br />
-    <p-button label="Обновить" (click)="onEditcharacter()"></p-button>
-  </div>
-  <ng-template pTemplate="footer">
-      Footer content here
-  </ng-template>
-</p-card>
+<character-dialog
+  [display]="displayDialog"
+  [character]="character"
+  (displayChange)="onDialogClose($event)"
+></character-dialog>

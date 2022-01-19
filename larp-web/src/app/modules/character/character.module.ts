@@ -1,3 +1,4 @@
+import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,12 +7,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
-import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
-import { DropdownModule } from 'primeng/dropdown';
 
 import { CharacterService } from 'src/app/shared/services/character.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogComponent } from './dialog/dialog.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 const appRoutes: Routes = [{ path: '', component: CharacterComponent }];
 
@@ -25,10 +26,10 @@ const appRoutes: Routes = [{ path: '', component: CharacterComponent }];
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    DropdownModule,
-    CardModule,
+    DialogModule,
+    InputNumberModule
   ],
-  declarations: [CharacterComponent],
+  declarations: [CharacterComponent, DialogComponent],
   providers: [CharacterService, MessageService],
 })
 export class CharacterModule {}

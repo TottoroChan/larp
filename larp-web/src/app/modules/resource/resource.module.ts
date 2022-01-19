@@ -13,6 +13,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ResourceService } from 'src/app/shared/services/resource.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogComponent } from './dialog/dialog.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 const appRoutes: Routes = [{ path: '', component: ResourceComponent }];
 
@@ -28,6 +29,7 @@ const appRoutes: Routes = [{ path: '', component: ResourceComponent }];
     ToastModule,
     InputNumberModule,
     DialogModule,
+    InputTextareaModule
   ],
   declarations: [ResourceComponent, DialogComponent],
   providers: [ResourceService, MessageService],

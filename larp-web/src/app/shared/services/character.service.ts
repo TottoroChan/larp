@@ -26,7 +26,18 @@ export class CharacterService {
         `/api/characters/${updatedCharacter.id}`,
         updatedCharacter
       )
-      .pipe(catchError(this.handleError<Character>('create')));
+      .pipe(catchError(this.handleError<Character>('update')));
+
+    return result;
+  }
+
+  updateResource(updatedResource: Resource) {
+    const result = this.http
+      .put<Resource>(
+        `/api/characters/resource/${updatedResource.id}`,
+        updatedResource
+      )
+      .pipe(catchError(this.handleError<Resource>('updateResource')));
 
     return result;
   }
@@ -34,7 +45,7 @@ export class CharacterService {
   delete(id: string) {
     const result = this.http
       .delete<Character>(`/api/characters/${id}`)
-      .pipe(catchError(this.handleError<Character>('create')));
+      .pipe(catchError(this.handleError<Character>('delete')));
 
     return result;
   }
@@ -52,7 +63,7 @@ export class CharacterService {
 
   getOne(id: string) {
     const result = this.http.get<Character>(`/api/characters/${id}`).pipe(
-      catchError(this.handleError<Character>('get')),
+      catchError(this.handleError<Character>('getOne')),
       map((character) => this.convertCharacter(character))
     );
 

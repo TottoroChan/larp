@@ -1,9 +1,7 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Table } from 'primeng/table';
 import { Character } from 'src/app/shared/models/character.model';
+import { ToastMessage, ToastSeverities } from 'src/app/shared/models/toast-message.model';
 import { CharacterService } from 'src/app/shared/services/character.service';
 
 @Component({
@@ -12,105 +10,76 @@ import { CharacterService } from 'src/app/shared/services/character.service';
   styleUrls: ['./character.component.less'],
 })
 export class CharacterComponent implements OnInit {
+  displayDialog: boolean = false;
   characters: Character[] = [];
-  public characterForm: FormGroup;
-  public editcharacterForm!: FormGroup;
-  public charactersList: { name: string; code: string; }[] = [];
-  public selectedcharacter!: { name: string; code: string; };
-  public onecharacter!: Character;
+  public character!: Character;
 
   loading: boolean = true;
 
-  @ViewChild('dt') table: Table | undefined;
-
   constructor(
     private characterService: CharacterService,
-    private formBuilder: FormBuilder,
     private messageService: MessageService
   ) {
-    this.characterForm = formBuilder.group({
-      name: [null, Validators.required],
-    });
   }
 
   ngOnInit() {
-    this.getcharactersList();
+    this.getCharactersList();
+  }
+
+  onCreate() {
+    this.character = new Character('', '', []);
+    this.openDialog();
+  }
+
+  onEdit(id: string) {
+    this.characterService.getOne(id).subscribe((response: Character) => {
+      this.character = response;
+      this.openDialog();
+    });
+  }
+
+  onDialogClose(toastMessage: ToastMessage) {
+    if (toastMessage) {
+      this.showMessage(toastMessage);
+    }
+    this.displayDialog = false;
+    this.getCharactersList();
   }
 
   onRefresh() {
-    this.getcharactersList();
+    this.getCharactersList();
   }
 
   onRemove(character: Character) {
-    this.characterService.delete(character.id).subscribe((response: Character) => {
-      this.showMessage('success', 'Успех!', `Юзер ${character.name} был удален.`)
-      this.getcharactersList();
+    this.characterService.delete(character.id).subscribe((character: Character) => {
+      const toastMessage = new ToastMessage(
+        ToastSeverities.Success,
+        'Успех!',
+        `Юзер ${character.name} был удален.`
+      );
+
+      this.showMessage(toastMessage);
+      this.getCharactersList();
     });
   }
 
-  onEdit(character: Character) {
-    this.editcharacterForm = this.formBuilder.group({
-      id: [character.id, Validators.required ],
-      name: [character.name, Validators.required],
-    });
+  private openDialog() {
+    this.displayDialog = true;
   }
 
-
-  onEditcharacter() {
-    const result = this.editcharacterForm.value;
-
-    const character = new Character(
-      result.id,
-      result.name,
-      []
-    );
-    character.id = result.id;
-    
-    this.characterService.update(character).subscribe((response: Character) => {
-      this.showMessage('success', 'Успех!', `Юзер ${character.name} был обновлен.`)
-      this.getcharactersList();
-    });
-  }
-  oncharacterChange() {
-    this.characterService.getOne(this.selectedcharacter.code).subscribe((response: Character) => {
-      this.onecharacter = response;
-    });
-  }
-
-  onAddcharacter() {
-    const result = this.characterForm.value;
-
-    const character = new Character(
-      '',
-      result.name,
-      []
-    );
-
-    this.characterService.create(character).subscribe((response: Character) => {
-      this.characterForm.reset();
-      this.showMessage('success', 'Успех!', `Юзер ${response.name} был создан.`)
-      this.getcharactersList();
-    });
-  }
-
-  private showMessage(severity: string, summary: string, detail: string) {
-    this.messageService.add({
-      severity: severity,
-      summary: summary,
-      detail: detail,
-    });
-  }
-
-  private getcharactersList() {
+  private getCharactersList() {
     this.loading = true;
     this.characterService.get().subscribe((response: Character[]) => {
       this.characters = response;
-      this.charactersList = [];
-      this.characters.forEach(character => {
-        this.charactersList.push({name: character.name, code: character.id})
-      });
-
       this.loading = false;
+    });
+  }
+
+  private showMessage(toastMesssage: ToastMessage) {
+    this.messageService.add({
+      severity: toastMesssage.severity,
+      summary: toastMesssage.summary,
+      detail: toastMesssage.detail,
     });
   }
 }

@@ -35,7 +35,7 @@ export class UserService {
   update(updatedUser: User) {
     const result = this.http
       .put<User>(`/api/users/${updatedUser.id}`, updatedUser)
-      .pipe(catchError(this.handleError<User>('create')));
+      .pipe(catchError(this.handleError<User>('update')));
 
     return result;
   }
@@ -43,7 +43,7 @@ export class UserService {
   delete(id: string) {
     const result = this.http
       .delete<User>(`/api/users/${id}`)
-      .pipe(catchError(this.handleError<User>('create')));
+      .pipe(catchError(this.handleError<User>('delete')));
 
     return result;
   }
@@ -59,7 +59,7 @@ export class UserService {
 
   getOne(id: string) {
     const result = this.http.get<User>(`/api/users/${id}`).pipe(
-      catchError(this.handleError<User>('get')),
+      catchError(this.handleError<User>('getOne')),
       map((user) => this.convertUser(user))
     );
 

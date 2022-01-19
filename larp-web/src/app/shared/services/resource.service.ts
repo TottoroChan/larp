@@ -42,7 +42,7 @@ export class ResourceService {
   delete(id: string) {
     const result = this.http
       .delete<Resource>(`/api/resources/${id}`)
-      .pipe(catchError(this.handleError<Resource>('create')));
+      .pipe(catchError(this.handleError<Resource>('delete')));
 
     return result;
   }
@@ -58,27 +58,7 @@ export class ResourceService {
 
   getOne(id: string) {
     const result = this.http.get<Resource>(`/api/resources/${id}`).pipe(
-      catchError(this.handleError<Resource>('get'))
-    );
-
-    return result;
-  }
-
-  private convertResource(resource: any) {
-    const characters = resource.characters
-      ? resource.characters.map(
-          (character: any) => new Character(character.id, character.name, [])
-        )
-      : [];
-
-    const result = new Resource(
-      resource.id,
-      resource.name,
-      resource.description,
-      resource.min,
-      resource.max,
-      resource.step,
-      resource.value
+      catchError(this.handleError<Resource>('getOne'))
     );
 
     return result;

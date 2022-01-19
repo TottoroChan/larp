@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 import { UserService } from 'src/app/shared/services/user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,7 +26,8 @@ const appRoutes: Routes = [{ path: '', component: UserComponent }];
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    DialogModule
+    DialogModule,
+    InputTextareaModule
   ],
   declarations: [UserComponent, DialogComponent],
   providers: [UserService, MessageService],
