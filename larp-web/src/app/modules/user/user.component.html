@@ -72,12 +72,12 @@
         </div>
       </td>
       <td class="user-list_options">
-        <p-button (click)="remove(user)">
-          <i class="pi pi-trash"></i>
-        </p-button>
-        <p-button (click)="edit(user.id)">
-          <i class="pi pi-user-edit"></i>
-        </p-button>
+        <p-splitButton
+          label="Show"
+          icon="pi pi-info-circle"
+          (onClick)="show(user.id)"
+          [model]="buildOptions(user)"
+        ></p-splitButton>
       </td>
     </tr>
   </ng-template>

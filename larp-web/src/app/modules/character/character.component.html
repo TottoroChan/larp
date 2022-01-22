@@ -57,15 +57,12 @@
         </div>
       </td>
       <td class="character-list_options">
-        <p-button (click)="remove(character)">
-          <i class="pi pi-trash"></i>
-        </p-button>
-        <p-button (click)="edit(character.id)">
-          <i class="pi pi-user-edit"></i>
-        </p-button>
-        <p-button (click)="show(character.id)">
-          <i class="pi pi-info-circle"></i>
-        </p-button>
+        <p-splitButton
+          label="Show"
+          icon="pi pi-info-circle"
+          (onClick)="show(character.id)"
+          [model]="buildOptions(character)"
+        ></p-splitButton>
       </td>
     </tr>
   </ng-template>

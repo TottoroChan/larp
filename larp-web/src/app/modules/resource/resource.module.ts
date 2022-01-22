@@ -9,11 +9,12 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { ResourceService } from 'src/app/shared/services/resource.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DialogComponent } from './dialog/dialog.component';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 
 const appRoutes: Routes = [{ path: '', component: ResourceComponent }];
 
@@ -29,7 +30,8 @@ const appRoutes: Routes = [{ path: '', component: ResourceComponent }];
     ToastModule,
     InputNumberModule,
     DialogModule,
-    InputTextareaModule
+    InputTextareaModule,
+    SplitButtonModule
   ],
   declarations: [ResourceComponent, DialogComponent],
   providers: [ResourceService, MessageService],

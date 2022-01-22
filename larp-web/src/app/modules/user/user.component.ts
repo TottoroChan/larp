@@ -29,6 +29,27 @@ export class UserComponent implements OnInit {
     this.getUsersList();
   }
 
+  buildOptions(user: User) {
+    const options = [
+      {
+        label: 'Edit',
+        icon: 'pi pi-user-edit',
+        command: () => {
+          this.edit(user.id);
+        },
+      },
+      {
+        label: 'Delete',
+        icon: 'pi pi-trash',
+        command: () => {
+          this.remove(user);
+        },
+      },
+    ];
+
+    return options;
+  }
+
   create() {
     this.user = new User('', '', '', '', '', '', '', []);
     this.openDialog();
@@ -39,6 +60,10 @@ export class UserComponent implements OnInit {
       this.user = response;
       this.openDialog();
     });
+  }
+
+  show(id: string) {
+
   }
 
   closeDialog(toastMessage: ToastMessage) {

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { Character } from 'src/app/shared/models/character.model';
-import { ToastMessage, ToastSeverities } from 'src/app/shared/models/toast-message.model';
+import {
+  ToastMessage,
+  ToastSeverities,
+} from 'src/app/shared/models/toast-message.model';
 import { CharacterService } from 'src/app/shared/services/character.service';
 
 @Component({
@@ -21,11 +24,31 @@ export class CharacterComponent implements OnInit {
     private characterService: CharacterService,
     private messageService: MessageService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.getCharactersList();
+  }
+
+  buildOptions(character: Character) {
+    const options = [
+      {
+        label: 'Edit',
+        icon: 'pi pi-user-edit',
+        command: () => {
+          this.edit(character.id);
+        },
+      },
+      {
+        label: 'Delete',
+        icon: 'pi pi-trash',
+        command: () => {
+          this.remove(character);
+        },
+      },
+    ];
+
+    return options;
   }
 
   create() {
@@ -41,7 +64,9 @@ export class CharacterComponent implements OnInit {
   }
 
   show(id: string) {
-    this.router.navigate([`/characters/info/${id}`], { skipLocationChange: true}); 
+    this.router.navigate([`/characters/info/${id}`], {
+      skipLocationChange: true,
+    });
   }
 
   closeDialog(toastMessage: ToastMessage) {
@@ -57,16 +82,18 @@ export class CharacterComponent implements OnInit {
   }
 
   remove(character: Character) {
-    this.characterService.delete(character.id).subscribe((character: Character) => {
-      const toastMessage = new ToastMessage(
-        ToastSeverities.Success,
-        'Успех!',
-        `Юзер ${character.name} был удален.`
-      );
+    this.characterService
+      .delete(character.id)
+      .subscribe((response: Character) => {
+        const toastMessage = new ToastMessage(
+          ToastSeverities.Success,
+          'Успех!',
+          `Юзер ${character.name} был удален.`
+        );
 
-      this.showMessage(toastMessage);
-      this.getCharactersList();
-    });
+        this.showMessage(toastMessage);
+        this.getCharactersList();
+      });
   }
 
   private openDialog() {

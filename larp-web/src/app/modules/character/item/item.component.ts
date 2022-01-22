@@ -17,19 +17,18 @@ export class ItemComponent implements OnInit {
   id!: string;
   options: MenuItem[];
 
-
   constructor(
     private route: ActivatedRoute,
     private characterService: CharacterService,
     private messageService: MessageService
   ) {
     //this.id = 'a896820b-af15-45ea-b0cd-88d18f7927a5';
-    
+
     this.options = [];
   }
 
   ngOnInit() {
-    this. id = this.route.snapshot.params['id'];
+    this.id = this.route.snapshot.params['id'];
     this.refresh();
   }
 
@@ -58,7 +57,7 @@ export class ItemComponent implements OnInit {
     this.refresh();
   }
 
-  private refresh(){
+  private refresh() {
     this.characterService.getOne(this.id).subscribe((response: Character) => {
       this.character = response;
     });

@@ -28,6 +28,27 @@ export class ResourceComponent implements OnInit {
     this.getResourcesList();
   }
 
+  buildOptions(resource: Resource) {
+    const options = [
+      {
+        label: 'Edit',
+        icon: 'pi pi-user-edit',
+        command: () => {
+          this.edit(resource.id);
+        },
+      },
+      {
+        label: 'Delete',
+        icon: 'pi pi-trash',
+        command: () => {
+          this.remove(resource);
+        },
+      },
+    ];
+
+    return options;
+  }
+
   create() {
     this.resource = new Resource('', '', '', 0, 0, 0, 0);
     this.openDialog();
@@ -38,6 +59,10 @@ export class ResourceComponent implements OnInit {
       this.resource = response;
       this.openDialog();
     });
+  }
+
+  show(id: string) {
+
   }
 
   closeDialog(toastMessage: ToastMessage) {

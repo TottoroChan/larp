@@ -68,12 +68,12 @@
         {{ resource.step }}
       </td>
       <td class="resource-list_options">
-        <p-button (click)="remove(resource)">
-          <i class="pi pi-trash"></i>
-        </p-button>
-        <p-button (click)="edit(resource.id)">
-          <i class="pi pi-user-edit"></i>
-        </p-button>
+        <p-splitButton
+          label="Show"
+          icon="pi pi-info-circle"
+          (onClick)="show(resource.id)"
+          [model]="buildOptions(resource)"
+        ></p-splitButton>
       </td>
     </tr>
   </ng-template>
