@@ -1,0 +1,35 @@
+<div class="character-info" *ngIf="character">
+  <div class="character-info__header larp-card">
+    <img
+      class="character-info__header_image"
+      src="../../../../assets/images/character_icon.png"
+    />
+    <div class="character-info__header_name">{{ character.name }}</div>
+    <div class="character-info__header_description">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+      consequuntur error repudiandae numquam deserunt quisquam repellat libero
+      asperiores earum nam nobis, culpa ratione quam perferendis esse,
+      cupiditate neque quas!
+    </div>
+  </div>
+
+  <div class="character-info__resources larp-card">
+    <div class="resource" *ngFor="let resource of character.resources">
+      <span class="resource_name">{{ resource.name }}</span>
+      <div class="resource_data">
+        <div
+          class="resource-point"
+          *ngFor="let point of getResourceBar(resource)"
+          [class.colored]="point"
+        >
+        </div>
+        <div class="resource-value">
+          <span> {{ resource.value }} / {{ resource.max }} </span>
+        </div>
+      </div>
+      <div class="resource_description">
+        {{ resource.description }}
+      </div>
+    </div>
+  </div>
+</div>

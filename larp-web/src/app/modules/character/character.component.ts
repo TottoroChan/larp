@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Character } from 'src/app/shared/models/character.model';
 import { ToastMessage, ToastSeverities } from 'src/app/shared/models/toast-message.model';
@@ -18,7 +19,8 @@ export class CharacterComponent implements OnInit {
 
   constructor(
     private characterService: CharacterService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {
   }
 
@@ -36,6 +38,10 @@ export class CharacterComponent implements OnInit {
       this.character = response;
       this.openDialog();
     });
+  }
+
+  show(id: string) {
+    this.router.navigate([`/characters/info/${id}`], { skipLocationChange: true}); 
   }
 
   closeDialog(toastMessage: ToastMessage) {

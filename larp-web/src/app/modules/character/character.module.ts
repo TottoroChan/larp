@@ -1,3 +1,4 @@
+import { ItemComponent } from './item/item.component';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { NgModule } from '@angular/core';
@@ -8,13 +9,16 @@ import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { CharacterService } from 'src/app/shared/services/character.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogComponent } from './dialog/dialog.component';
-import { InputNumberModule } from 'primeng/inputnumber';
 
-const appRoutes: Routes = [{ path: '', component: CharacterComponent }];
+const appRoutes: Routes = [
+  { path: '', component: CharacterComponent },
+  { path: 'info/:id', component: ItemComponent },
+];
 
 @NgModule({
   imports: [
@@ -27,9 +31,9 @@ const appRoutes: Routes = [{ path: '', component: CharacterComponent }];
     ReactiveFormsModule,
     ToastModule,
     DialogModule,
-    InputNumberModule
+    InputNumberModule,
   ],
-  declarations: [CharacterComponent, DialogComponent],
+  declarations: [CharacterComponent, DialogComponent, ItemComponent],
   providers: [CharacterService, MessageService],
 })
 export class CharacterModule {}
