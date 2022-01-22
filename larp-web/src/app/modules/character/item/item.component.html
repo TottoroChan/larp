@@ -4,6 +4,14 @@
       class="character-info__header_image"
       src="../../../../assets/images/character_icon.png"
     />
+    <div class="character-info__header_options">
+      <p-splitButton
+        label="Edit"
+        icon="pi pi-user-edit"
+        (onClick)="edit()"
+        [model]="options"
+      ></p-splitButton>
+    </div>
     <div class="character-info__header_name">{{ character.name }}</div>
     <div class="character-info__header_description">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
@@ -21,8 +29,7 @@
           class="resource-point"
           *ngFor="let point of getResourceBar(resource)"
           [class.colored]="point"
-        >
-        </div>
+        ></div>
         <div class="resource-value">
           <span> {{ resource.value }} / {{ resource.max }} </span>
         </div>
@@ -33,3 +40,9 @@
     </div>
   </div>
 </div>
+
+<character-dialog
+  [display]="displayDialog"
+  [character]="character"
+  (displayChange)="closeDialog($event)"
+></character-dialog>
