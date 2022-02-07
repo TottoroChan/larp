@@ -7,7 +7,7 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./app.component.less'],
 })
 export class AppComponent {
-  title = 'larp-web';
+  title = 'larp.web';
   visibleSidebar = false;
   menuItems!: MenuItem[];
   activeMenuItem!: MenuItem;
