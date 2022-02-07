@@ -1,0 +1,7 @@
+{
+  "name": "larp.tool",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
