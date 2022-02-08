@@ -1,17 +1,26 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title> Правила </ion-title>
+    <ion-title *ngIf="!showSearchBar">Правила</ion-title>
+    <ion-buttons slot="end" *ngIf="!showSearchBar">
+      <ion-button (click)="toggleSearch()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar
+      *ngIf="showSearchBar"
+      showCancelButton="always"
+      (ionInput)="search($event)"
+      (ionCancel)="toggleSearch()"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar> </ion-toolbar>
-  </ion-header>
-
-  <ion-list *ngFor="let rule of listOfRules">
-    <ion-item (click)="showItem(rule)">
-      <ion-label>{{ rule.title }}</ion-label>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let rule of listOfRules" (click)="showItem(rule, $event)">
+      <ion-label><h2>{{ rule.title }}</h2>
+        <!-- <div class="result-list"><p>...ремя будет потрачено на попытки уловить отголоски магии и лишь на закате своей жизни ты, возможно, обре,ремя будет потрачено на попытки уловить отголоски ,ии и лишь на закате своей жизни ты, возможно, обре...</p><p>.... Лечение - слова заклинания и сила, исходящая от мага, сплетаются в единый поток жизненной энергии, не,. Лечение - слова заклинания и сила, исходящая от ,а, сплетаются в единый поток жизненной энергии, не...</p><p>...изит). Текст заклинаний обязательно оформляется в магические книги или свитки (в которых ещё и можно ра,изит). Текст заклинаний обязательно оформляется в ,ические книги или свитки (в которых ещё и можно ра...</p></div> -->
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

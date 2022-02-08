@@ -1,0 +1,17 @@
+ion-list {
+  ion-item {
+    ion-label {
+      .result-list {
+        p {
+          margin: 10px 0;
+          color: var(--ion-color-step-600, #666666);
+          white-space: normal;
+          &::before,
+          &::after {
+            content: "...";
+          }
+        }
+      }
+    }
+  }
+}

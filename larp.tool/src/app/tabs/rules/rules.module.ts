@@ -1,5 +1,5 @@
+import { RuleItemPage } from './components/rule-item/rule-item.page';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,6 @@ import { RulesPageRoutingModule } from './rules-routing.module';
     RulesPageRoutingModule,
     HttpClientModule
   ],
-  declarations: [RulesPage]
+  declarations: [RulesPage, RuleItemPage]
 })
 export class RulesPageModule {}

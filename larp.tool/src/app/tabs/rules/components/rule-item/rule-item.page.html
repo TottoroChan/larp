@@ -1,11 +1,15 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title> Tab 2-2 </ion-title>
+    <ion-title> {{rulesFile.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar> </ion-toolbar>
-  </ion-header>
+<ion-content [scrollEvents]="true">
+  <ion-card *ngFor="let rule of rulesFile.content">
+    <ion-card-header *ngIf="rule.title">
+      <ion-card-title>{{ rule.title }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content> {{ rule.content }} </ion-card-content>
+  </ion-card>
 </ion-content>

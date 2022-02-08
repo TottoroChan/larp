@@ -7,17 +7,15 @@ const routes: Routes = [
   {
     path: '',
     component: RulesPage,
-    children: [
-      {
-        path: 'item',
-        component: RuleItemPage,
-      },
-    ]
-  }
+  },
+  {
+    path: 'item',
+    component: RuleItemPage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class RulesPageRoutingModule {}
