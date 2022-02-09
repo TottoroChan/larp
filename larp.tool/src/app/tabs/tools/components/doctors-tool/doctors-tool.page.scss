@@ -1,0 +1,17 @@
+ion-content {
+  section#scan {
+    padding: 10px;    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    ion-button.custom-large {
+      height: 200px;
+      width: 200px;
+
+      ion-icon {
+        font-size: 9em;
+      }
+    }
+  }
+}
