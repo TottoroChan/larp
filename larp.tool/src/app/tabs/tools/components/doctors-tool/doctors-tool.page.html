@@ -10,11 +10,38 @@
 </ion-header>
 
 <ion-content>
-  <section id="scan">
+  <section id="scan" *ngIf="!scanResult">
     <h4>Нажмите для сканирования:</h4>
 
-    <ion-button color="light" class="custom-large">
+    <ion-button color="light" class="custom-large" (click)="scanQR()">
       <ion-icon slot="icon-only" name="scan-outline"></ion-icon>
     </ion-button>
+  </section>
+
+  <section id="scan-result" *ngIf="scanResult && !successResult">
+    <h4>Введите название болезни:</h4>
+
+    <ion-input
+      clearInput
+      placeholder="Название"
+      [(ngModel)]="disiaseName"
+    ></ion-input>
+
+    <section id="buttons">
+      <ion-button color="light">отмена</ion-button>
+      <ion-button (click)="checkDisiase()" color="light"
+        >подтвердить</ion-button
+      >
+    </section>
+
+    <section id="fail-result" *ngIf="disiaseChecked && !successResult">
+      <h4>Откройте следующий симптом</h4>
+    </section>
+  </section>
+
+  <section id="success-result" *ngIf="disiaseChecked && successResult">
+    <h4>ВЕРНО:</h4>
+
+    <h4>{{disiaseName}}</h4>
   </section>
 </ion-content>

@@ -1,3 +1,4 @@
+import { DoctorsToolPage } from './components/doctors-tool/doctors-tool.page';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,8 @@ import { ToolsPage } from './tools.page';
 
 import { ToolsPageRoutingModule } from './tools-routing.module';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 @NgModule({
   imports: [
     IonicModule,
@@ -15,6 +18,10 @@ import { ToolsPageRoutingModule } from './tools-routing.module';
     RouterModule.forChild([{ path: '', component: ToolsPage }]),
     ToolsPageRoutingModule,
   ],
-  declarations: [ToolsPage]
+  declarations: [
+    ToolsPage,
+    DoctorsToolPage,
+  ],
+  providers: [BarcodeScanner],
 })
 export class ToolsPageModule {}
