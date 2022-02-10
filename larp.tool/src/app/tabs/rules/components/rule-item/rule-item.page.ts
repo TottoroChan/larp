@@ -49,4 +49,8 @@ export class RuleItemPage {
 
     this.ionContent.scrollToPoint(0, offsetY, 500);
   }
+
+  goBack() {
+    this.router.navigate(['tabs/rules']);
+  }
 }

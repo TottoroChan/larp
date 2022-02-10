@@ -56,7 +56,11 @@ export class RulesPage {
     let navigationExtras: NavigationExtras = {
       state: {
         rulesFile: rulesFile,
-        textToSearch: event.target.parentElement.classList.contains("result-list") ?  event.target.textContent : null,
+        textToSearch: event.target.parentElement.classList.contains(
+          'result-list'
+        )
+          ? event.target.textContent
+          : null,
       },
     };
     this.router.navigate(['tabs/rules/item'], navigationExtras);
@@ -67,20 +71,28 @@ export class RulesPage {
   }
 
   search(event) {
+    const query = event.target.value.toLowerCase();
     const items = Array.from(
       document.querySelector('ion-list')
         .children as HTMLCollectionOf<HTMLElement>
     );
-    const query = event.target.value.toLowerCase();
-    requestAnimationFrame(() => {
+
+    if (query.length > 2) {
+      requestAnimationFrame(() => {
+        this.listOfRules.forEach((rule, index) => {
+          this.cleanResultList(items, index);
+
+          this.buildResultList(rule, query, items, index);
+
+          this.renderResultList(query, items, index);
+        });
+      });
+    } else {
       this.listOfRules.forEach((rule, index) => {
         this.cleanResultList(items, index);
-
-        this.buildResultList(rule, query, items, index);
-
-        this.renderResultList(query, items, index);
       });
-    });
+      this.searchResultList = [];
+    }
   }
 
   private cleanResultList(items: HTMLElement[], index: number) {
@@ -111,17 +123,15 @@ export class RulesPage {
   }
 
   private renderResultList(query: any, items: HTMLElement[], index: number) {
-    if (query.length > 2) {
-      const resultListElement = document.createElement('div');
-      resultListElement.className = 'result-list';
-      items[index].querySelector('ion-label').appendChild(resultListElement);
+    const resultListElement = document.createElement('div');
+    resultListElement.className = 'result-list';
+    items[index].querySelector('ion-label').appendChild(resultListElement);
 
-      this.searchResultList.forEach((result) => {
-        let resultlement = document.createElement('p');
-        resultlement.innerHTML = result.replace(query, `<b>${query}</b>`);
-        items[index].querySelector('.result-list').appendChild(resultlement);
-      });
-    }
+    this.searchResultList.forEach((result) => {
+      let resultlement = document.createElement('p');
+      resultlement.innerHTML = result.replace(query, `<b>${query}</b>`);
+      items[index].querySelector('.result-list').appendChild(resultlement);
+    });
   }
 
   private getRulesPath(): string {
