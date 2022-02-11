@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Disease, testDisiases } from './models/disease.model';
 
 @Component({
   selector: 'app-doctors-tool',
@@ -11,6 +12,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 export class DoctorsToolPage {
   scanResult: string;
   disiaseName: string;
+  realDisiase: Disease;
   disiaseChecked: boolean = false;
   successResult: boolean = false;
 
@@ -18,9 +20,20 @@ export class DoctorsToolPage {
 
   ionViewDidEnter() {}
 
-  ionViewDidLeave() {}
+  ionViewDidLeave() {
+    this.scanResult = null;
+    this.disiaseName = null;
+    this.realDisiase = null;
+    this.disiaseChecked = false;
+    this.successResult = false;
+  }
+
+  disiaseChange() {
+    this.disiaseChecked = false;
+  }
 
   scanQR() {
+    //this.scanResult = "A";
     this.barcodeScanner
       .scan()
       .then((barcodeData) => {
@@ -33,13 +46,15 @@ export class DoctorsToolPage {
   }
 
   checkDisiase() {
-    if (this.disiaseName == this.scanResult){
+    const code = this.scanResult.charAt(32);
+    this.realDisiase = testDisiases.find((disiase) => disiase.code == code);
+
+    if (this.disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
       this.successResult = true;
-    }
-    else {
+    } else {
       this.successResult = false;
     }
-      this.disiaseChecked = true;
+    this.disiaseChecked = true;
   }
 
   goBack() {

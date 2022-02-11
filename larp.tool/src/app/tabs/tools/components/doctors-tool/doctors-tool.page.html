@@ -24,11 +24,12 @@
     <ion-input
       clearInput
       placeholder="Название"
+      (ionChange)="disiaseChange()"
       [(ngModel)]="disiaseName"
     ></ion-input>
 
     <section id="buttons">
-      <ion-button color="light">отмена</ion-button>
+      <ion-button color="light" (click)="goBack()">отмена</ion-button>
       <ion-button (click)="checkDisiase()" color="light"
         >подтвердить</ion-button
       >
@@ -42,6 +43,8 @@
   <section id="success-result" *ngIf="disiaseChecked && successResult">
     <h4>ВЕРНО:</h4>
 
-    <h4>{{disiaseName}}</h4>
+    <h3>{{realDisiase.name}}</h3>
+
+    <p>{{realDisiase.description}}</p>
   </section>
 </ion-content>
