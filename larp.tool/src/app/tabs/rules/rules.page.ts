@@ -12,7 +12,6 @@ import { RulesFile, testRules } from './models/rulesFile.model';
 export class RulesPage {
   listOfRules: RulesFile[] = [];
   showSearchBar: boolean = false;
-  searchResultList: any = [];
 
   constructor(private router: Router) {}
 
@@ -23,7 +22,6 @@ export class RulesPage {
   ionViewDidLeave() {
     this.listOfRules = [];
     this.showSearchBar = false;
-    this.searchResultList = [];
   }
 
   showItem(rulesFile: RulesFile, event) {
@@ -56,20 +54,25 @@ export class RulesPage {
         this.listOfRules.forEach((rule, index) => {
           this.cleanResultList(items, index);
 
-          this.buildResultList(rule, query, items, index);
+          const searchResultList = this.buildResultList(
+            rule,
+            query,
+            items,
+            index
+          );
 
-          this.renderResultList(query, items, index);
+          this.renderResultList(query, items, index, searchResultList);
         });
       });
     } else {
       this.listOfRules.forEach((rule, index) => {
         this.cleanResultList(items, index);
       });
-      this.searchResultList = [];
     }
   }
 
   private cleanResultList(items: HTMLElement[], index: number) {
+    items[index].style.display = 'block';
     if (items[index].querySelector('.result-list')) {
       items[index].querySelector('.result-list').remove();
     }
@@ -81,27 +84,35 @@ export class RulesPage {
     items: HTMLElement[],
     index: number
   ) {
-    this.searchResultList = [];
+    let searchResultList = [];
     rule.content.forEach((item) => {
-      if (item.content.toLowerCase().indexOf(query) > -1) {
-        let match = item.content.match(`(.{0,50})(${query})(.{0,50})`)[0];
-        this.searchResultList.push(match);
+      const content: any = item.content.toLowerCase();
+
+      if (content.indexOf(query) > -1) {
+        let match = [...content.matchAll(`(.{0,50})(${query})(.{0,50})`)];
+
+        match.forEach((element) => {
+          searchResultList.push(element[0]);
+        });
       }
     });
 
-    items[index].style.display = this.searchResultList.length
-      ? 'block'
-      : 'none';
+    items[index].style.display = searchResultList.length ? 'block' : 'none';
 
-    return this.searchResultList;
+    return searchResultList;
   }
 
-  private renderResultList(query: any, items: HTMLElement[], index: number) {
+  private renderResultList(
+    query: any,
+    items: HTMLElement[],
+    index: number,
+    searchResultList
+  ) {
     const resultListElement = document.createElement('div');
     resultListElement.className = 'result-list';
     items[index].querySelector('ion-label').appendChild(resultListElement);
 
-    this.searchResultList.forEach((result) => {
+    searchResultList.forEach((result) => {
       let resultlement = document.createElement('p');
       resultlement.innerHTML = result.replace(query, `<b>${query}</b>`);
       items[index].querySelector('.result-list').appendChild(resultlement);
