@@ -93,9 +93,9 @@ export class FilesService {
             encoding: Encoding.UTF8,
           }).then((fileContent) => {
             result.push(JSON.parse(fileContent.data) as Type);
-            return result;
           });
         });
+        return result;
       }
     } catch (error) {
       return null;
