@@ -17,10 +17,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <section *ngIf="noContent">
+    Похоже что информации о правилах нет на устройстве. Перейдите во вкладку
+    "домой" и нажмите на кнопку "Синхронизировать данные"
+  </section>
+  <ion-list *ngIf="!noContent">
     <ion-item *ngFor="let rule of listOfRules" (click)="showItem(rule, $event)">
-      <ion-label><h2>{{ rule.title }}</h2>
-      </ion-label>
+      <ion-label><h2>{{ rule.title }}</h2> </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { RulesPage } from './rules.page';
 
 import { RulesPageRoutingModule } from './rules-routing.module';
+import { FilesService } from 'src/app/shared/services/files.service';
 
 @NgModule({
   imports: [
@@ -14,8 +15,9 @@ import { RulesPageRoutingModule } from './rules-routing.module';
     CommonModule,
     FormsModule,
     RulesPageRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  declarations: [RulesPage, RuleItemPage]
+  declarations: [RulesPage, RuleItemPage],
+  providers: [FilesService],
 })
 export class RulesPageModule {}

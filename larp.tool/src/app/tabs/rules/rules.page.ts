@@ -1,3 +1,4 @@
+import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { AppMode, environment } from 'src/environments/environment';
@@ -10,18 +11,32 @@ import { RulesFile, testRules } from './models/rulesFile.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class RulesPage {
+  content: string = '';
   listOfRules: RulesFile[] = [];
   showSearchBar: boolean = false;
+  noContent: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private filesService: FilesService) {}
 
   ionViewDidEnter() {
-    this.listOfRules = testRules;
+    try {
+      this.filesService
+        .readDataFromFiles<RulesFile>('rules')
+        .then((response) => {
+          if (response) {
+            this.noContent = false;
+            this.listOfRules = response;
+          } else {
+            this.noContent = true;
+          }
+        });
+    } catch (error) {}
   }
 
   ionViewDidLeave() {
     this.listOfRules = [];
     this.showSearchBar = false;
+    this.noContent = false;
   }
 
   showItem(rulesFile: RulesFile, event) {

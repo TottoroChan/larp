@@ -1,12 +1,11 @@
-import { RulesFile } from './../../tabs/rules/models/rulesFile.model';
 import { Octokit } from 'octokit';
-import { environment, AppMode } from 'src/environments/environment';
+import { environment, AppMode } from '../../../src/environments/environment';
 import { Injectable } from '@angular/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
 @Injectable()
 export class FilesService {
-  async syncGitData() {
+  async getData() {
     try {
       const octokit = new Octokit({
         auth: environment.gitToken,
@@ -66,31 +65,5 @@ export class FilesService {
     }
     const decoder = new TextDecoder(); // default is utf-8
     return decoder.decode(bytes);
-  }
-
-  async readDataFromFiles<Type>(contentFolder: string) {
-    const path = environment.appMode == AppMode.master ? 'master' : 'player';
-    try {
-      let rulesFile: Type[] = [];
-      const dir = await Filesystem.readdir({
-        path: `content/${path}/${contentFolder}`,
-        directory: Directory.External,
-      });
-
-      dir.files.forEach((file) => {
-        Filesystem.readFile({
-          path: `content/${path}/${contentFolder}/${file}`,
-          directory: Directory.External,
-          encoding: Encoding.UTF8,
-        }).then((fileContent) => {
-          rulesFile.push(JSON.parse(fileContent.data) as Type);
-        });
-      });
-      return rulesFile;
-    } catch (error) {
-      return null;
-    }
-
-    //console.log('secrets:', contents);
   }
 }
