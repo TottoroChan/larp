@@ -1,3 +1,4 @@
+import { FilesService } from 'src/app/shared/services/files.service';
 import { DoctorsToolPage } from './components/doctors-tool/doctors-tool.page';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
@@ -22,6 +23,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     ToolsPage,
     DoctorsToolPage,
   ],
-  providers: [BarcodeScanner],
+  providers: [BarcodeScanner, FilesService],
 })
 export class ToolsPageModule {}

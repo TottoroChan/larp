@@ -1,7 +1,6 @@
-import { RulesFile } from './../../tabs/rules/models/rulesFile.model';
 import { Octokit } from 'octokit';
 import { environment, AppMode } from 'src/environments/environment';
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
 @Injectable()
@@ -68,29 +67,38 @@ export class FilesService {
     return decoder.decode(bytes);
   }
 
-  async readDataFromFiles<Type>(contentFolder: string) {
+  async readLocalData<Type>(contentFolder?: string, fileName?: string) {
     const path = environment.appMode == AppMode.master ? 'master' : 'player';
-    try {
-      let rulesFile: Type[] = [];
-      const dir = await Filesystem.readdir({
-        path: `content/${path}/${contentFolder}`,
-        directory: Directory.External,
-      });
 
-      dir.files.forEach((file) => {
-        Filesystem.readFile({
-          path: `content/${path}/${contentFolder}/${file}`,
+    let result: Type[] = [];
+    try {
+      if (fileName) {
+        const fileContent = await Filesystem.readFile({
+          path: `content/${path}/${contentFolder}/${fileName}`,
           directory: Directory.External,
           encoding: Encoding.UTF8,
-        }).then((fileContent) => {
-          rulesFile.push(JSON.parse(fileContent.data) as Type);
         });
-      });
-      return rulesFile;
+        result.push(JSON.parse(fileContent.data) as Type);
+        return result;
+      } else {
+        const dir = await Filesystem.readdir({
+          path: `content/${path}/${contentFolder}`,
+          directory: Directory.External,
+        });
+
+        dir.files.forEach((file) => {
+          Filesystem.readFile({
+            path: `content/${path}/${contentFolder}/${file}`,
+            directory: Directory.External,
+            encoding: Encoding.UTF8,
+          }).then((fileContent) => {
+            result.push(JSON.parse(fileContent.data) as Type);
+            return result;
+          });
+        });
+      }
     } catch (error) {
       return null;
     }
-
-    //console.log('secrets:', contents);
   }
 }

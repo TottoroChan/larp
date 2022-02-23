@@ -10,7 +10,12 @@
 </ion-header>
 
 <ion-content>
-  <section id="scan" *ngIf="!scanResult">
+  <section *ngIf="noContent">
+    Похоже что информации о правилах нет на устройстве. Перейдите во вкладку
+    "домой" и нажмите на кнопку "Синхронизировать данные"
+  </section>
+
+  <section id="scan" *ngIf="!noContent && !scanResult">
     <h4>Нажмите для сканирования:</h4>
 
     <ion-button color="light" class="custom-large" (click)="scanQR()">
@@ -18,7 +23,7 @@
     </ion-button>
   </section>
 
-  <section id="scan-result" *ngIf="scanResult && !successResult">
+  <section id="scan-result" *ngIf="!noContent && scanResult && !successResult">
     <h4>Введите название болезни:</h4>
 
     <ion-input
@@ -35,14 +40,18 @@
       >
     </section>
 
-    <section id="fail-result" *ngIf="disiaseChecked && !successResult">
+    <section
+      id="fail-result"
+      *ngIf="!noContent && disiaseChecked && !successResult"
+    >
       <h4>Откройте следующий симптом</h4>
     </section>
   </section>
 
-  <section id="success-result" *ngIf="disiaseChecked && successResult">
-    <h4>ВЕРНО:</h4>
-
+  <section
+    id="success-result"
+    *ngIf="!noContent && disiaseChecked && successResult"
+  >
     <h3>{{realDisiase.name}}</h3>
 
     <p>{{realDisiase.description}}</p>

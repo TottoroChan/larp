@@ -1,6 +1,6 @@
-import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { FilesService } from 'src/app/shared/services/files.service';
 import { AppMode, environment } from 'src/environments/environment';
 import { RulesFile, testRules } from './models/rulesFile.model';
 
@@ -21,7 +21,7 @@ export class RulesPage {
   ionViewDidEnter() {
     try {
       this.filesService
-        .readDataFromFiles<RulesFile>('rules')
+        .readLocalData<RulesFile>('rules')
         .then((response) => {
           if (response) {
             this.noContent = false;

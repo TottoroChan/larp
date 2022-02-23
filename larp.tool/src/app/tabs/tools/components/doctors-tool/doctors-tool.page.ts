@@ -1,7 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { FilesService } from 'src/app/shared/services/files.service';
 import { Disease, testDisiases } from './models/disease.model';
+import { DoctorsTool } from './models/doctors.model';
 
 @Component({
   selector: 'app-doctors-tool',
@@ -15,10 +17,29 @@ export class DoctorsToolPage {
   realDisiase: Disease;
   disiaseChecked: boolean = false;
   successResult: boolean = false;
+  listOfDiseases: Disease[] = [];
+  noContent: boolean = false;
 
-  constructor(private barcodeScanner: BarcodeScanner, private router: Router) {}
+  constructor(
+    private barcodeScanner: BarcodeScanner,
+    private router: Router,
+    private filesService: FilesService
+  ) {}
 
-  ionViewDidEnter() {}
+  ionViewDidEnter() {
+    try {
+      this.filesService
+        .readLocalData<DoctorsTool>('tools', 'doctors.json')
+        .then((response) => {
+          if (response) {
+            this.noContent = false;
+            this.listOfDiseases = response[0].diseases;
+          } else {
+            this.noContent = true;
+          }
+        });
+    } catch (error) {}
+  }
 
   ionViewDidLeave() {
     this.scanResult = null;
@@ -47,7 +68,9 @@ export class DoctorsToolPage {
 
   checkDisiase() {
     const code = this.scanResult.charAt(32);
-    this.realDisiase = testDisiases.find((disiase) => disiase.code == code);
+    this.realDisiase = this.listOfDiseases.find(
+      (disiase) => disiase.code == code
+    );
 
     if (this.disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
       this.successResult = true;
