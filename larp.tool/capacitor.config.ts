@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'larp.tool',
+  appId: 'io.larp.arbor',
+  appName: 'arbor 2022',
   webDir: 'www',
   bundledWebRuntime: false
 };
