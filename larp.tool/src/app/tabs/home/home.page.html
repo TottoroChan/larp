@@ -5,13 +5,12 @@
 </ion-header>
 
 <ion-content>
-  <section>
+  <section *ngIf="!isDataLoading">
     <ion-button color="light" expand="block" size="large" (click)="syncData()"
       >Синхронизировать данные</ion-button
     >
   </section>
-  <section *ngIf="isDataLoading">LOADING 
-    path:{{path}} filePath:{{filePath}}
-  path2:{{path2}}
-  ERROR: {{error}}</section>
+  <section id="spinner-section" *ngIf="isDataLoading">
+    <div class="loader">Loading...</div>
+  </section>
 </ion-content>
