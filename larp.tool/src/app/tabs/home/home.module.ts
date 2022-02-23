@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { GithubService } from './services/github.service';
+import { FilesService } from '../../shared/services/files.service';
 import { Octokit } from '@octokit/rest';
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, HomePageRoutingModule],
   declarations: [HomePage],
-  providers: [GithubService, Octokit],
+  providers: [FilesService, Octokit],
 })
 export class HomePageModule {}

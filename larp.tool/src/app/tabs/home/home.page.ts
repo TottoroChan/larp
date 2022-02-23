@@ -1,4 +1,4 @@
-import { GithubService } from './services/github.service';
+import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
@@ -8,9 +8,22 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePage {
-  constructor(private githubService: GithubService) {}
+  isDataLoading: boolean = false;
+  path: string = '';
+  path2: string = '';
+  filePath: string = '';
+  error: any;
+  error1: any;
+  constructor(private githubService: FilesService) {}
 
-  syncData() {
-    this.githubService.getData();
+  async syncData() {
+    this.isDataLoading = true;
+    try {
+      await this.githubService.syncGitData();
+    } catch (error) {
+      this.error1 = error;
+    }
+
+    this.isDataLoading = false;
   }
 }
