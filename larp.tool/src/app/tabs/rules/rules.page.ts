@@ -20,16 +20,14 @@ export class RulesPage {
 
   ionViewDidEnter() {
     try {
-      this.filesService
-        .readLocalData<RulesFile>('rules')
-        .then((response) => {
-          if (response) {
-            this.noContent = false;
-            this.listOfRules = response;
-          } else {
-            this.noContent = true;
-          }
-        });
+      this.filesService.readLocalData<RulesFile>('rules').then((response) => {
+        if (response) {
+          this.noContent = false;
+          this.listOfRules = response;
+        } else {
+          this.noContent = true;
+        }
+      });
     } catch (error) {}
   }
 
@@ -107,7 +105,12 @@ export class RulesPage {
         let match = [...content.matchAll(`(.{0,50})(${query})(.{0,50})`)];
 
         match.forEach((element) => {
-          searchResultList.push(element[0]);
+          const substring = element[0];
+          const searchResult = item.content.substring(
+            content.indexOf(substring),
+            content.indexOf(substring) + substring.length
+          );
+          searchResultList.push(searchResult);
         });
       }
     });
@@ -129,7 +132,15 @@ export class RulesPage {
 
     searchResultList.forEach((result) => {
       let resultlement = document.createElement('p');
-      resultlement.innerHTML = result.replace(query, `<b>${query}</b>`);
+      const searchQuery = result.substring(
+        result.toLowerCase().indexOf(query),
+        result.toLowerCase().indexOf(query) + query.length
+      );
+
+      resultlement.innerHTML = result.replace(
+        searchQuery,
+        `<b>${searchQuery}</b>`
+      );
       items[index].querySelector('.result-list').appendChild(resultlement);
     });
   }
