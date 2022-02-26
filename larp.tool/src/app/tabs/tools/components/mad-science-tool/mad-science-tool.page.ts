@@ -22,19 +22,19 @@ export class MadScienceToolPage {
   constructor(private router: Router, private filesService: FilesService) {}
 
   ionViewDidEnter() {
-    this.madScience = testMadScience;
-    // try {
-    //   this.filesService
-    //     .readLocalData<MadScience>('tools', 'madScience.json')
-    //     .then((response) => {
-    //       if (response) {
-    //         this.noContent = false;
-    //         this.madScience = response[0];
-    //       } else {
-    //         this.noContent = true;
-    //       }
-    //     });
-    // } catch (error) {}
+    try {
+      this.filesService
+        .readLocalData<MadScience>('tools', 'madScience.json')
+        .then((response) => {
+          if (response) {
+            this.noContent = false;
+            debugger;
+            this.madScience = response[0];
+          } else {
+            this.noContent = true;
+          }
+        });
+    } catch (error) {}
   }
 
   ionViewDidLeave() {
