@@ -1,10 +1,12 @@
 ion-content {
-  section{
+  section#scan,
+  section#scan-result,
+  section#fail-result,
+  section#success-result {
     padding: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    
   }
 
   section#scan {
@@ -35,11 +37,11 @@ ion-content {
       width: 100%;
     }
   }
-  
+
   section#fail-result {
     color: red;
   }
-  
+
   section#success-result {
     color: green;
   }
