@@ -1,0 +1,21 @@
+ion-content {
+  section#mad-science {
+    padding: 10px;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    .important {
+      color: red;
+    }
+  }
+
+  section#mad-science-result {
+    padding: 10px;
+
+    ion-card {
+      ion-card-content {
+        margin-top: 50px;
+      }
+    }
+  }
+}

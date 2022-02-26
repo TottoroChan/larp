@@ -1,3 +1,4 @@
+import { MadScienceToolPage } from './components/mad-science-tool/mad-science-tool.page';
 import { DoctorsToolPage } from './components/doctors-tool/doctors-tool.page';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'doctors',
     component: DoctorsToolPage,
+  },
+  {
+    path: 'mad-science',
+    component: MadScienceToolPage,
   },
 ];
 
