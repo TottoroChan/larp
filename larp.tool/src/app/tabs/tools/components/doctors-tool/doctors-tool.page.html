@@ -52,8 +52,19 @@
     id="success-result"
     *ngIf="!noContent && disiaseChecked && successResult"
   >
-    <h3>{{realDisiase.name}}</h3>
-
-    <p>{{realDisiase.description}}</p>
+      <span>Нажмите на карту чтобы узнать дополнительную информацию.</span>
+    <div class="card" (click)="flipCard($event)">
+      <div class="card-front">
+        <img
+          src="./../../../../../assets/images/doctors-tool/corovovirus.jpg"
+        />
+      </div>
+      <div class="card-back">
+        <img src="./../../../../../assets/images/doctors-tool/card_back.jpg" />
+        <div class="result">
+          <p>{{realDisiase.description}}</p>
+        </div>
+      </div>
+    </div>
   </section>
 </ion-content>

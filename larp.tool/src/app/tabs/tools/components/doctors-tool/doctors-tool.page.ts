@@ -67,6 +67,8 @@ export class DoctorsToolPage {
   }
 
   checkDisiase() {
+    // this.successResult = true;
+    // this.disiaseChecked = true;
     const code = this.scanResult.charAt(32);
     this.realDisiase = this.listOfDiseases.find(
       (disiase) => disiase.code == code
@@ -82,5 +84,16 @@ export class DoctorsToolPage {
 
   goBack() {
     this.router.navigate(['tabs/tools']);
+  }
+
+  flipCard(event) {
+    var element = event.currentTarget;
+    if (element.className === 'card') {
+      if (element.style.transform == 'rotateY(180deg)') {
+        element.style.transform = 'rotateY(0deg)';
+      } else {
+        element.style.transform = 'rotateY(180deg)';
+      }
+    }
   }
 }
