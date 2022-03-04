@@ -33,6 +33,7 @@ export class DoctorsToolPage {
         .then((response) => {
           if (response) {
             this.noContent = false;
+            debugger
             this.listOfDiseases = response[0].diseases;
           } else {
             this.noContent = true;
@@ -54,7 +55,7 @@ export class DoctorsToolPage {
   }
 
   scanQR() {
-    //this.scanResult = "A";
+    //this.scanResult = "B";
     this.barcodeScanner
       .scan()
       .then((barcodeData) => {
