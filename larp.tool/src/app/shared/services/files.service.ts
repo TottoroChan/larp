@@ -1,3 +1,4 @@
+import { Tool } from '../../tabs/tools/models/tools.model';
 import { IConfig } from './../models/config.model';
 import { Octokit } from 'octokit';
 import { environment, AppMode } from 'src/environments/environment';
@@ -95,7 +96,8 @@ export class FilesService {
             directory: Directory.External,
             encoding: Encoding.UTF8,
           }).then((fileContent) => {
-            result.push(JSON.parse(fileContent.data) as Type);
+            const data = JSON.parse(fileContent.data) as Type;
+            result.push(data);
           });
         });
         return result;
@@ -103,6 +105,35 @@ export class FilesService {
     } catch (error) {
       return null;
     }
+  }
+
+  async readToolList() {
+    const config = await this.readConfig();
+    const path = config.isMaster ? 'master' : 'player'; //environment.appMode == AppMode.master ? 'master' : 'player';
+
+    let result: Tool[] = [];
+
+    const tools = await Filesystem.readdir({
+      path: `content/${path}/tools`,
+      directory: Directory.External,
+    });
+
+    await tools.files.forEach((file) => {
+      Filesystem.readFile({
+        path: `content/${path}/tools/${file}`,
+        directory: Directory.External,
+        encoding: Encoding.UTF8,
+      }).then((fileContent) => {
+        const data = JSON.parse(fileContent.data);
+        const tool = new Tool();
+        tool.name = data.name;
+        tool.path = data.path;
+
+        result.push(tool);
+      });
+    });
+
+    return result;
   }
 
   configFilePath = 'content/config.cfg';

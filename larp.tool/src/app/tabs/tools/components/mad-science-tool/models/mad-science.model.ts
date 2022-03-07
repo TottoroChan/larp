@@ -21,15 +21,21 @@ export class MadScienceCheck {
 }
 
 export class MadScience {
+  name: string;
+  path: string;
   checkList: MadScienceCheck[];
   successRate: MadScienceItem[];
   effects: MadScienceItem[];
 
   constructor(
+    name: string,
+    path: string,
     checkList: MadScienceCheck[],
     successRate: MadScienceItem[],
     effects: MadScienceItem[]
   ) {
+    this.name = name;
+    this.path = path;
     this.checkList = checkList;
     this.successRate = successRate;
     this.effects = effects;
@@ -37,6 +43,8 @@ export class MadScience {
 }
 
 export var testMadScience = new MadScience(
+  'Безумная наука',
+  './mad-science',
   [
     new MadScienceCheck('chek 1', false, false),
     new MadScienceCheck('chek 2', false, false),

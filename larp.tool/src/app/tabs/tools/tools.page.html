@@ -5,20 +5,20 @@
 </ion-header>
 
 <ion-content>
-  <section>
-    <ion-button
-      color="light"
-      expand="block"
-      size="large"
-      [routerLink]="['./doctors']"
-      >Врачебный инструмент</ion-button
-    >
-    <ion-button
-      color="light"
-      expand="block"
-      size="large"
-      [routerLink]="['./mad-science']"
-      >Безумная наука</ion-button
-    >
+  <section *ngIf="noContent; else elseblock">
+    Похоже что информации о правилах нет на устройстве. Перейдите во вкладку
+    "домой" и нажмите на кнопку "Синхронизировать данные"
   </section>
+  <ng-template #elseblock>
+    <section>
+      <ion-button
+        *ngFor="let tool of listOfTools"
+        color="light"
+        expand="block"
+        size="large"
+        [routerLink]="[tool.path]"
+        >{{tool.name}}</ion-button
+      >
+    </section>
+  </ng-template>
 </ion-content>
