@@ -1,3 +1,10 @@
+import {
+  Directory,
+  Encoding,
+  Filesystem,
+  ReadFileResult,
+} from '@capacitor/filesystem';
+import { IConfig } from './../../shared/models/config.model';
 import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 
@@ -9,21 +16,12 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class HomePage {
   isDataLoading: boolean = false;
-  path: string = '';
-  path2: string = '';
-  filePath: string = '';
-  error: any;
-  error1: any;
-  constructor(private githubService: FilesService) {}
+
+  constructor(private filesService: FilesService) {}
 
   async syncData() {
     this.isDataLoading = true;
-    try {
-      await this.githubService.syncGitData();
-    } catch (error) {
-      this.error1 = error;
-    }
-
+    await this.filesService.syncGitData();
     this.isDataLoading = false;
   }
 }

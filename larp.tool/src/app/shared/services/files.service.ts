@@ -1,3 +1,4 @@
+import { IConfig } from './../models/config.model';
 import { Octokit } from 'octokit';
 import { environment, AppMode } from 'src/environments/environment';
 import { Injectable, Type } from '@angular/core';
@@ -34,7 +35,7 @@ export class FilesService {
         const content = file.data.content.replace('\n', '');
         const contentJSON = this.decodeBase64(content);
 
-        await this.CreateFolderIfNotExist(contentFolder);
+        await this.CreateFolderIfNotExist(`content/${contentFolder}`);
 
         await Filesystem.writeFile({
           path: `content/${contentFolder}/${file.data.name}`,
@@ -49,7 +50,7 @@ export class FilesService {
   private async CreateFolderIfNotExist(folderPath: string) {
     try {
       await Filesystem.mkdir({
-        path: `content/${folderPath}`,
+        path: `${folderPath}`,
         directory: Directory.External,
         recursive: true,
       });
@@ -100,5 +101,44 @@ export class FilesService {
     } catch (error) {
       return null;
     }
+  }
+
+  configFilePath = 'content/config.cfg';
+
+  async initConfig(config: IConfig) {
+    await this.CreateFolderIfNotExist('content');
+
+    try {
+      await Filesystem.readFile({
+        path: this.configFilePath,
+        directory: Directory.External,
+        encoding: Encoding.UTF8,
+      });
+    } catch (e) {
+      await Filesystem.writeFile({
+        path: this.configFilePath,
+        data: JSON.stringify(config),
+        directory: Directory.External,
+        encoding: Encoding.UTF8,
+      });
+    }
+  }
+
+  async writeConfig(config: IConfig) {
+    await Filesystem.writeFile({
+      path: this.configFilePath,
+      data: JSON.stringify(config),
+      directory: Directory.External,
+      encoding: Encoding.UTF8,
+    });
+  }
+
+  async readConfig(): Promise<IConfig> {
+    const config = await Filesystem.readFile({
+      path: this.configFilePath,
+      directory: Directory.External,
+      encoding: Encoding.UTF8,
+    });
+    return JSON.parse(config.data);
   }
 }
