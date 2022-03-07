@@ -12,7 +12,8 @@ export class FilesService {
         auth: environment.gitToken,
       });
 
-      const path = environment.appMode == AppMode.master ? 'master' : 'player';
+      const config = await this.readConfig();
+      const path = config.isMaster ? 'master' : 'player'; //environment.appMode == AppMode.master ? 'master' : 'player';
       await this.getFilesFromFolder(octokit, `${path}/rules`);
 
       await this.getFilesFromFolder(octokit, `${path}/tools`);
@@ -69,7 +70,8 @@ export class FilesService {
   }
 
   async readLocalData<Type>(contentFolder?: string, fileName?: string) {
-    const path = environment.appMode == AppMode.master ? 'master' : 'player';
+    const config = await this.readConfig();
+    const path = config.isMaster ? 'master' : 'player'; //environment.appMode == AppMode.master ? 'master' : 'player';
 
     let result: Type[] = [];
     try {

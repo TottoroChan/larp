@@ -1,6 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> Дом </ion-title>
+    <ion-title> Арбор 2022 </ion-title>
+    <ion-buttons slot="end" *ngIf="config">
+      <ion-button
+        (click)="onSwitchMode()"
+        *ngIf="!config.isMaster; else elseblock"
+      >
+        <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+      </ion-button>
+      <ng-template #elseblock>
+        <ion-button (click)="onSwitchMode()">
+          <ion-icon
+            slot="icon-only"
+            name="people-circle-outline"
+          ></ion-icon> </ion-button
+      ></ng-template>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
