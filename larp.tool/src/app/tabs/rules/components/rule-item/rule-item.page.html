@@ -12,9 +12,9 @@
 <ion-content [scrollEvents]="true">
   <ion-card *ngFor="let rule of rulesFile.content">
     <ion-card-header *ngIf="rule.title">
-      <ion-card-title>{{ rule.title }}</ion-card-title>
+      <ion-card-title  [innerHTML]="rule.title"></ion-card-title>
     </ion-card-header>
 
-    <ion-card-content> {{ rule.content }} </ion-card-content>
+    <ion-card-content [innerHTML]="rule.content"></ion-card-content>
   </ion-card>
 </ion-content>

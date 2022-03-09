@@ -1,5 +1,5 @@
 import { RulesFile } from './../../models/rulesFile.model';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 
@@ -7,6 +7,7 @@ import { IonContent } from '@ionic/angular';
   selector: 'app-rule-item',
   templateUrl: 'rule-item.page.html',
   styleUrls: ['rule-item.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RuleItemPage {
   @ViewChild(IonContent) ionContent: IonContent;
