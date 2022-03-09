@@ -2,7 +2,7 @@ import { Tool } from '../../tabs/tools/models/tools.model';
 import { IConfig } from './../models/config.model';
 import { Octokit } from 'octokit';
 import { environment, AppMode } from 'src/environments/environment';
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
 @Injectable()
@@ -22,31 +22,31 @@ export class FilesService {
   }
 
   private async getFilesFromFolder(octokit: Octokit, contentFolder: string) {
-    try {
-      const params = {
-        owner: 'izhlarp',
-        repo: 'arbor2022',
-        path: contentFolder,
-      };
+    const params = {
+      owner: 'izhlarp',
+      repo: 'arbor2022',
+      path: contentFolder,
+    };
 
-      const tools: any = await octokit.rest.repos.getContent(params);
+    let folderContent: any = await octokit.rest.repos.getContent(params);
 
-      tools.data.forEach(async (item) => {
-        params.path = item.path;
-        const file: any = await octokit.rest.repos.getContent(params);
-        const content = file.data.content.replace('\n', '');
-        const contentJSON = this.decodeBase64(content);
+    for (let index = 0; index < folderContent.data.length; index++) {
+      const item = folderContent.data[index];
 
-        await this.CreateFolderIfNotExist(`content/${contentFolder}`);
+      params.path = item.path;
+      const file: any = await octokit.rest.repos.getContent(params);
+      const content = file.data.content.replace('\n', '');
+      const contentJSON = this.decodeBase64(content);
 
-        await Filesystem.writeFile({
-          path: `content/${contentFolder}/${file.data.name}`,
-          data: contentJSON,
-          directory: Directory.External,
-          encoding: Encoding.UTF8,
-        });
+      await this.CreateFolderIfNotExist(`content/${contentFolder}`);
+
+      await Filesystem.writeFile({
+        path: `content/${contentFolder}/${file.data.name}`,
+        data: contentJSON,
+        directory: Directory.External,
+        encoding: Encoding.UTF8,
       });
-    } catch (error) {}
+    }
   }
 
   private async CreateFolderIfNotExist(folderPath: string) {
@@ -75,36 +75,59 @@ export class FilesService {
     const path = config.isMaster ? 'master' : 'player'; //environment.appMode == AppMode.master ? 'master' : 'player';
 
     let result: Type[] = [];
-    try {
-      if (fileName) {
-        const fileContent = await Filesystem.readFile({
-          path: `content/${path}/${contentFolder}/${fileName}`,
-          directory: Directory.External,
-          encoding: Encoding.UTF8,
-        });
-        result.push(JSON.parse(fileContent.data) as Type);
-        return result;
-      } else {
-        const dir = await Filesystem.readdir({
-          path: `content/${path}/${contentFolder}`,
-          directory: Directory.External,
-        });
 
-        dir.files.forEach((file) => {
-          Filesystem.readFile({
-            path: `content/${path}/${contentFolder}/${file}`,
-            directory: Directory.External,
-            encoding: Encoding.UTF8,
-          }).then((fileContent) => {
-            const data = JSON.parse(fileContent.data) as Type;
-            result.push(data);
-          });
-        });
-        return result;
-      }
-    } catch (error) {
-      return null;
+    if (fileName) {
+      result = await this.readFileByName<Type>(
+        `content/${path}/${contentFolder}/${fileName}`
+      );
+    } else {
+      result = await this.readFilesFromFolder<Type>(
+        `content/${path}/${contentFolder}`
+      );
     }
+
+    return result;
+  }
+
+  private async readFilesFromFolder<Type>(path: string) {
+    let result: Type[] = [];
+
+    const dir = await Filesystem.readdir({
+      path: path,
+      directory: Directory.External,
+    });
+
+    for (let index = 0; index < dir.files.length; index++) {
+      const file = dir.files[index];
+
+      const fileContent = await Filesystem.readFile({
+        path: `${path}/${file}`,
+        directory: Directory.External,
+        encoding: Encoding.UTF8,
+      });
+
+      const data = JSON.parse(fileContent.data) as Type;
+
+      result.push(data);
+    }
+
+    return result;
+  }
+
+  private async readFileByName<Type>(path: string) {
+    let result: Type[] = [];
+
+    const fileContent = await Filesystem.readFile({
+      path: path,
+      directory: Directory.External,
+      encoding: Encoding.UTF8,
+    });
+
+    const data = JSON.parse(fileContent.data) as Type;
+
+    result.push(data);
+
+    return result;
   }
 
   async readToolList() {
@@ -118,20 +141,22 @@ export class FilesService {
       directory: Directory.External,
     });
 
-    await tools.files.forEach((file) => {
-      Filesystem.readFile({
+    for (let index = 0; index < tools.files.length; index++) {
+      const file = tools.files[index];
+
+      const fileContent = await Filesystem.readFile({
         path: `content/${path}/tools/${file}`,
         directory: Directory.External,
         encoding: Encoding.UTF8,
-      }).then((fileContent) => {
-        const data = JSON.parse(fileContent.data);
-        const tool = new Tool();
-        tool.name = data.name;
-        tool.path = data.path;
-
-        result.push(tool);
       });
-    });
+
+      const data = JSON.parse(fileContent.data);
+      const tool = new Tool();
+      tool.name = data.name;
+      tool.path = data.path;
+
+      result.push(tool);
+    }
 
     return result;
   }
@@ -172,6 +197,7 @@ export class FilesService {
       directory: Directory.External,
       encoding: Encoding.UTF8,
     });
+
     return JSON.parse(config.data);
   }
 }
