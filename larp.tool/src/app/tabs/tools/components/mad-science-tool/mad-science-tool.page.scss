@@ -11,8 +11,20 @@ ion-content {
 
   section#mad-science-result {
     padding: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     ion-card {
+      padding: 30px 15px;
+
+      ion-card-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
       ion-card-content {
         margin-top: 50px;
       }
