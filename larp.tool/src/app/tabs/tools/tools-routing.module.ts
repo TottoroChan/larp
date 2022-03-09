@@ -1,6 +1,6 @@
+import { NgModule } from '@angular/core';
 import { MadScienceToolPage } from './components/mad-science-tool/mad-science-tool.page';
 import { DoctorsToolPage } from './components/doctors-tool/doctors-tool.page';
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ToolsPage } from './tools.page';
 
@@ -23,4 +23,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
+
 export class ToolsPageRoutingModule {}

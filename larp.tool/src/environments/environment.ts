@@ -2,15 +2,8 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-
-export enum AppMode{
-  player,
-  master
-}
-
 export const environment = {
   production: false,
-  appMode: AppMode.master,
   gitToken: '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',
   masterCode: 'мастеркод'
 };

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="!showSearchBar; else elseblock">Правила</ion-title>
+    <ion-title *ngIf="!showSearchBar">Правила</ion-title>
 
     <ion-buttons slot="end" *ngIf="!showSearchBar">
       <ion-button (click)="toggleSearch()">
@@ -8,15 +8,14 @@
       </ion-button>
     </ion-buttons>
 
-    <ng-template #elseblock>
-      <ion-searchbar
-        debounce="500"
-        showCancelButton="always"
-        (ionInput)="search($event)"
-        (ionCancel)="toggleSearch()"
-        placeholder="Поиск..."
-      ></ion-searchbar>
-    </ng-template>
+    <ion-searchbar
+      *ngIf="showSearchBar"
+      debounce="500"
+      showCancelButton="always"
+      (ionInput)="search($event)"
+      (ionCancel)="toggleSearch()"
+      placeholder="Поиск..."
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -30,7 +29,8 @@
     <ion-list>
       <ion-item
         *ngFor="let rule of listOfRules"
-        (click)="showItem(rule, $event)">
+        (click)="showItem(rule, $event)"
+      >
         <ion-label><h2>{{ rule.title }}</h2></ion-label>
       </ion-item>
     </ion-list>

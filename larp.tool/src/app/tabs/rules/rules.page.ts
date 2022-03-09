@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FilesService } from 'src/app/shared/services/files.service';
-import { AppMode, environment } from 'src/environments/environment';
 import { RulesFile, testRules } from './models/rulesFile.model';
 
 @Component({
