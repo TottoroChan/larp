@@ -1,31 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> Арбор 2022 </ion-title>
+    <ion-title>Арбор 2022</ion-title>
     <ion-buttons slot="end" *ngIf="config">
       <ion-button
         (click)="onSwitchMode()"
-        *ngIf="!config.isMaster; else elseblock"
-      >
+        *ngIf="!config.isMaster; else elseblock">
         <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
       </ion-button>
+
       <ng-template #elseblock>
         <ion-button (click)="onSwitchMode()">
           <ion-icon
             slot="icon-only"
-            name="people-circle-outline"
-          ></ion-icon> </ion-button
+            name="people-circle-outline">
+          </ion-icon>
+        </ion-button
       ></ng-template>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <section *ngIf="!isDataLoading">
-    <ion-button color="light" expand="block" size="large" (click)="syncData()"
-      >Синхронизировать данные</ion-button
-    >
+  <section id="spinner-section" *ngIf="isDataLoading; else elseblock">
+    <div class="loader"></div>
   </section>
-  <section id="spinner-section" *ngIf="isDataLoading">
-    <div class="loader">Loading...</div>
-  </section>
+
+  <ng-template #elseblock>
+    <section>
+      <ion-button color="light" expand="block" size="large" (click)="syncData()">
+        Синхронизировать данные
+      </ion-button>
+    </section>
+  </ng-template>
 </ion-content>

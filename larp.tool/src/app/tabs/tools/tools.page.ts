@@ -18,6 +18,7 @@ export class ToolsPage {
       this.filesService.readToolList().then((response) => {
         if (response) {
           this.noContent = false;
+
           this.listOfTools = response;
         } else {
           this.noContent = true;

@@ -28,6 +28,7 @@ export class MadScienceToolPage {
         .then((response) => {
           if (response) {
             this.noContent = false;
+
             this.madScience = response[0];
           } else {
             this.noContent = true;

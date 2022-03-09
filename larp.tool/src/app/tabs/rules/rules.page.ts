@@ -48,6 +48,7 @@ export class RulesPage {
           : null,
       },
     };
+
     this.router.navigate(['tabs/rules/item'], navigationExtras);
   }
 
@@ -86,6 +87,7 @@ export class RulesPage {
 
   private cleanResultList(items: HTMLElement[], index: number) {
     items[index].style.display = 'block';
+
     if (items[index].querySelector('.result-list')) {
       items[index].querySelector('.result-list').remove();
     }
@@ -93,11 +95,12 @@ export class RulesPage {
 
   private buildResultList(
     rule: RulesFile,
-    query: any,
+    query: string,
     items: HTMLElement[],
     index: number
   ) {
     let searchResultList = [];
+
     rule.content.forEach((item) => {
       const content: any = item.content.toLowerCase();
 
@@ -106,10 +109,12 @@ export class RulesPage {
 
         match.forEach((element) => {
           const substring = element[0];
+
           const searchResult = item.content.substring(
             content.indexOf(substring),
             content.indexOf(substring) + substring.length
           );
+
           searchResultList.push(searchResult);
         });
       }
@@ -121,7 +126,7 @@ export class RulesPage {
   }
 
   private renderResultList(
-    query: any,
+    query: string,
     items: HTMLElement[],
     index: number,
     searchResultList
@@ -132,6 +137,7 @@ export class RulesPage {
 
     searchResultList.forEach((result) => {
       let resultlement = document.createElement('p');
+
       const searchQuery = result.substring(
         result.toLowerCase().indexOf(query),
         result.toLowerCase().indexOf(query) + query.length
@@ -141,19 +147,8 @@ export class RulesPage {
         searchQuery,
         `<b>${searchQuery}</b>`
       );
+
       items[index].querySelector('.result-list').appendChild(resultlement);
     });
-  }
-
-  private getRulesPath(): string {
-    let path = null;
-    switch (environment.appMode) {
-      case AppMode.master:
-        path = '/assets/content/master';
-      case AppMode.player:
-        path = '/assets/content/player';
-    }
-
-    return path;
   }
 }

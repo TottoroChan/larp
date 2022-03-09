@@ -13,8 +13,8 @@ export class FilesService {
         auth: environment.gitToken,
       });
 
-      const config = await this.readConfig();
-      const path = config.isMaster ? 'master' : 'player'; //environment.appMode == AppMode.master ? 'master' : 'player';
+      const path = await this.getRootPath();
+
       await this.getFilesFromFolder(octokit, `${path}/rules`);
 
       await this.getFilesFromFolder(octokit, `${path}/tools`);
@@ -35,6 +35,7 @@ export class FilesService {
 
       params.path = item.path;
       const file: any = await octokit.rest.repos.getContent(params);
+
       const content = file.data.content.replace('\n', '');
       const contentJSON = this.decodeBase64(content);
 
@@ -63,18 +64,20 @@ export class FilesService {
     const text = atob(base64);
     const length = text.length;
     const bytes = new Uint8Array(length);
+
     for (let i = 0; i < length; i++) {
       bytes[i] = text.charCodeAt(i);
     }
-    const decoder = new TextDecoder(); // default is utf-8
+
+    const decoder = new TextDecoder();
+
     return decoder.decode(bytes);
   }
 
   async readLocalData<Type>(contentFolder?: string, fileName?: string) {
-    const config = await this.readConfig();
-    const path = config.isMaster ? 'master' : 'player'; //environment.appMode == AppMode.master ? 'master' : 'player';
-
     let result: Type[] = [];
+
+    const path = await this.getRootPath();
 
     if (fileName) {
       result = await this.readFileByName<Type>(
@@ -131,10 +134,9 @@ export class FilesService {
   }
 
   async readToolList() {
-    const config = await this.readConfig();
-    const path = config.isMaster ? 'master' : 'player'; //environment.appMode == AppMode.master ? 'master' : 'player';
-
     let result: Tool[] = [];
+
+    const path = await this.getRootPath();
 
     const tools = await Filesystem.readdir({
       path: `content/${path}/tools`,
@@ -151,6 +153,7 @@ export class FilesService {
       });
 
       const data = JSON.parse(fileContent.data);
+
       const tool = new Tool();
       tool.name = data.name;
       tool.path = data.path;
@@ -199,5 +202,12 @@ export class FilesService {
     });
 
     return JSON.parse(config.data);
+  }
+
+  private async getRootPath() {
+    const config = await this.readConfig();
+    const path = config.isMaster ? 'master' : 'player';
+
+    return path;
   }
 }

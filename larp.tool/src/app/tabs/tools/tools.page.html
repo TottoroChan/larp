@@ -9,6 +9,7 @@
     Похоже что информации о правилах нет на устройстве. Перейдите во вкладку
     "домой" и нажмите на кнопку "Синхронизировать данные"
   </section>
+
   <ng-template #elseblock>
     <section>
       <ion-button
@@ -16,9 +17,7 @@
         color="light"
         expand="block"
         size="large"
-        [routerLink]="[tool.path]"
-        >{{tool.name}}</ion-button
-      >
+        [routerLink]="[tool.path]">{{tool.name}}</ion-button>
     </section>
   </ng-template>
 </ion-content>

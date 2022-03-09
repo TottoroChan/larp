@@ -68,7 +68,9 @@ export class HomePage {
 
   async syncData() {
     this.isDataLoading = true;
+
     await this.filesService.syncGitData();
+
     this.isDataLoading = false;
   }
 }

@@ -30,34 +30,29 @@
       clearInput
       placeholder="Название"
       (ionChange)="disiaseChange()"
-      [(ngModel)]="disiaseName"
-    ></ion-input>
+      [(ngModel)]="disiaseName">
+    </ion-input>
 
     <section id="buttons">
       <ion-button color="light" (click)="goBack()">отмена</ion-button>
-      <ion-button (click)="checkDisiase()" color="light"
-        >подтвердить</ion-button
-      >
+      <ion-button (click)="checkDisiase()" color="light">подтвердить</ion-button>
     </section>
 
     <section
       id="fail-result"
-      *ngIf="!noContent && disiaseChecked && !successResult"
-    >
+      *ngIf="!noContent && disiaseChecked && !successResult">
       <h4>Откройте следующий симптом</h4>
     </section>
   </section>
 
   <section
     id="success-result"
-    *ngIf="!noContent && disiaseChecked && successResult"
-  >
-      <span>Нажмите на карту чтобы узнать дополнительную информацию.</span>
+    *ngIf="!noContent && disiaseChecked && successResult">
+    <span>Нажмите на карту чтобы узнать дополнительную информацию.</span>
+
     <div class="card" (click)="flipCard($event)">
       <div class="card-front">
-        <img
-          src="./../../../../../assets/images/doctors-tool/{{realDisiase.image}}"
-        />
+        <img src="./../../../../../assets/images/doctors-tool/{{realDisiase.image}}"/>
       </div>
       <div class="card-back">
         <img src="./../../../../../assets/images/doctors-tool/card_back.jpg" />

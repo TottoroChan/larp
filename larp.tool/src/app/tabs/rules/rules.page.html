@@ -1,30 +1,38 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="!showSearchBar">Правила</ion-title>
+    <ion-title *ngIf="!showSearchBar; else elseblock">Правила</ion-title>
+
     <ion-buttons slot="end" *ngIf="!showSearchBar">
       <ion-button (click)="toggleSearch()">
         <ion-icon slot="icon-only" name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-searchbar
-      *ngIf="showSearchBar"
-      debounce="500"
-      showCancelButton="always"
-      (ionInput)="search($event)"
-      (ionCancel)="toggleSearch()"
-      placeholder="Поиск..."
-    ></ion-searchbar>
+
+    <ng-template #elseblock>
+      <ion-searchbar
+        debounce="500"
+        showCancelButton="always"
+        (ionInput)="search($event)"
+        (ionCancel)="toggleSearch()"
+        placeholder="Поиск..."
+      ></ion-searchbar>
+    </ng-template>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <section *ngIf="noContent">
+  <section *ngIf="noContent; else elseblock">
     Похоже что информации о правилах нет на устройстве. Перейдите во вкладку
     "домой" и нажмите на кнопку "Синхронизировать данные"
   </section>
-  <ion-list *ngIf="!noContent">
-    <ion-item *ngFor="let rule of listOfRules" (click)="showItem(rule, $event)">
-      <ion-label><h2>{{ rule.title }}</h2> </ion-label>
-    </ion-item>
-  </ion-list>
+
+  <ng-template #elseblock>
+    <ion-list>
+      <ion-item
+        *ngFor="let rule of listOfRules"
+        (click)="showItem(rule, $event)">
+        <ion-label><h2>{{ rule.title }}</h2></ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-template>
 </ion-content>

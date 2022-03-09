@@ -33,7 +33,7 @@ export class DoctorsToolPage {
         .then((response) => {
           if (response) {
             this.noContent = false;
-            debugger
+
             this.listOfDiseases = response[0].diseases;
           } else {
             this.noContent = true;
@@ -56,21 +56,16 @@ export class DoctorsToolPage {
 
   scanQR() {
     //this.scanResult = "B";
-    this.barcodeScanner
-      .scan()
-      .then((barcodeData) => {
-        console.log('Barcode data', barcodeData);
-        this.scanResult = barcodeData.text;
-      })
-      .catch((err) => {
-        console.log('Error', err);
-      });
+    this.barcodeScanner.scan().then((barcodeData) => {
+      this.scanResult = barcodeData.text;
+    });
   }
 
   checkDisiase() {
     // this.successResult = true;
     // this.disiaseChecked = true;
     const code = this.scanResult.charAt(32);
+
     this.realDisiase = this.listOfDiseases.find(
       (disiase) => disiase.code == code
     );
@@ -80,6 +75,7 @@ export class DoctorsToolPage {
     } else {
       this.successResult = false;
     }
+
     this.disiaseChecked = true;
   }
 
@@ -89,6 +85,7 @@ export class DoctorsToolPage {
 
   flipCard(event) {
     var element = event.currentTarget;
+
     if (element.className === 'card') {
       if (element.style.transform == 'rotateY(180deg)') {
         element.style.transform = 'rotateY(0deg)';

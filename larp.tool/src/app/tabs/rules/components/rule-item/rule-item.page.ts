@@ -39,8 +39,10 @@ export class RuleItemPage {
   scrollTo(textToSearch: string) {
     const xpath = `//ion-card-content[text()[contains(., '${textToSearch}')]]`;
     const element: any = document.evaluate(xpath, document.body).iterateNext();
+
     let offsetY = element.getBoundingClientRect().top;
     let text = element.innerHTML;
+
     text = text.replace(textToSearch, `<b>${textToSearch}</b>`);
     element.innerHTML = text;
 
