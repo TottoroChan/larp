@@ -7,6 +7,10 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
 @Injectable()
 export class FilesService {
+  private contentFolder = 'content';
+  private configFolder = '.config';
+  private configFilePath = '.config/config.cfg';
+
   async syncGitData() {
     try {
       const octokit = new Octokit({
@@ -21,14 +25,16 @@ export class FilesService {
     } catch (error) {}
   }
 
-  private async getFilesFromFolder(octokit: Octokit, contentFolder: string) {
+  private async getFilesFromFolder(octokit: Octokit, repoFolder: string) {
     const params = {
       owner: 'izhlarp',
       repo: 'arbor2022',
-      path: contentFolder,
+      path: repoFolder,
     };
 
     let folderContent: any = await octokit.rest.repos.getContent(params);
+
+    await this.createFolder(`${this.contentFolder}/${repoFolder}`);
 
     for (let index = 0; index < folderContent.data.length; index++) {
       const item = folderContent.data[index];
@@ -39,10 +45,8 @@ export class FilesService {
       const content = file.data.content.replace('\n', '');
       const contentJSON = this.decodeBase64(content);
 
-      await this.CreateFolderIfNotExist(`content/${contentFolder}`);
-
       await Filesystem.writeFile({
-        path: `content/${contentFolder}/${file.data.name}`,
+        path: `${this.contentFolder}/${repoFolder}/${file.data.name}`,
         data: contentJSON,
         directory: Directory.External,
         encoding: Encoding.UTF8,
@@ -50,14 +54,30 @@ export class FilesService {
     }
   }
 
-  private async CreateFolderIfNotExist(folderPath: string) {
+  private async createFolder(folderPath: string) {
     try {
-      await Filesystem.mkdir({
-        path: `${folderPath}`,
+      const folder = await Filesystem.readdir({
+        path: folderPath,
         directory: Directory.External,
-        recursive: true,
       });
-    } catch (error) {}
+
+      if (folder && folderPath != this.configFolder) {
+        await Filesystem.rmdir({
+          path: folderPath,
+          directory: Directory.External,
+          recursive: true,
+        });
+      }
+    } catch (error) {
+    } finally {
+      if (folderPath != this.configFolder) {
+        await Filesystem.mkdir({
+          path: folderPath,
+          directory: Directory.External,
+          recursive: true,
+        });
+      }
+    }
   }
 
   private decodeBase64(base64) {
@@ -81,11 +101,11 @@ export class FilesService {
 
     if (fileName) {
       result = await this.readFileByName<Type>(
-        `content/${path}/${contentFolder}/${fileName}`
+        `${this.contentFolder}/${path}/${contentFolder}/${fileName}`
       );
     } else {
       result = await this.readFilesFromFolder<Type>(
-        `content/${path}/${contentFolder}`
+        `${this.contentFolder}/${path}/${contentFolder}`
       );
     }
 
@@ -139,7 +159,7 @@ export class FilesService {
     const path = await this.getRootPath();
 
     const tools = await Filesystem.readdir({
-      path: `content/${path}/tools`,
+      path: `${this.contentFolder}/${path}/tools`,
       directory: Directory.External,
     });
 
@@ -147,7 +167,7 @@ export class FilesService {
       const file = tools.files[index];
 
       const fileContent = await Filesystem.readFile({
-        path: `content/${path}/tools/${file}`,
+        path: `${this.contentFolder}/${path}/tools/${file}`,
         directory: Directory.External,
         encoding: Encoding.UTF8,
       });
@@ -164,10 +184,8 @@ export class FilesService {
     return result;
   }
 
-  configFilePath = 'content/config.cfg';
-
   async initConfig(config: IConfig) {
-    await this.CreateFolderIfNotExist('content');
+    await this.createFolder(this.configFolder);
 
     try {
       await Filesystem.readFile({
