@@ -57,7 +57,7 @@ export class HomePage {
   }
 
   private switchMode(data: any) {
-    if (data.code.toLowerCase() == environment.masterCode.toLowerCase()) {
+    if (data.code == environment.masterCode) {
       this.config.isMaster = !this.config.isMaster;
 
       this.filesService.writeConfig(this.config).then(async () => {
