@@ -8,8 +8,7 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 @Injectable()
 export class FilesService {
   private contentFolder = 'content';
-  private configFolder = '.config';
-  private configFilePath = '.config/config.cfg';
+  private configFile = '.config.cfg';
 
   async syncGitData() {
     try {
@@ -61,7 +60,7 @@ export class FilesService {
         directory: Directory.External,
       });
 
-      if (folder && folderPath != this.configFolder) {
+      if (folder) {
         await Filesystem.rmdir({
           path: folderPath,
           directory: Directory.External,
@@ -70,13 +69,11 @@ export class FilesService {
       }
     } catch (error) {
     } finally {
-      if (folderPath != this.configFolder) {
-        await Filesystem.mkdir({
-          path: folderPath,
-          directory: Directory.External,
-          recursive: true,
-        });
-      }
+      await Filesystem.mkdir({
+        path: folderPath,
+        directory: Directory.External,
+        recursive: true,
+      });
     }
   }
 
@@ -95,21 +92,24 @@ export class FilesService {
   }
 
   async readLocalData<Type>(contentFolder?: string, fileName?: string) {
-    let result: Type[] = [];
+    let result: Type[] = null;
 
-    const path = await this.getRootPath();
+    try {
+      const path = await this.getRootPath();
 
-    if (fileName) {
-      result = await this.readFileByName<Type>(
-        `${this.contentFolder}/${path}/${contentFolder}/${fileName}`
-      );
-    } else {
-      result = await this.readFilesFromFolder<Type>(
-        `${this.contentFolder}/${path}/${contentFolder}`
-      );
+      if (fileName) {
+        result = await this.readFileByName<Type>(
+          `${this.contentFolder}/${path}/${contentFolder}/${fileName}`
+        );
+      } else {
+        result = await this.readFilesFromFolder<Type>(
+          `${this.contentFolder}/${path}/${contentFolder}`
+        );
+      }
+    } catch (error) {
+    } finally {
+      return result;
     }
-
-    return result;
   }
 
   private async readFilesFromFolder<Type>(path: string) {
@@ -154,48 +154,53 @@ export class FilesService {
   }
 
   async readToolList() {
-    let result: Tool[] = [];
+    let result: Tool[] = null;
 
-    const path = await this.getRootPath();
+    try {
+      const path = await this.getRootPath();
 
-    const tools = await Filesystem.readdir({
-      path: `${this.contentFolder}/${path}/tools`,
-      directory: Directory.External,
-    });
-
-    for (let index = 0; index < tools.files.length; index++) {
-      const file = tools.files[index];
-
-      const fileContent = await Filesystem.readFile({
-        path: `${this.contentFolder}/${path}/tools/${file}`,
+      const tools = await Filesystem.readdir({
+        path: `${this.contentFolder}/${path}/tools`,
         directory: Directory.External,
-        encoding: Encoding.UTF8,
       });
 
-      const data = JSON.parse(fileContent.data);
+      if (tools.files.length) {
+        result = [];
 
-      const tool = new Tool();
-      tool.name = data.name;
-      tool.path = data.path;
+        for (let index = 0; index < tools.files.length; index++) {
+          const file = tools.files[index];
 
-      result.push(tool);
+          const fileContent = await Filesystem.readFile({
+            path: `${this.contentFolder}/${path}/tools/${file}`,
+            directory: Directory.External,
+            encoding: Encoding.UTF8,
+          });
+
+          const data = JSON.parse(fileContent.data);
+
+          const tool = new Tool();
+          tool.name = data.name;
+          tool.path = data.path;
+
+          result.push(tool);
+        }
+      }
+    } catch (error) {
+    } finally {
+      return result;
     }
-
-    return result;
   }
 
   async initConfig(config: IConfig) {
-    await this.createFolder(this.configFolder);
-
     try {
       await Filesystem.readFile({
-        path: this.configFilePath,
+        path: this.configFile,
         directory: Directory.External,
         encoding: Encoding.UTF8,
       });
     } catch (e) {
       await Filesystem.writeFile({
-        path: this.configFilePath,
+        path: this.configFile,
         data: JSON.stringify(config),
         directory: Directory.External,
         encoding: Encoding.UTF8,
@@ -205,7 +210,7 @@ export class FilesService {
 
   async writeConfig(config: IConfig) {
     await Filesystem.writeFile({
-      path: this.configFilePath,
+      path: this.configFile,
       data: JSON.stringify(config),
       directory: Directory.External,
       encoding: Encoding.UTF8,
@@ -214,7 +219,7 @@ export class FilesService {
 
   async readConfig(): Promise<IConfig> {
     const config = await Filesystem.readFile({
-      path: this.configFilePath,
+      path: this.configFile,
       directory: Directory.External,
       encoding: Encoding.UTF8,
     });

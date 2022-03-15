@@ -22,12 +22,15 @@ export class RulesPage {
       this.filesService.readLocalData<RulesFile>('rules').then((response) => {
         if (response) {
           this.noContent = false;
+
           this.listOfRules = response;
         } else {
           this.noContent = true;
         }
       });
-    } catch (error) {}
+    } catch (error) {
+      debugger;
+    }
   }
 
   ionViewDidLeave() {

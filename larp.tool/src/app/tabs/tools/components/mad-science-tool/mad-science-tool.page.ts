@@ -14,7 +14,6 @@ import { FilesService } from 'src/app/shared/services/files.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class MadScienceToolPage {
-  noContent: boolean = false;
   madScience: MadScience = null;
   result: { successRate: MadScienceItem; effect: MadScienceItem } = null;
   madScienceAllowed: boolean = false;
@@ -26,19 +25,12 @@ export class MadScienceToolPage {
       this.filesService
         .readLocalData<MadScience>('tools', 'madScience.json')
         .then((response) => {
-          if (response) {
-            this.noContent = false;
-
-            this.madScience = response[0];
-          } else {
-            this.noContent = true;
-          }
+          this.madScience = response[0];
         });
     } catch (error) {}
   }
 
   ionViewDidLeave() {
-    this.noContent = false;
     this.result = null;
     this.madScience = null;
     this.madScienceAllowed = false;

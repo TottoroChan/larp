@@ -18,7 +18,6 @@ export class DoctorsToolPage {
   disiaseChecked: boolean = false;
   successResult: boolean = false;
   listOfDiseases: Disease[] = [];
-  noContent: boolean = false;
 
   constructor(
     private barcodeScanner: BarcodeScanner,
@@ -31,13 +30,7 @@ export class DoctorsToolPage {
       this.filesService
         .readLocalData<DoctorsTool>('tools', 'doctors.json')
         .then((response) => {
-          if (response) {
-            this.noContent = false;
-
-            this.listOfDiseases = response[0].diseases;
-          } else {
-            this.noContent = true;
-          }
+          this.listOfDiseases = response[0].diseases;
         });
     } catch (error) {}
   }

@@ -10,12 +10,7 @@
 </ion-header>
 
 <ion-content *ngIf="madScience">
-  <section *ngIf="noContent">
-    Похоже что информации о правилах нет на устройстве. Перейдите во вкладку
-    "домой" и нажмите на кнопку "Синхронизировать данные"
-  </section>
-
-  <section id="mad-science" *ngIf="!noContent && !result">
+  <section id="mad-science" *ngIf="!result">
     <ion-list>
       <ion-item *ngFor="let entry of madScience.checkList">
         <span *ngIf="!entry.isOptional" class="important">*</span>
@@ -38,7 +33,7 @@
     </ion-button>
   </section>
 
-  <section id="mad-science-result" *ngIf="!noContent && result">
+  <section id="mad-science-result" *ngIf="result">
     <ion-card>
       <ion-card-header>
         <ion-card-title>{{result.successRate.title}}</ion-card-title>
