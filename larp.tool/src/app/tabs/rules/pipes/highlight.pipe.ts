@@ -9,13 +9,10 @@ export class HighlightPipe implements PipeTransform {
       return text;
     }
 
-    const regex = new RegExp(searchQuery, 'gi');
-    const match = text.match(regex);
-
-    if (!match) {
+    if (!text.includes(searchQuery)) {
       return text;
     }
 
-    return text.replace(regex, `<span class='highlight'>${match[0]}</span>`);
+    return text.replace(searchQuery, `<span class='highlight'>${searchQuery}</span>`);
   }
 }

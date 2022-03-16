@@ -110,7 +110,7 @@ export class RulesPage {
         let match = [...content.matchAll(`(.{0,50})(${query})(.{0,50})`)];
 
         match.forEach((element) => {
-          const substring = element[0];
+          const substring = element[0].replace(/<[^>]*>?/gm, '');
 
           const searchResult = item.content.substring(
             content.indexOf(substring),
