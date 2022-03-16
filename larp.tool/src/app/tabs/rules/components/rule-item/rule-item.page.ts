@@ -16,18 +16,18 @@ export class RuleItemPage {
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe((params) => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.rulesFile =
-          this.router.getCurrentNavigation().extras.state.rulesFile;
-        this.textToSearch =
-          this.router.getCurrentNavigation().extras.state.textToSearch;
+      var data = this.router.getCurrentNavigation().extras.state;
+
+      if (data) {
+        this.rulesFile = data.rulesFile;
+        this.textToSearch = data.textToSearch;
       }
     });
   }
 
   ionViewDidEnter() {
     if (this.textToSearch) {
-      this.scrollTo(this.textToSearch);
+      this.scrollTo();
     }
   }
 
@@ -36,18 +36,13 @@ export class RuleItemPage {
     this.textToSearch = null;
   }
 
-  scrollTo(textToSearch: string) {
-    const xpath = `//ion-card-content[text()[contains(., '${textToSearch}')]]`;
-    const element: any = document.evaluate(xpath, document.body).iterateNext();
+  scrollTo() {
+    const element = document.querySelector('.highlight');
 
     let offsetY = element.getBoundingClientRect().top;
-    let text = element.innerHTML;
 
-    text = text.replace(textToSearch, `<b>${textToSearch}</b>`);
-    element.innerHTML = text;
-
-    if (offsetY > 60) {
-      offsetY -= 60;
+    if (offsetY > 150) {
+      offsetY -= 150;
     }
 
     this.ionContent.scrollToPoint(0, offsetY, 500);

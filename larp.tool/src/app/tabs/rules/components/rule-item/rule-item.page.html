@@ -15,6 +15,6 @@
       <ion-card-title  [innerHTML]="rule.title"></ion-card-title>
     </ion-card-header>
 
-    <ion-card-content [innerHTML]="rule.content"></ion-card-content>
+    <ion-card-content [innerHTML]="rule.content | highlight: textToSearch"></ion-card-content>
   </ion-card>
 </ion-content>

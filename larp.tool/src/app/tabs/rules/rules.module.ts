@@ -1,3 +1,4 @@
+import { HighlightPipe } from './pipes/highlight.pipe';
 import { RuleItemPage } from './components/rule-item/rule-item.page';
 import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +18,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
     RulesPageRoutingModule,
     HttpClientModule,
   ],
-  declarations: [RulesPage, RuleItemPage],
+  declarations: [RulesPage, RuleItemPage, HighlightPipe],
   providers: [FilesService],
 })
 export class RulesPageModule {}
