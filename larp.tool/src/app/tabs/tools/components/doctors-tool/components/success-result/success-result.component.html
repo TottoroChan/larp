@@ -1,0 +1,19 @@
+<section id="success-result">
+  <span>Нажмите на карту чтобы узнать дополнительную информацию.</span>
+
+  <div class="card" (click)="flipCard($event)">
+    <div class="card-front">
+      <img
+        src="./../../../../../assets/images/doctors-tool/{{
+          realDisiase.image
+        }}"
+      />
+    </div>
+    <div class="card-back">
+      <img [src]="cardBackImage" />
+      <div class="result">
+        <p>{{ realDisiase.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>

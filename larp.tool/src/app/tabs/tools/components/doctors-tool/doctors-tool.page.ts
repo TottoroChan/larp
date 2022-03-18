@@ -13,8 +13,8 @@ import { DoctorsTool } from './models/doctors.model';
 })
 export class DoctorsToolPage {
   scanResult: string;
-  disiaseName: string;
   realDisiase: Disease;
+  isMaster: boolean = false;
   disiaseChecked: boolean = false;
   successResult: boolean = false;
   listOfDiseases: Disease[] = [];
@@ -32,38 +32,44 @@ export class DoctorsToolPage {
         .then((response) => {
           this.listOfDiseases = response[0].diseases;
         });
+      this.filesService.readConfig().then((config) => {
+        this.isMaster = config.isMaster;
+      });
     } catch (error) {}
   }
 
   ionViewDidLeave() {
     this.scanResult = null;
-    this.disiaseName = null;
     this.realDisiase = null;
     this.disiaseChecked = false;
     this.successResult = false;
-  }
-
-  disiaseChange() {
-    this.disiaseChecked = false;
+    this.isMaster = false;
   }
 
   scanQR() {
-    //this.scanResult = "B";
+    // this.scanResult = 'A';
+    // if (this.isMaster) {
+    //   this.successResult = true;
+    //   this.disiaseChecked = true;
+    //   this.realDisiase = testDisiases[0];
+    // }
     this.barcodeScanner.scan().then((barcodeData) => {
       this.scanResult = barcodeData.text;
+      if (this.isMaster) {
+        this.successResult = true;
+        this.disiaseChecked = true;
+        this.realDisiase = this.getRealDisiase();
+      }
     });
   }
 
-  checkDisiase() {
+  checkDisiase(disiaseName: string) {
     // this.successResult = true;
     // this.disiaseChecked = true;
-    const code = this.scanResult.charAt(32);
+    // this.realDisiase = testDisiases[0];
+    this.realDisiase = this.getRealDisiase();
 
-    this.realDisiase = this.listOfDiseases.find(
-      (disiase) => disiase.code == code
-    );
-
-    if (this.disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
+    if (disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
       this.successResult = true;
     } else {
       this.successResult = false;
@@ -72,19 +78,17 @@ export class DoctorsToolPage {
     this.disiaseChecked = true;
   }
 
-  goBack() {
-    this.router.navigate(['tabs/tools']);
+  private getRealDisiase() {
+    const code = this.scanResult.charAt(32);
+
+    const realDisiase = this.listOfDiseases.find(
+      (disiase) => disiase.code == code
+    );
+
+    return realDisiase;
   }
 
-  flipCard(event) {
-    var element = event.currentTarget;
-
-    if (element.className === 'card') {
-      if (element.style.transform == 'rotateY(180deg)') {
-        element.style.transform = 'rotateY(0deg)';
-      } else {
-        element.style.transform = 'rotateY(180deg)';
-      }
-    }
+  goBack() {
+    this.router.navigate(['tabs/tools']);
   }
 }

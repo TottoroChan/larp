@@ -29,7 +29,6 @@ export class RulesPage {
         }
       });
     } catch (error) {
-      debugger;
     }
   }
 

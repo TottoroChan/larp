@@ -1,3 +1,6 @@
+import { MasterResultComponent } from './components/doctors-tool/components/master-result/master-result.component';
+import { SuccessResultComponent } from './components/doctors-tool/components/success-result/success-result.component';
+import { ScanResultComponent } from './components/doctors-tool/components/scan-result/scan-result.component';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { DoctorsToolPage } from './components/doctors-tool/doctors-tool.page';
 import { IonicModule } from '@ionic/angular';
@@ -23,6 +26,9 @@ import { MadScienceToolPage } from './components/mad-science-tool/mad-science-to
   declarations: [
     ToolsPage,
     DoctorsToolPage,
+    ScanResultComponent,
+    SuccessResultComponent,
+    MasterResultComponent,
     MadScienceToolPage
   ],
   providers: [BarcodeScanner, FilesService],

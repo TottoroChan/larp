@@ -18,43 +18,10 @@
     </ion-button>
   </section>
 
-  <section id="scan-result" *ngIf="scanResult && !successResult">
-    <h4>Введите название болезни:</h4>
+  <master-result *ngIf="disiaseChecked && successResult && isMaster" [realDisiase]="realDisiase"></master-result>
+  
+  <scan-result *ngIf="scanResult && !successResult && !isMaster" [disiaseChecked]="disiaseChecked" [successResult]="successResult" (onCheckDisiase)="checkDisiase($event)"></scan-result>
 
-    <ion-input
-      clearInput
-      placeholder="Название"
-      (ionChange)="disiaseChange()"
-      [(ngModel)]="disiaseName">
-    </ion-input>
 
-    <section id="buttons">
-      <ion-button color="light" (click)="goBack()">отмена</ion-button>
-      <ion-button (click)="checkDisiase()" color="light">подтвердить</ion-button>
-    </section>
-
-    <section
-      id="fail-result"
-      *ngIf="disiaseChecked && !successResult">
-      <h4>Откройте следующий симптом</h4>
-    </section>
-  </section>
-
-  <section
-    id="success-result"
-    *ngIf="disiaseChecked && successResult">
-    <span>Нажмите на карту чтобы узнать дополнительную информацию.</span>
-
-    <div class="card" (click)="flipCard($event)">
-      <div class="card-front">
-        <img src="./../../../../../assets/images/doctors-tool/{{realDisiase.image}}"/>
-      </div>
-      <div class="card-back">
-        <img src="./../../../../../assets/images/doctors-tool/card_back.jpg" />
-        <div class="result">
-          <p>{{realDisiase.description}}</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <success-result *ngIf="disiaseChecked && successResult && !isMaster" [realDisiase]="realDisiase"></success-result>
 </ion-content>
