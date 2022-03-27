@@ -1,3 +1,4 @@
+import { ThiefToolPage } from './components/thief-tool/thief-tool.page';
 import { NgModule } from '@angular/core';
 import { MadScienceToolPage } from './components/mad-science-tool/mad-science-tool.page';
 import { DoctorsToolPage } from './components/doctors-tool/doctors-tool.page';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'mad-science',
     component: MadScienceToolPage,
+  },
+  {
+    path: 'thief-tool',
+    component: ThiefToolPage,
   },
 ];
 

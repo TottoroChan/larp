@@ -1,0 +1,34 @@
+<ion-header *ngIf="thiefTool">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{thiefTool.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="thiefTool">
+  <section id="thief-tool" *ngIf="!result">
+    <ion-button color="light" expand="block" size="large" (click)="getResult()">
+      Получить результат
+    </ion-button>
+  </section>
+
+  <section id="thief-tool-result" *ngIf="result">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{result.successRate.title}}</ion-card-title>
+        <ion-card-subtitle
+          >{{result.successRate.description}}</ion-card-subtitle
+        >
+      </ion-card-header>
+
+      <ion-card-content>
+        <h2>{{result.effect.title}}:</h2>
+        <p>{{result.effect.description}}</p></ion-card-content
+      >
+    </ion-card>
+  </section>
+</ion-content>

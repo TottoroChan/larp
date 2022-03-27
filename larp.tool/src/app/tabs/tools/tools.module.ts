@@ -1,3 +1,4 @@
+import { ThiefToolPage } from './components/thief-tool/thief-tool.page';
 import { MasterResultComponent } from './components/doctors-tool/components/master-result/master-result.component';
 import { SuccessResultComponent } from './components/doctors-tool/components/success-result/success-result.component';
 import { ScanResultComponent } from './components/doctors-tool/components/scan-result/scan-result.component';
@@ -29,7 +30,8 @@ import { MadScienceToolPage } from './components/mad-science-tool/mad-science-to
     ScanResultComponent,
     SuccessResultComponent,
     MasterResultComponent,
-    MadScienceToolPage
+    MadScienceToolPage,
+    ThiefToolPage
   ],
   providers: [BarcodeScanner, FilesService],
 })
