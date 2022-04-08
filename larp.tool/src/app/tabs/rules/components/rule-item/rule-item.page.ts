@@ -43,9 +43,9 @@ export class RuleItemPage {
 
     if (offsetY > 150) {
       offsetY -= 150;
-    }
 
-    this.ionContent.scrollToPoint(0, offsetY, 500);
+      this.ionContent.scrollToPoint(0, offsetY, 500);
+    }
   }
 
   goBack() {

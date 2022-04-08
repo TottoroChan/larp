@@ -28,8 +28,7 @@ export class RulesPage {
           this.noContent = true;
         }
       });
-    } catch (error) {
-    }
+    } catch (error) {}
   }
 
   ionViewDidLeave() {
@@ -39,14 +38,14 @@ export class RulesPage {
   }
 
   showItem(rulesFile: RulesFile, event) {
+    const resultEvent =
+      event.target.parentElement.classList.contains('result-list');
+    const textToSearch = resultEvent ? event.target.textContent : null;
+
     let navigationExtras: NavigationExtras = {
       state: {
         rulesFile: rulesFile,
-        textToSearch: event.target.parentElement.classList.contains(
-          'result-list'
-        )
-          ? event.target.textContent
-          : null,
+        textToSearch: textToSearch,
       },
     };
 
@@ -106,14 +105,18 @@ export class RulesPage {
       const content: any = item.content.toLowerCase();
 
       if (content.indexOf(query) > -1) {
-        let match = [...content.matchAll(`(.{0,50})(${query})(.{0,50})`)];
+        const regex = new RegExp(
+          `(?<=\\s)(.{0,50})(${query})(.{0,50})(?<=\\s?)`,
+          'g'
+        );
+        let match = [...content.matchAll(regex)];
 
         match.forEach((element) => {
-          const substring = element[0].replace(/<[^>]*>?/gm, '');
+          let foundString = this.trimString(element[0]);
 
           const searchResult = item.content.substring(
-            content.indexOf(substring),
-            content.indexOf(substring) + substring.length
+            content.indexOf(foundString),
+            content.indexOf(foundString) + foundString.length
           );
 
           searchResultList.push(searchResult);
@@ -124,6 +127,31 @@ export class RulesPage {
     items[index].style.display = searchResultList.length ? 'block' : 'none';
 
     return searchResultList;
+  }
+
+  trimString(stringToTrim: any): string {
+    const isCleanString = !['<', '>'].some((x) => stringToTrim.includes(x));
+    if (isCleanString) {
+      return stringToTrim;
+    }
+
+    console.log(stringToTrim);
+
+    while (stringToTrim.indexOf('<') > stringToTrim.length / 2) {
+      stringToTrim = stringToTrim.slice(0, stringToTrim.lastIndexOf('<'));
+    }
+
+    while (
+      stringToTrim.indexOf('>') < stringToTrim.length / 2 &&
+      stringToTrim.indexOf('>') != -1
+    ) {
+      stringToTrim = stringToTrim.slice(
+        stringToTrim.indexOf('>') + 1,
+        stringToTrim.length
+      );
+    }
+
+    return stringToTrim;
   }
 
   private renderResultList(
