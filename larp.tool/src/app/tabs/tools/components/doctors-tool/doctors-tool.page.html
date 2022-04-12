@@ -20,8 +20,7 @@
 
   <master-result *ngIf="disiaseChecked && successResult && isMaster" [realDisiase]="realDisiase"></master-result>
   
-  <scan-result *ngIf="scanResult && !successResult && !isMaster" [disiaseChecked]="disiaseChecked" [successResult]="successResult" (onCheckDisiase)="checkDisiase($event)"></scan-result>
-
+  <scan-result *ngIf="scanResult && !successResult && !isMaster" [disiaseChecked]="disiaseChecked" [successResult]="successResult" (onCheckDisiase)="checkDisiase($event)" (onDisiaseChange)="onDisiaseChange($event)" (onGoBack)="goBack()"></scan-result>
 
   <success-result *ngIf="disiaseChecked && successResult && !isMaster" [realDisiase]="realDisiase"></success-result>
 </ion-content>

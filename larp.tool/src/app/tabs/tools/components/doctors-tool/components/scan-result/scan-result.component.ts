@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'scan-result',
@@ -8,6 +15,8 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } fro
 })
 export class ScanResultComponent implements OnInit {
   @Output() onCheckDisiase = new EventEmitter<string>();
+  @Output() onDisiaseChange = new EventEmitter<boolean>();
+  @Output() onGoBack = new EventEmitter();
   @Input() disiaseChecked: boolean;
   @Input() successResult: boolean;
   disiaseName: string;
@@ -22,5 +31,10 @@ export class ScanResultComponent implements OnInit {
 
   disiaseChange() {
     this.disiaseChecked = false;
+    this.onDisiaseChange.emit(this.disiaseChecked);
+  }
+
+  goBack() {
+    this.onGoBack.emit();
   }
 }

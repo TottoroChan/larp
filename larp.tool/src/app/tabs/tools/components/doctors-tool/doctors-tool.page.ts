@@ -53,6 +53,7 @@ export class DoctorsToolPage {
     //   this.disiaseChecked = true;
     //   this.realDisiase = testDisiases[0];
     // }
+
     this.barcodeScanner.scan().then((barcodeData) => {
       this.scanResult = barcodeData.text;
       if (this.isMaster) {
@@ -63,10 +64,20 @@ export class DoctorsToolPage {
     });
   }
 
+  onDisiaseChange(disiaseChecked: boolean){
+    this.disiaseChecked = disiaseChecked;
+  }
+
   checkDisiase(disiaseName: string) {
-    // this.successResult = true;
-    // this.disiaseChecked = true;
     // this.realDisiase = testDisiases[0];
+    // if(this.realDisiase.name == disiaseName){
+    //   this.successResult =true
+    // }
+    // else {
+    //   this.successResult = false;
+    // }
+    // this.disiaseChecked = true;
+
     this.realDisiase = this.getRealDisiase();
 
     if (disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
