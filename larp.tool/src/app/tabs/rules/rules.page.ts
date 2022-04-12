@@ -106,7 +106,7 @@ export class RulesPage {
 
       if (content.indexOf(query) > -1) {
         const regex = new RegExp(
-          `(?<=\\s)(.{0,50})(${query})(.{0,50})(?<=\\s?)`,
+          `(\\s)(.{0,50})(${query})(.{0,50})(\\s)`,
           'g'
         );
         let match = [...content.matchAll(regex)];
@@ -130,6 +130,8 @@ export class RulesPage {
   }
 
   trimString(stringToTrim: any): string {
+    stringToTrim = stringToTrim.trim();
+
     const isCleanString = !['<', '>'].some((x) => stringToTrim.includes(x));
     if (isCleanString) {
       return stringToTrim;
@@ -150,6 +152,8 @@ export class RulesPage {
         stringToTrim.length
       );
     }
+
+    stringToTrim = stringToTrim.trim();
 
     return stringToTrim;
   }

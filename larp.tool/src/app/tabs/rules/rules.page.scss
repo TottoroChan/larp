@@ -12,6 +12,8 @@ ion-list {
           margin: 15px 0;
           color: var(--ion-color-step-600, #666666);
           white-space: normal;
+          line-height: 16px;
+
           &::before,
           &::after {
             content: "...";
