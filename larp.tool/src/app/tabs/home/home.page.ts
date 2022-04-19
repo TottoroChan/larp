@@ -28,42 +28,48 @@ export class HomePage {
   }
 
   async onSwitchMode() {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Включить режим мастера.',
-      message: 'Введите код:',
-      inputs: [
-        {
-          name: 'code',
-          placeholder: 'код',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Отменить',
-          role: 'cancel',
-          cssClass: 'secondary',
-          id: 'cancel-button',
-        },
-        {
-          text: 'Подтвердить',
-          id: 'confirm-button',
-          handler: (data) => this.switchMode(data),
-        },
-      ],
-    });
+    if (!this.config.isMaster) {
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Включить режим мастера.',
+        message: 'Введите код:',
+        inputs: [
+          {
+            name: 'code',
+            placeholder: 'код',
+          },
+        ],
+        buttons: [
+          {
+            text: 'Отменить',
+            role: 'cancel',
+            cssClass: 'secondary',
+            id: 'cancel-button',
+          },
+          {
+            text: 'Подтвердить',
+            id: 'confirm-button',
+            handler: (data) => {
+              if (data.code == environment.masterCode) {
+                this.switchMode();
+              }
+            },
+          },
+        ],
+      });
 
-    await alert.present();
+      await alert.present();
+    } else {
+      this.switchMode();
+    }
   }
 
-  private switchMode(data: any) {
-    if (data.code == environment.masterCode) {
-      this.config.isMaster = !this.config.isMaster;
+  private switchMode() {
+    this.config.isMaster = !this.config.isMaster;
 
-      this.filesService.writeConfig(this.config).then(async () => {
-        this.config = await this.filesService.readConfig();
-      });
-    }
+    this.filesService.writeConfig(this.config).then(async () => {
+      this.config = await this.filesService.readConfig();
+    });
   }
 
   async syncData() {
