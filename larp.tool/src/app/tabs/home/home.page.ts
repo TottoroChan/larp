@@ -1,8 +1,8 @@
 import { environment } from 'src/environments/environment';
 import { FilesService } from '../../shared/services/files.service';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { IConfig } from 'src/app/shared/models/config.model';
+import { Config } from 'src/app/shared/models/config.model';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +10,16 @@ import { IConfig } from 'src/app/shared/models/config.model';
   styleUrls: ['home.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HomePage {
+export class HomePage implements OnInit {
   isDataLoading: boolean = false;
-  config: IConfig = null;
+  config: Config = null;
 
   constructor(
     private filesService: FilesService,
     private alertController: AlertController
   ) {}
+
+  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

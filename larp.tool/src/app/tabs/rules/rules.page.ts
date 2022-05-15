@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { RulesFile, testRules } from './models/rulesFile.model';
@@ -9,13 +9,15 @@ import { RulesFile, testRules } from './models/rulesFile.model';
   styleUrls: ['rules.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class RulesPage {
+export class RulesPage implements OnInit {
   content: string = '';
   listOfRules: RulesFile[] = [];
   showSearchBar: boolean = false;
   noContent: boolean = false;
 
   constructor(private router: Router, private filesService: FilesService) {}
+
+  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {
@@ -105,10 +107,7 @@ export class RulesPage {
       const content: any = item.content.toLowerCase();
 
       if (content.indexOf(query) > -1) {
-        const regex = new RegExp(
-          `(\\s)(.{0,50})(${query})(.{0,50})(\\s)`,
-          'g'
-        );
+        const regex = new RegExp(`(\\s)(.{0,50})(${query})(.{0,50})(\\s)`, 'g');
         let match = [...content.matchAll(regex)];
 
         match.forEach((element) => {

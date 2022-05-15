@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { FilesService } from 'src/app/shared/services/files.service';
@@ -11,7 +11,7 @@ import { DoctorsTool } from './models/doctors.model';
   styleUrls: ['doctors-tool.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DoctorsToolPage {
+export class DoctorsToolPage implements OnInit {
   scanResult: string;
   realDisiase: Disease;
   isMaster: boolean = false;
@@ -24,6 +24,8 @@ export class DoctorsToolPage {
     private router: Router,
     private filesService: FilesService
   ) {}
+
+  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {
@@ -64,7 +66,7 @@ export class DoctorsToolPage {
     });
   }
 
-  onDisiaseChange(disiaseChecked: boolean){
+  onDisiaseChange(disiaseChecked: boolean) {
     this.disiaseChecked = disiaseChecked;
   }
 

@@ -1,3 +1,3 @@
-export interface IConfig {
+export interface Config {
   isMaster: boolean;
 }

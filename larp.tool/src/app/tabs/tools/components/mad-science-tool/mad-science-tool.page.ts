@@ -3,7 +3,7 @@ import {
   MadScience,
   testMadScience,
 } from './../mad-science-tool/models/mad-science.model';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilesService } from 'src/app/shared/services/files.service';
 
@@ -13,12 +13,14 @@ import { FilesService } from 'src/app/shared/services/files.service';
   styleUrls: ['mad-science-tool.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MadScienceToolPage {
+export class MadScienceToolPage implements OnInit {
   madScience: MadScience = null;
   result: { successRate: MadScienceItem; effect: MadScienceItem } = null;
   madScienceAllowed: boolean = false;
 
   constructor(private router: Router, private filesService: FilesService) {}
+
+  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

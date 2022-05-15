@@ -1,16 +1,18 @@
-import { IConfig } from './shared/models/config.model';
+import { Config } from './shared/models/config.model';
 import { FilesService } from 'src/app/shared/services/files.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
-  constructor(filesService: FilesService) {
-    const config: IConfig = { isMaster: false };
+export class AppComponent implements OnInit {
+  constructor(private filesService: FilesService) {}
 
-    filesService.initConfig(config);
+  ngOnInit(): void {
+    const config: Config = { isMaster: false };
+
+    this.filesService.initConfig(config);
   }
 }

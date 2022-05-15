@@ -1,5 +1,5 @@
 import { ThiefItem, ThiefTool } from './models/thief-tool.model';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilesService } from 'src/app/shared/services/files.service';
 
@@ -9,11 +9,13 @@ import { FilesService } from 'src/app/shared/services/files.service';
   styleUrls: ['thief-tool.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ThiefToolPage {
+export class ThiefToolPage implements OnInit {
   thiefTool: ThiefTool = null;
   result: { successRate: ThiefItem; effect: ThiefItem } = null;
 
   constructor(private router: Router, private filesService: FilesService) {}
+
+  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

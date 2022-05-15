@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { Tool } from './models/tools.model';
 
@@ -8,10 +8,12 @@ import { Tool } from './models/tools.model';
   styleUrls: ['tools.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ToolsPage {
+export class ToolsPage implements OnInit {
   noContent: boolean;
   listOfTools: Tool[];
   constructor(private filesService: FilesService) {}
+
+  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

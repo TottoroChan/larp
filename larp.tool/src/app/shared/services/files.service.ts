@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Tool } from '../../tabs/tools/models/tools.model';
-import { IConfig } from './../models/config.model';
+import { Config } from './../models/config.model';
 import { Octokit } from 'octokit';
 import { environment } from 'src/environments/environment';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
@@ -178,9 +178,10 @@ export class FilesService {
 
           const data = JSON.parse(fileContent.data);
 
-          const tool = new Tool();
-          tool.name = data.name;
-          tool.path = data.path;
+          const tool: Tool = {
+            name: data.name,
+            path: data.path,
+          };
 
           result.push(tool);
         }
@@ -191,7 +192,7 @@ export class FilesService {
     }
   }
 
-  async initConfig(config: IConfig) {
+  async initConfig(config: Config) {
     try {
       await Filesystem.readFile({
         path: this.configFile,
@@ -208,7 +209,7 @@ export class FilesService {
     }
   }
 
-  async writeConfig(config: IConfig) {
+  async writeConfig(config: Config) {
     await Filesystem.writeFile({
       path: this.configFile,
       data: JSON.stringify(config),
@@ -217,7 +218,7 @@ export class FilesService {
     });
   }
 
-  async readConfig(): Promise<IConfig> {
+  async readConfig(): Promise<Config> {
     const config = await Filesystem.readFile({
       path: this.configFile,
       directory: Directory.External,

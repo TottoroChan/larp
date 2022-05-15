@@ -1,5 +1,5 @@
 import { RulesFile } from './../../models/rulesFile.model';
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 
@@ -9,12 +9,14 @@ import { IonContent } from '@ionic/angular';
   styleUrls: ['rule-item.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class RuleItemPage {
+export class RuleItemPage implements OnInit {
   @ViewChild(IonContent) ionContent: IonContent;
   rulesFile: RulesFile;
   textToSearch: string;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       var data = this.router.getCurrentNavigation().extras.state;
 
