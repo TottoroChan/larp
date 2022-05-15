@@ -9,6 +9,7 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 export class FilesService {
   private contentFolder = 'content';
   private configFile = '.config.cfg';
+  private repoPaths = ['master', 'player'];
   private octokitParams = {
     owner: 'izhlarp',
     repo: 'arbor2022',
@@ -40,22 +41,19 @@ export class FilesService {
         auth: environment.gitToken,
       });
 
-      const path = await this.getRootPath();
-      const lastModifiedDate = await this.getGitLastModifiedDate(octokit);
       const config = await this.readConfig();
 
-      if (!config.lastSyncDate || config.lastSyncDate < lastModifiedDate) {
+      this.repoPaths.forEach(async (path) => {
         await this.getFilesFromFolder(octokit, `${path}/rules`);
 
         await this.getFilesFromFolder(octokit, `${path}/tools`);
+      });
 
-        debugger;
-        const newConfig = {
-          isMaster: config.isMaster,
-          lastSyncDate: new Date(),
-        };
-        this.writeConfig(newConfig);
-      }
+      const newConfig = {
+        isMaster: config.isMaster,
+        lastSyncDate: new Date(),
+      };
+      this.writeConfig(newConfig);
     } catch (error) {}
   }
 
@@ -94,11 +92,11 @@ export class FilesService {
       });
 
       if (folder) {
-        await Filesystem.rmdir({
-          path: folderPath,
-          directory: Directory.External,
-          recursive: true,
-        });
+        // await Filesystem.rmdir({
+        //   path: folderPath,
+        //   directory: Directory.External,
+        //   recursive: true,
+        // });
       }
     } catch (error) {
     } finally {

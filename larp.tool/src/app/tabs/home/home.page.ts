@@ -28,7 +28,7 @@ export class HomePage implements OnInit {
         null
       );
 
-      if (this.config.lastSyncDate < lastModifiedDate) {
+      if (new Date(this.config.lastSyncDate) < lastModifiedDate) {
         this.lastSyncDate = new Date(this.config.lastSyncDate).toLocaleString();
         this.syncRequired = true;
       }
