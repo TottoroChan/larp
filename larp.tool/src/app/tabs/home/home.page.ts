@@ -13,7 +13,7 @@ import { Config } from 'src/app/shared/models/config.model';
 export class HomePage implements OnInit {
   isDataLoading: boolean = false;
   config: Config = null;
-  syncRequired: boolean = true;
+  syncRequired: boolean = false;
   lastSyncDate: string;
 
   constructor(
@@ -84,6 +84,13 @@ export class HomePage implements OnInit {
     this.isDataLoading = true;
 
     await this.filesService.syncGitData();
+
+    this.config = await this.filesService.readConfig();
+    const lastSyncDate = new Date(this.config.lastSyncDate);
+    const currentDate = new Date();
+    if (lastSyncDate.toDateString() === currentDate.toDateString()) {
+      this.syncRequired = false;
+    }
 
     this.isDataLoading = false;
   }
