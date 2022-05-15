@@ -23,14 +23,9 @@ export class FilesService {
       });
     }
 
-    const path = await this.getRootPath();
-    this.octokitParams.path = path;
+    let commitList: any = await octokit.rest.repos.listCommits(this.octokitParams)
 
-    let repoContent: any = await octokit.rest.repos.getContent(
-      this.octokitParams
-    );
-
-    const lastModifiedDate = new Date(repoContent.headers['last-modified']);
+    const lastModifiedDate = new Date(commitList.data[0].commit.committer.date);
 
     return lastModifiedDate;
   }
@@ -92,11 +87,11 @@ export class FilesService {
       });
 
       if (folder) {
-        // await Filesystem.rmdir({
-        //   path: folderPath,
-        //   directory: Directory.External,
-        //   recursive: true,
-        // });
+        await Filesystem.rmdir({
+          path: folderPath,
+          directory: Directory.External,
+          recursive: true,
+        });
       }
     } catch (error) {
     } finally {
