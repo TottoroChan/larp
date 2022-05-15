@@ -13,19 +13,25 @@ import { Config } from 'src/app/shared/models/config.model';
 export class HomePage implements OnInit {
   isDataLoading: boolean = false;
   config: Config = null;
+  syncRequired: boolean = true;
+  lastSyncDate: string;
 
   constructor(
     private filesService: FilesService,
     private alertController: AlertController
   ) {}
 
-  ngOnInit(): void {}
-
-  ionViewDidEnter() {
+  async ngOnInit(): Promise<void> {
     try {
-      this.filesService.readConfig().then((result) => {
-        this.config = result;
-      });
+      this.config = await this.filesService.readConfig();
+      const lastModifiedDate = await this.filesService.getGitLastModifiedDate(
+        null
+      );
+
+      if (this.config.lastSyncDate < lastModifiedDate) {
+        this.lastSyncDate = new Date(this.config.lastSyncDate).toLocaleString();
+        this.syncRequired = true;
+      }
     } catch (error) {}
   }
 

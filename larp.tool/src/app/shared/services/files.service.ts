@@ -9,6 +9,30 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 export class FilesService {
   private contentFolder = 'content';
   private configFile = '.config.cfg';
+  private octokitParams = {
+    owner: 'izhlarp',
+    repo: 'arbor2022',
+    path: '',
+  };
+
+  async getGitLastModifiedDate(octokit): Promise<Date> {
+    if (!octokit) {
+      octokit = new Octokit({
+        auth: environment.gitToken,
+      });
+    }
+
+    const path = await this.getRootPath();
+    this.octokitParams.path = path;
+
+    let repoContent: any = await octokit.rest.repos.getContent(
+      this.octokitParams
+    );
+
+    const lastModifiedDate = new Date(repoContent.headers['last-modified']);
+
+    return lastModifiedDate;
+  }
 
   async syncGitData() {
     try {
@@ -17,29 +41,38 @@ export class FilesService {
       });
 
       const path = await this.getRootPath();
+      const lastModifiedDate = await this.getGitLastModifiedDate(octokit);
+      const config = await this.readConfig();
 
-      await this.getFilesFromFolder(octokit, `${path}/rules`);
+      if (!config.lastSyncDate || config.lastSyncDate < lastModifiedDate) {
+        await this.getFilesFromFolder(octokit, `${path}/rules`);
 
-      await this.getFilesFromFolder(octokit, `${path}/tools`);
+        await this.getFilesFromFolder(octokit, `${path}/tools`);
+
+        debugger;
+        const newConfig = {
+          isMaster: config.isMaster,
+          lastSyncDate: new Date(),
+        };
+        this.writeConfig(newConfig);
+      }
     } catch (error) {}
   }
 
   private async getFilesFromFolder(octokit: Octokit, repoFolder: string) {
-    const params = {
-      owner: 'izhlarp',
-      repo: 'arbor2022',
-      path: repoFolder,
-    };
+    this.octokitParams.path = repoFolder;
 
-    let folderContent: any = await octokit.rest.repos.getContent(params);
+    let folderContent: any = await octokit.rest.repos.getContent(
+      this.octokitParams
+    );
 
     await this.createFolder(`${this.contentFolder}/${repoFolder}`);
 
     for (let index = 0; index < folderContent.data.length; index++) {
       const item = folderContent.data[index];
 
-      params.path = item.path;
-      const file: any = await octokit.rest.repos.getContent(params);
+      this.octokitParams.path = item.path;
+      const file: any = await octokit.rest.repos.getContent(this.octokitParams);
 
       const content = file.data.content.replace('\n', '');
       const contentJSON = this.decodeBase64(content);

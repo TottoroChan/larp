@@ -49,9 +49,13 @@
 
   <ng-template #elseblock>
     <section>
+      <div *ngIf="config && syncRequired"  class="sync-required">
+        Последняя синхронизация была {{ lastSyncDate }}. Необходимо
+        синхронизировать данные приложения.
+      </div>
       <h1>Арбор 2022</h1>
       <h2>Затерянный Город</h2>
-      <img src="./../../../assets/images/arbor_map.jpg">
+      <img src="./../../../assets/images/arbor_map.jpg" />
     </section>
   </ng-template>
 </ion-content>

@@ -11,7 +11,10 @@ export class AppComponent implements OnInit {
   constructor(private filesService: FilesService) {}
 
   ngOnInit(): void {
-    const config: Config = { isMaster: false };
+    const config: Config = {
+      isMaster: false,
+      lastSyncDate: new Date(-8640000000000000),
+    };
 
     this.filesService.initConfig(config);
   }
