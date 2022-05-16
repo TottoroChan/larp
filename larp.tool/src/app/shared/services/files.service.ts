@@ -48,7 +48,7 @@ export class FilesService {
         isMaster: config.isMaster,
         lastSyncDate: new Date(),
       };
-      this.writeConfig(newConfig);
+      await this.writeConfig(newConfig);
     } catch (error) {}
   }
 
