@@ -1,7 +1,26 @@
-ion-card-content {
-  line-height: 25px !important;
+ion-card {
+  &-header {
+    &.large-font ion-card-title {
+      font-size: 30px;
+    }
+  }
+  &-content {
+    line-height: 25px !important;
 
-  .highlight {
-    background-color: #fffca6;
+    table td {
+      padding: 5px;
+    }
+
+    &.large-font {
+      font-size: 20px;
+
+      p, strong {
+        font-size: 20px;
+      }
+    }
+
+    .highlight {
+      background-color: #fffca6;
+    }
   }
 }

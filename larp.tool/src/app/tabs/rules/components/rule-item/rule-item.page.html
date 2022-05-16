@@ -6,15 +6,23 @@
       </ion-button>
     </ion-buttons>
     <ion-title> {{rulesFile.title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="small-font" [disabled]="!largeFontSize" (click)="toSmallFontSize()">
+        <ion-icon name="remove-outline"></ion-icon>
+      </ion-button>
+      <ion-button id="large-font" [disabled]="largeFontSize" (click)="toLargeFontSize()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="true">
   <ion-card *ngFor="let rule of rulesFile.content">
-    <ion-card-header *ngIf="rule.title">
-      <ion-card-title  [innerHTML]="rule.title"></ion-card-title>
+    <ion-card-header [ngClass]="largeFontSize ? 'large-font' : ''" *ngIf="rule.title">
+      <ion-card-title [innerHTML]="rule.title"></ion-card-title>
     </ion-card-header>
 
-    <ion-card-content [innerHTML]="rule.content | highlight: textToSearch"></ion-card-content>
+    <ion-card-content [ngClass]="largeFontSize ? 'large-font' : ''" [innerHTML]="rule.content | highlight: textToSearch"></ion-card-content>
   </ion-card>
 </ion-content>

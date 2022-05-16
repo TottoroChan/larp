@@ -13,6 +13,7 @@ export class RuleItemPage implements OnInit {
   @ViewChild(IonContent) ionContent: IonContent;
   rulesFile: RulesFile;
   textToSearch: string;
+  largeFontSize: boolean = false;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -48,6 +49,14 @@ export class RuleItemPage implements OnInit {
 
       this.ionContent.scrollToPoint(0, offsetY, 500);
     }
+  }
+
+  toLargeFontSize(){
+    this.largeFontSize = true;
+  }
+
+  toSmallFontSize(){
+    this.largeFontSize = false;
   }
 
   goBack() {
