@@ -27,27 +27,27 @@
 
 @font-face {
   font-family: CambriaFont;
-  src: url("./assets/fonts/Cambria.woff");
+  src: url("../assets/fonts/Cambria.woff");
 }
 @font-face {
   font-family: CambriaBoldFont;
-  src: url("./assets/fonts/Cambria-Bold.woff");
+  src: url("../assets/fonts/Cambria-Bold.woff");
 }
 @font-face {
   font-family: CambriaBoldItalicFont;
-  src: url("./assets/fonts/Cambria-BoldItalic.woff");
+  src: url("../assets/fonts/Cambria-BoldItalic.woff");
 }
 @font-face {
   font-family: CambriaItalicFont;
-  src: url("./assets/fonts/Cambria-Italic.woff");
+  src: url("../assets/fonts/Cambria-Italic.woff");
 }
 @font-face {
   font-family: CandaraFont;
-  src: url("./assets/fonts/candara.ttf");
+  src: url("../assets/fonts/candara.ttf");
 }
 
 :root {
-  background: url("./assets/images/background.jpg") no-repeat center / cover;
+  background: url("../assets/images/background.jpg") no-repeat center / cover;
   --ion-font-family: "CandaraFont";
 }
 
@@ -57,9 +57,9 @@
 
 ion-header {
   ion-toolbar {
-    --background: url("./assets/images/up.png") center / cover no-repeat;
+    --background: url("../assets/images/up.png") center / cover no-repeat;
     .master-button {
-      background-image: url("./assets/images/master_icon.png");
+      background-image: url("../assets/images/master_icon.png");
       color: #8a7e76;
       background-repeat: no-repeat;
       background-position: left;
@@ -73,28 +73,28 @@ ion-header {
       }
     }
     .arrow-button {
-      background-image: url("./assets/images/arrow.png");
+      background-image: url("../assets/images/arrow.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 20px;
       width: 30px;
     }
     .plus-button {
-      background-image: url("./assets/images/+.png");
+      background-image: url("../assets/images/+.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 20px;
       width: 30px;
     }
     .minus-button {
-      background-image: url("./assets/images/-.png");
+      background-image: url("../assets/images/-.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 20px;
       width: 30px;
     }
     #trigger-button {
-      background-image: url("./assets/images/menu.png");
+      background-image: url("../assets/images/menu.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 35px;
@@ -107,7 +107,7 @@ ion-header {
       font-size: 20px;
 
       &.with-icon {
-        background-image: url("./assets/images/master_icon.png");
+        background-image: url("../assets/images/master_icon.png");
         background-repeat: no-repeat;
         background-position: left;
         background-size: 25px;
@@ -116,7 +116,7 @@ ion-header {
       }
     }
     .search-button {
-      background-image: url("./assets/images/search.png");
+      background-image: url("../assets/images/search.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 30px;
@@ -132,13 +132,13 @@ ion-header {
 }
 
 ion-content {
-  --background: url("./assets/images/background.jpg") no-repeat center / cover;
+  --background: url("../assets/images/background.jpg") no-repeat center / cover;
 }
 
 ion-button.custom-button {
   --background: none;
   --box-shadow: none;
-  background-image: url("./assets/images/btn_small.png");
+  background-image: url("../assets/images/btn_small.png");
   background-repeat: no-repeat;
   background-size: 100% 60px;
   width: 100%;
@@ -153,7 +153,7 @@ ion-button.custom-button {
 }
 
 ion-button.custom-button-big {
-  --background: url("./assets/images/btn_big.png") no-repeat center / contain;
+  --background: url("../assets/images/btn_big.png") no-repeat center / contain;
   --box-shadow: none;
   height: 80px;
   color: #cdc4c7;
@@ -166,14 +166,26 @@ ion-button.custom-button-big {
 ion-popover {
   background: #0000007d;
   ion-content {
-    --background: url("./assets/images/menu_backdrop.png") no-repeat center;
+    --background: url("../assets/images/menu_backdrop.png") no-repeat center;
     ion-list {
       background: none !important;
       ion-item {
         --background: none !important;
-
-        &:last-child {
           --border-color: transparent;
+
+
+        &::after {
+          content: "";
+          display: block;
+          height: 5px;
+          background-image: url("../src/../assets/images/line_mini.png");
+          background-repeat: no-repeat;
+          background-position: bottom;
+          background-size: 80%;
+        }
+
+        &:last-child::after {
+          background: none;
         }
       }
     }
@@ -183,7 +195,7 @@ ion-popover {
 ion-card.result-card {
   font-family: "CambriaFont";
   --background: none;
-  background-image: url("./assets/images/thief_card.png");
+  background-image: url("../assets/images/thief_card.png");
   background-repeat: no-repeat;
   box-shadow: none;
   padding: 30px 15px;
