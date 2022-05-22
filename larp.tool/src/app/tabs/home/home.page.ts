@@ -98,6 +98,12 @@ export class HomePage implements OnInit {
       this.syncRequired = false;
     }
 
+    await this.delay(3000)
+
     this.isDataLoading = false;
+  }
+
+  private async delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 }
