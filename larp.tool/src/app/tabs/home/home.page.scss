@@ -1,6 +1,12 @@
 ion-content {
   section {
     padding: 10px;
+    text-align: center;
+    color: #464137;
+
+    .synced, .sync-required {
+      font-family: 'CambriaFont';
+    }
 
     &#spinner-section {
       .loader {

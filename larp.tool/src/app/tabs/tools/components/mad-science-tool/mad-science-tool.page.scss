@@ -4,8 +4,26 @@ ion-content {
     display: flex;
     align-items: stretch;
     flex-direction: column;
+    text-align: center;
+
+    ion-list {
+      background: none;
+
+      ion-item {
+        --background: none;
+
+        ion-label {
+          font-family: "CambriaFont";
+        }
+
+        ion-checkbox{
+          --ion-color-base: #332b22 !important;
+        }
+      }
+    }
+
     .important {
-      color: red;
+      color: #9d0000;
     }
   }
 

@@ -1,18 +1,12 @@
 <ion-header>
   <ion-toolbar *ngIf="config">
     <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon
-          slot="icon-only"
-          [name]="config.isMaster ? 'people-circle-outline' : 'person-circle-outline'"
-        ></ion-icon>
+      <ion-button class="master-button">
+        <ion-label *ngIf="config.isMaster">Режим мастера</ion-label>
       </ion-button>
-      <span *ngIf="config.isMaster">Режим мастера</span>
     </ion-buttons>
     <ion-buttons slot="end" *ngIf="config">
-      <ion-button id="trigger-button">
-        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
-      </ion-button>
+      <ion-button id="trigger-button"> </ion-button>
 
       <ion-popover trigger="trigger-button" [dismissOnSelect]="true">
         <ng-template>
@@ -47,16 +41,20 @@
   <section id="spinner-section" *ngIf="isDataLoading; else elseblock">
     <div class="loader"></div>
   </section>
-
   <ng-template #elseblock>
     <section>
-      <div *ngIf="config && syncRequired"  class="sync-required">
-        Последняя синхронизация была {{ lastSyncDate }}. Необходимо
-        синхронизировать данные приложения.
+      <img src="./../../../assets/images/header.png" />
+      <ion-button expand="block" class="custom-button-big" (click)="switchTab('rules')">Правила </ion-button>
+      <ion-button expand="full" class="custom-button-big" (click)="switchTab('tools')">Инструменты </ion-button>
+      <ion-button expand="full" class="custom-button-big" (click)="syncData()">Синхронизировать данные </ion-button>
+      <div *ngIf="config && syncRequired" class="sync-required">
+        Дата последней синхронизации: {{ lastSyncDate }}.
+        <br>
+        Необходимо синхронизировать данные приложения.
       </div>
-      <h1>Арбор 2022</h1>
-      <h2>Затерянный Город</h2>
-      <img src="./../../../assets/images/arbor_map.jpg" />
+      <div *ngIf="config && !syncRequired" class="synced">
+        Данные обновлены.
+      </div>
     </section>
   </ng-template>
 </ion-content>

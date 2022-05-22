@@ -1,9 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-      </ion-button>
+      <ion-button (click)="goBack()" class="arrow-button"> </ion-button>
     </ion-buttons>
     <ion-title> Безумная Наука</ion-title>
   </ion-toolbar>
@@ -19,30 +17,34 @@
           slot="start"
           [(ngModel)]="entry.isChecked"
           [color]="entry.isOptional ? 'secondary' : 'primary'"
-          (ionChange)="checkboxClick($event)"></ion-checkbox>
+          (ionChange)="checkboxClick($event)"
+        ></ion-checkbox>
       </ion-item>
     </ion-list>
 
     <ion-button
-      color="light"
-      expand="block"
-      size="large"
+      class="custom-button-big"
       (click)="getResult()"
-      [disabled]="!madScienceAllowed">
+      [disabled]="!madScienceAllowed"
+    >
       Получить результат
     </ion-button>
+    <div class="info"><span class="important">*</span> - обязательный пункт.</div>
   </section>
 
   <section id="mad-science-result" *ngIf="result">
-    <ion-card>
+    <ion-card class="result-card">
       <ion-card-header>
         <ion-card-title>{{result.successRate.title}}</ion-card-title>
-        <ion-card-subtitle>{{result.successRate.description}}</ion-card-subtitle>
+        <ion-card-subtitle
+          >{{result.successRate.description}}</ion-card-subtitle
+        >
       </ion-card-header>
 
       <ion-card-content>
         <h2>{{result.effect.title}}:</h2>
-        <p>{{result.effect.description}}</p></ion-card-content>
+        <p>{{result.effect.description}}</p></ion-card-content
+      >
     </ion-card>
   </section>
 </ion-content>

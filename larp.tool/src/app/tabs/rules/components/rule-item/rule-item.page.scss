@@ -1,26 +1,39 @@
-ion-card {
-  &-header {
-    &.large-font ion-card-title {
-      font-size: 30px;
-    }
-  }
-  &-content {
-    line-height: 25px !important;
+ion-content {
+  ion-card {
+    box-shadow: none;
+    background: none;
+    color: #000;
 
-    table td {
-      padding: 5px;
-    }
-
-    &.large-font {
-      font-size: 20px;
-
-      p, strong {
-        font-size: 20px;
+    &-header {
+      padding-bottom: 0;
+      ion-card-title {
+        font-family: "CambriaBoldFont";
+      }
+      &.large-font ion-card-title {
+        font-size: 30px;
       }
     }
+    &-content {
+      line-height: 25px !important;
+      font-family: "CambriaFont";
+      font-size: 17px !important;
 
-    .highlight {
-      background-color: #fffca6;
+      table td {
+        padding: 5px;
+      }
+
+      &.large-font {
+        font-size: 20px;
+
+        p,
+        strong {
+          font-size: 20px;
+        }
+      }
+
+      .highlight {
+        background-color: #fffca6;
+      }
     }
   }
 }

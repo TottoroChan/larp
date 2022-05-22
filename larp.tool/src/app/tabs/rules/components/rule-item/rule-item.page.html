@@ -1,17 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      <ion-button (click)="goBack()" class="arrow-button">
       </ion-button>
     </ion-buttons>
     <ion-title> {{rulesFile.title}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button id="small-font" [disabled]="!largeFontSize" (click)="toSmallFontSize()">
-        <ion-icon name="remove-outline"></ion-icon>
+      <ion-button class="minus-button" [disabled]="!largeFontSize" (click)="toSmallFontSize()">
       </ion-button>
-      <ion-button id="large-font" [disabled]="largeFontSize" (click)="toLargeFontSize()">
-        <ion-icon name="add-outline"></ion-icon>
+      <ion-button class="plus-button" [disabled]="largeFontSize" (click)="toLargeFontSize()">
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

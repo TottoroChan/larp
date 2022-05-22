@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> Инструменты </ion-title>
+    <ion-title class="with-icon"> Инструменты </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +13,8 @@
   <ng-template #elseblock>
     <section>
       <ion-button
+        class="custom-button-big"
         *ngFor="let tool of listOfTools"
-        color="light"
         expand="block"
         size="large"
         [routerLink]="[tool.path]">{{tool.name}}</ion-button>

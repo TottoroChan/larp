@@ -1,8 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    <ion-buttons slot="start"> 
+      <ion-button (click)="goBack()" class="arrow-button">
       </ion-button>
     </ion-buttons>
     <ion-title> Врачебный инструмент </ion-title>
@@ -13,7 +12,7 @@
   <section id="scan" *ngIf="!scanResult">
     <h4>Нажмите для сканирования:</h4>
 
-    <ion-button color="light" class="custom-large" (click)="scanQR()">
+    <ion-button class="custom-large" (click)="scanQR()">
       <ion-icon slot="icon-only" name="scan-outline"></ion-icon>
     </ion-button>
   </section>

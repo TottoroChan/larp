@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
@@ -18,7 +19,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private filesService: FilesService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -78,6 +80,10 @@ export class HomePage implements OnInit {
     this.filesService.writeConfig(this.config).then(async () => {
       this.config = await this.filesService.readConfig();
     });
+  }
+
+  private switchTab(tabName){
+    this.router.navigateByUrl(`tabs/${tabName}`);
   }
 
   async syncData() {

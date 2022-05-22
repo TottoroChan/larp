@@ -10,8 +10,8 @@
   </ion-input>
 
   <section id="buttons">
-    <ion-button color="light" (click)="goBack()">отмена</ion-button>
-    <ion-button (click)="checkDisiase()" color="light">подтвердить</ion-button>
+    <ion-button (click)="goBack()" class="custom-button">отмена</ion-button>
+    <ion-button (click)="checkDisiase()" class="custom-button">подтвердить</ion-button>
   </section>
 
   <section id="fail-result" *ngIf="disiaseChecked && !successResult">

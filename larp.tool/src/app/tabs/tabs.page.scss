@@ -1,1 +1,38 @@
+ion-tab {
+  &-bar {
+    background-image: url("./../../assets/images/up.png");
+  }
+  &-button {
+    &[tab="home"] {
+      background-image: url("./../../assets/images/home.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 30px;
 
+      &.tab-selected {
+        background-image: url("./../../assets/images/home_hover.png");
+      }
+    }
+    &[tab="rules"] {
+      background-image: url("./../../assets/images/book.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 26px;
+
+      &.tab-selected {
+        background-image: url("./../../assets/images/book_hover.png");
+      }
+    }
+    &[tab="tools"] {
+      background-image: url("./../../assets/images/tools.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 27px;
+
+      &.tab-selected {
+        background-image: url("./../../assets/images/tools_hover.png");
+      }
+    }
+    background: none;
+  }
+}

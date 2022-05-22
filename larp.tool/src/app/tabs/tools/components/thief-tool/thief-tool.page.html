@@ -1,8 +1,7 @@
 <ion-header *ngIf="thiefTool">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()">
-        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      <ion-button (click)="goBack()" class="arrow-button">
       </ion-button>
     </ion-buttons>
     <ion-title>{{thiefTool.name}}</ion-title>
@@ -11,13 +10,13 @@
 
 <ion-content *ngIf="thiefTool">
   <section id="thief-tool" *ngIf="!result">
-    <ion-button color="light" expand="block" size="large" (click)="getResult()">
+    <ion-button class="custom-button-big" (click)="getResult()">
       Получить результат
     </ion-button>
   </section>
 
   <section id="thief-tool-result" *ngIf="result">
-    <ion-card>
+    <ion-card class="result-card">
       <ion-card-header>
         <ion-card-title>{{result.successRate.title}}</ion-card-title>
         <ion-card-subtitle

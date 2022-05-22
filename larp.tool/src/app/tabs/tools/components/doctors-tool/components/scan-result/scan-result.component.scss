@@ -5,14 +5,18 @@ ion-content {
     align-items: center;
     flex-direction: column;
     ion-input {
-      background: #f4f5f8;
+      background: #42392173;
       color: #000;
       padding: 5px 10px !important;
       margin: 15px 0;
-      border: 1px solid #d7d8da;
+      border: none;
       border-radius: 4px;
-    }
+      font-size: 20px;
 
+      .input-clear-icon {
+        filter: brightness(0.1);
+      }
+    }
     #buttons {
       display: flex;
       justify-content: space-evenly;
@@ -21,7 +25,8 @@ ion-content {
     }
 
     section#fail-result {
-      color: red;
+      color: #620101;
+      text-decoration: underline;
     }
   }
 }

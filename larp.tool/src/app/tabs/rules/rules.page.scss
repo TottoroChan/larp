@@ -2,23 +2,39 @@ ion-content {
   section {
     padding: 10px;
   }
-}
 
-ion-list {
-  ion-item {
-    ion-label {
-      .result-list {
-        p {
-          margin: 15px 0;
-          color: var(--ion-color-step-600, #666666);
-          white-space: normal;
-          line-height: 16px;
+  ion-list {
+    background: none !important;
+    ion-item {
+      --background: none !important;
+      --border-color: transparent;
 
-          &::before,
-          &::after {
-            content: "...";
+      ion-label {
+        font-family: "CambriaBoldFont" !important;
+
+        .result-list {
+          p {
+            margin: 15px 0;
+            color: #000;
+            white-space: normal;
+            line-height: 16px;
+
+            &::before,
+            &::after {
+              content: "...";
+            }
           }
         }
+      }
+
+      &:after {
+        content: "";
+        display: block;
+        height: 5px;
+        background-image: url("./../../../assets/images/line.png");
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: 90%;
       }
     }
   }
