@@ -1,13 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="with-icon"> Инструменты </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()" class="arrow-button"> </ion-button>
+    </ion-buttons>
+
+    <ion-title> Инструменты </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <section *ngIf="noContent; else elseblock">
-    Похоже что информации об инструментах нет на устройстве. Перейдите во вкладку
-    "домой" и нажмите на кнопку "Синхронизировать данные"
+    Похоже что информации об инструментах нет на устройстве. Перейдите во
+    вкладку "домой" и нажмите на кнопку "Синхронизировать данные"
   </section>
 
   <ng-template #elseblock>
@@ -17,7 +21,9 @@
         *ngFor="let tool of listOfTools"
         expand="block"
         size="large"
-        [routerLink]="[tool.path]">{{tool.name}}</ion-button>
+        [routerLink]="[tool.path]"
+        >{{tool.name}}</ion-button
+      >
     </section>
   </ng-template>
 </ion-content>

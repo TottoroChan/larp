@@ -104,18 +104,8 @@ ion-header {
     }
     ion-title {
       color: #cbc67e;
-      margin-left: 8px;
       text-transform: initial;
       font-size: 20px;
-
-      &.with-icon {
-        background-image: url("../assets/images/master_icon.png");
-        background-repeat: no-repeat;
-        background-position: left;
-        background-size: 25px;
-        width: 180px;
-        padding-left: 30px;
-      }
     }
     .search-button {
       background-image: url("../assets/images/search.png");

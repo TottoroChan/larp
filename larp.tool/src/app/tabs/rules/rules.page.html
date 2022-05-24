@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="!showSearchBar" class="with-icon">Правила</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()" class="arrow-button"> </ion-button>
+    </ion-buttons>
+
+    <ion-title *ngIf="!showSearchBar">Правила</ion-title>
 
     <ion-buttons slot="end" *ngIf="!showSearchBar">
       <ion-button (click)="toggleSearch()" class="search-button"> </ion-button>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { Tool } from './models/tools.model';
@@ -11,7 +12,7 @@ import { Tool } from './models/tools.model';
 export class ToolsPage implements OnInit {
   noContent: boolean;
   listOfTools: Tool[];
-  constructor(private filesService: FilesService) {}
+  constructor(private filesService: FilesService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -32,5 +33,9 @@ export class ToolsPage implements OnInit {
   ionViewDidLeave() {
     this.listOfTools = [];
     this.noContent = false;
+  }
+
+  goHome(){
+    this.router.navigateByUrl(`tabs/home`);
   }
 }

@@ -183,4 +183,8 @@ export class RulesPage implements OnInit {
       items[index].querySelector('.result-list').appendChild(resultlement);
     });
   }
+
+  goHome(){
+    this.router.navigateByUrl(`tabs/home`);
+  }
 }
