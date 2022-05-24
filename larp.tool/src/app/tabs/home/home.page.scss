@@ -4,8 +4,20 @@ ion-content {
     text-align: center;
     color: #464137;
 
-    .synced, .sync-required {
-      font-family: 'CambriaFont';
+    .header-img {
+      margin: 50px 0;
     }
+
+    .synced,
+    .sync-required {
+      font-family: "CambriaFont";
+    }
+  }
+}
+ion-footer {
+  text-align: center;
+  .version {
+    color: #464137;
+    font-family: "CambriaFont";
   }
 }

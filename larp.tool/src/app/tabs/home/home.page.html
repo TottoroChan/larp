@@ -43,7 +43,7 @@
   </section>
   <ng-template #elseblock>
     <section>
-      <img src="./../../../assets/images/header.png" />
+      <img class="header-img" src="./../../../assets/images/header.png" />
       <ion-button expand="block" class="custom-button-big" (click)="switchTab('rules')">Правила </ion-button>
       <ion-button expand="full" class="custom-button-big" (click)="switchTab('tools')">Инструменты </ion-button>
       <ion-button expand="full" class="custom-button-big" (click)="syncData()">Синхронизировать данные </ion-button>
@@ -58,3 +58,6 @@
     </section>
   </ng-template>
 </ion-content>
+<ion-footer>
+      <div class="version">Ver. 2.1</div>
+</ion-footer>
