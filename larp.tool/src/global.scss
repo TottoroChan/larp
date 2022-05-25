@@ -221,9 +221,9 @@ ion-alert {
   .alert-wrapper {
     --background: none;
     --box-shadow: none;
-    background-image: url("../assets/images/thief_card.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-image: url("../assets/images/thief_card.png") !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
     font-family: "CambriaFont";
     padding: 30px 15px;
     max-width: 80% !important;
@@ -249,9 +249,9 @@ ion-alert {
       button {
         --background: none;
         --box-shadow: none;
-        background-image: url("../assets/images/btn_small.png");
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-image: url("../assets/images/btn_small.png") !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% 100% !important;
         margin: 0 7px !important;
         padding: 10px 25px 13px !important;
         height: 50px;
