@@ -1,0 +1,36 @@
+<ion-toolbar *ngIf="config">
+  <ion-buttons slot="start">
+    <ion-button class="master-button">
+      <ion-label *ngIf="config.isMaster">Режим мастера</ion-label>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end" *ngIf="config">
+    <ion-button id="trigger-button"> </ion-button>
+
+    <ion-popover trigger="trigger-button" [dismissOnSelect]="true">
+      <ng-template>
+        <ion-content>
+          <ion-list>
+            <ion-item [button]="true" (click)="onSyncData()">
+              <ion-label>Синхронизировать данные</ion-label>
+            </ion-item>
+            <ion-item
+              [button]="true"
+              *ngIf="!config.isMaster"
+              (click)="onSwitchMode()"
+            >
+              <ion-label>Включить режим мастера</ion-label>
+            </ion-item>
+            <ion-item
+              [button]="true"
+              *ngIf="config.isMaster"
+              (click)="onSwitchMode()"
+            >
+              <ion-label>Выключить режим мастера</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
+  </ion-buttons>
+</ion-toolbar>
