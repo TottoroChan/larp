@@ -4,6 +4,7 @@ import { Config } from './../models/config.model';
 import { Octokit } from 'octokit';
 import { environment } from 'src/environments/environment';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { appSettings } from 'src/app/app.config';
 
 @Injectable()
 export class FilesService {
@@ -12,7 +13,7 @@ export class FilesService {
   private repoPaths = ['master', 'player'];
   private octokitParams = {
     owner: 'izhlarp',
-    repo: 'arbor2022',
+    repo: appSettings.repo,
     path: '',
   };
 
@@ -23,7 +24,9 @@ export class FilesService {
       });
     }
 
-    let commitList: any = await octokit.rest.repos.listCommits(this.octokitParams)
+    let commitList: any = await octokit.rest.repos.listCommits(
+      this.octokitParams
+    );
 
     const lastModifiedDate = new Date(commitList.data[0].commit.committer.date);
 

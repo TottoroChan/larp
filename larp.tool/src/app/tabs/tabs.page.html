@@ -1,14 +1,7 @@
 <ion-tabs>
-
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
-    </ion-tab-button>
-
-    <ion-tab-button tab="rules">
-    </ion-tab-button>
-
-    <ion-tab-button tab="tools">
-    </ion-tab-button>
+    <ng-template ngFor let-tab [ngForOf]="tabs">
+      <ion-tab-button [tab]="tab.id"> </ion-tab-button>
+    </ng-template>
   </ion-tab-bar>
-
 </ion-tabs>

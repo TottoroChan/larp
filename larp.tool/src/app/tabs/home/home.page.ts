@@ -4,6 +4,8 @@ import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Config } from 'src/app/shared/models/config.model';
+import { appSettings } from 'src/app/app.config';
+import { Tab } from 'src/app/shared/models/tab.models';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,7 @@ export class HomePage implements OnInit {
   config: Config = null;
   syncRequired: boolean = false;
   lastSyncDate: string;
+  tabs: Tab[] = appSettings.tabs;
 
   constructor(
     private filesService: FilesService,
@@ -82,7 +85,7 @@ export class HomePage implements OnInit {
     });
   }
 
-  private switchTab(tabName){
+  switchTab(tabName) {
     this.router.navigateByUrl(`tabs/${tabName}`);
   }
 
@@ -98,12 +101,12 @@ export class HomePage implements OnInit {
       this.syncRequired = false;
     }
 
-    await this.delay(3000)
+    await this.delay(3000);
 
     this.isDataLoading = false;
   }
 
   private async delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }

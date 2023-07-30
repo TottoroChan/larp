@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gitToken: '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',
+  gitToken: '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',
   masterCode: 'мастеркод'
 };
 
