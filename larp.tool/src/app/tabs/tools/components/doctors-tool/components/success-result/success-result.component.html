@@ -3,11 +3,7 @@
 
   <div class="card" (click)="flipCard($event)">
     <div class="card-front">
-      <img
-        src="./../../../../../assets/images/doctors-tool/{{
-          realDisiase.image
-        }}"
-      />
+      <img [src]="cardFrontImage" />
     </div>
     <div class="card-back">
       <img [src]="cardBackImage" />

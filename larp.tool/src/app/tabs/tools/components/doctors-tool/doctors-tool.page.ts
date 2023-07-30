@@ -49,21 +49,21 @@ export class DoctorsToolPage implements OnInit {
   }
 
   scanQR() {
-    // this.scanResult = 'A';
-    // if (this.isMaster) {
-    //   this.successResult = true;
-    //   this.disiaseChecked = true;
-    //   this.realDisiase = testDisiases[0];
-    // }
+    this.scanResult = 'A';
+    if (this.isMaster) {
+      this.successResult = true;
+      this.disiaseChecked = true;
+      this.realDisiase = testDisiases[0];
+    }
 
-    this.barcodeScanner.scan().then((barcodeData) => {
-      this.scanResult = barcodeData.text;
-      if (this.isMaster) {
-        this.successResult = true;
-        this.disiaseChecked = true;
-        this.realDisiase = this.getRealDisiase();
-      }
-    });
+    // this.barcodeScanner.scan().then((barcodeData) => {
+    //   this.scanResult = barcodeData.text;
+    //   if (this.isMaster) {
+    //     this.successResult = true;
+    //     this.disiaseChecked = true;
+    //     this.realDisiase = this.getRealDisiase();
+    //   }
+    // });
   }
 
   onDisiaseChange(disiaseChecked: boolean) {
@@ -71,24 +71,24 @@ export class DoctorsToolPage implements OnInit {
   }
 
   checkDisiase(disiaseName: string) {
-    // this.realDisiase = testDisiases[0];
-    // if(this.realDisiase.name == disiaseName){
-    //   this.successResult =true
-    // }
-    // else {
-    //   this.successResult = false;
-    // }
-    // this.disiaseChecked = true;
-
-    this.realDisiase = this.getRealDisiase();
-
-    if (disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
-      this.successResult = true;
-    } else {
+    this.realDisiase = testDisiases[0];
+    if(this.realDisiase.name == disiaseName){
+      this.successResult =true
+    }
+    else {
       this.successResult = false;
     }
-
     this.disiaseChecked = true;
+
+    // this.realDisiase = this.getRealDisiase();
+
+    // if (disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
+    //   this.successResult = true;
+    // } else {
+    //   this.successResult = false;
+    // }
+
+    // this.disiaseChecked = true;
   }
 
   private getRealDisiase() {

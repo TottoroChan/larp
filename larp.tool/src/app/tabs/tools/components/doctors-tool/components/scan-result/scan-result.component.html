@@ -9,12 +9,12 @@
   >
   </ion-input>
 
-  <section id="buttons">
+  <section class="buttons">
     <ion-button (click)="goBack()" class="custom-button">отмена</ion-button>
     <ion-button (click)="checkDisiase()" class="custom-button">подтвердить</ion-button>
   </section>
 
-  <section id="fail-result" *ngIf="disiaseChecked && !successResult">
+  <section class="fail-result" *ngIf="disiaseChecked && !successResult">
     <h4>Откройте следующий симптом</h4>
   </section>
 </section>

@@ -14,7 +14,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true">
+<ion-content id="rule-item-page" [scrollEvents]="true">
   <ion-card *ngFor="let rule of rulesFile.content">
     <ion-card-header [ngClass]="largeFontSize ? 'large-font' : ''" *ngIf="rule.title">
       <ion-card-title [innerHTML]="rule.title"></ion-card-title>

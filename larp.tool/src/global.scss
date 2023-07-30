@@ -32,32 +32,30 @@
   background: none;
 }
 
-ion-header {
-  .larp-toolbar {
-    .master-button {
-      width: 180px;
-      padding-left: 25px;
-      margin-left: 5px;
-      ion-label {
-        text-transform: initial;
-        font-size: 20px;
-      }
-    }
-    .arrow-button,
-    .plus-button,
-    .minus-button {
-      width: 30px;
-    }
-    #trigger-button {
-      width: 40px;
-    }
-    ion-title {
+.larp-toolbar {
+  .master-button {
+    width: 180px;
+    padding-left: 25px;
+    margin-left: 5px;
+    ion-label {
       text-transform: initial;
       font-size: 20px;
     }
-    .search-button {
-      width: 40px;
-    }
+  }
+  .arrow-button,
+  .plus-button,
+  .minus-button {
+    width: 30px;
+  }
+  #trigger-button {
+    width: 40px;
+  }
+  ion-title {
+    text-transform: initial;
+    font-size: 20px;
+  }
+  .search-button {
+    width: 40px;
   }
 }
 

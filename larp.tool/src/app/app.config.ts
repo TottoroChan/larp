@@ -20,6 +20,7 @@ var arbor2022: AppSettings = {
     },
   ],
   repo: 'arbor2022',
+  doctorsToolImagePath: './../../../../../assets/images/arbor2022/doctors-tool/'
 };
 
 export var appSettings: AppSettings = arbor2022;

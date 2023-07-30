@@ -1,5 +1,5 @@
 ion-content {
-  section#mad-science {
+  section#mad-science-input {
     padding: 10px;
     display: flex;
     align-items: stretch;
@@ -11,19 +11,7 @@ ion-content {
 
       ion-item {
         --background: none;
-
-        ion-label {
-          font-family: "CambriaFont";
-        }
-
-        ion-checkbox{
-          --ion-color-base: #332b22 !important;
-        }
       }
-    }
-
-    .important {
-      color: #9d0000;
     }
   }
 
@@ -35,15 +23,10 @@ ion-content {
     justify-content: center;
 
     ion-card {
-
       ion-card-header {
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        ion-card-subtitle {
-          color:  var(--ion-color-step-850, #262626);;
-        }
       }
 
       ion-card-content {

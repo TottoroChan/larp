@@ -20,62 +20,92 @@
 }
 
 :root {
-  --backgrund-color: #ceb692;
-  --text-color-title: #cbc67e;
-  --text-color-light: #cdc4c7;
-  --text-color-dark: #8a7e76;
-  background: url("../assets/images/background.jpg") no-repeat center / cover;
   --ion-font-family: "CandaraFont";
 }
 
-.header-md::after {
-  background: none;
+ion-tabs {
+  .larp-tab-bar {
+    background-image: url("../assets/images/arbor2022/up.png");
+  }
+  .larp-tab-button {
+    &#tab-button-home {
+      background-image: url("../assets/images/arbor2022/home.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 30px;
+
+      &.tab-selected {
+        background-image: url("../assets/images/arbor2022/home_hover.png");
+      }
+    }
+    &#tab-button-rules {
+      background-image: url("../assets/images/arbor2022/book.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 26px;
+
+      &.tab-selected {
+        background-image: url("../assets/images/arbor2022/book_hover.png");
+      }
+    }
+    &#tab-button-tools {
+      background-image: url("../assets/images/arbor2022/tools.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 27px;
+
+      &.tab-selected {
+        background-image: url("../assets/images/arbor2022/tools_hover.png");
+      }
+    }
+  }
 }
 
 ion-header {
   .larp-toolbar {
-    --background: url("../assets/images/up.png") center / cover no-repeat;
-    color: var(--text-color-title);
+    --background: url("../assets/images/arbor2022/up.png") center / cover
+      no-repeat;
+    color: #cbc67e;
     .master-button {
-      background-image: url("../assets/images/master_icon.png");
-      color: var(--text-color-dark);
+      background-image: url("../assets/images/arbor2022/master_icon.png");
+      color: #8a7e76;
       background-repeat: no-repeat;
       background-position: left;
       background-size: 25px;
     }
     .arrow-button {
-      background-image: url("../assets/images/arrow.png");
+      background-image: url("../assets/images/arbor2022/arrow.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 20px;
     }
     .plus-button {
-      background-image: url("../assets/images/+.png");
+      background-image: url("../assets/images/arbor2022/+.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 20px;
     }
     .minus-button {
-      background-image: url("../assets/images/-.png");
+      background-image: url("../assets/images/arbor2022/-.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 20px;
     }
     #trigger-button {
-      background-image: url("../assets/images/menu.png");
+      background-image: url("../assets/images/arbor2022/menu.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 35px;
       width: 40px;
     }
     .search-button {
-      background-image: url("../assets/images/search.png");
+      background-image: url("../assets/images/arbor2022/search.png");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 30px;
     }
     .search {
-      --background: var(--backgrund-color) !important;
+      --background: #ceb692 !important;
       input {
         font-family: "CambriaBoldFont" !important;
       }
@@ -84,37 +114,148 @@ ion-header {
 }
 
 ion-content {
-  --background: url("../assets/images/background.jpg") no-repeat center / cover;
+  --background: url("../assets/images/arbor2022/background.jpg") no-repeat
+    center / cover;
+}
+
+#home-page {
   .header-img {
-    background-image: url("../assets/images/header.png");
+    background-image: url("../assets/images/arbor2022/header.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     height: 150px;
   }
+  section {
+    color: #464137;
+
+    .synced,
+    .sync-required {
+      font-family: "CambriaFont";
+    }
+  }
+  .version {
+    color: #464137;
+    font-family: "CambriaFont";
+  }
 }
 
+#rules-page {
+  .rules-item {
+    ion-label {
+      font-family: "CambriaBoldFont" !important;
+
+      .result-list {
+        p {
+          color: #000;
+        }
+      }
+    }
+  }
+  .rules-item-divider {
+    display: block;
+    height: 5px;
+    background-image: url("../assets/images/arbor2022/line.png") !important;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 90%;
+  }
+}
+
+#rule-item-page {
+  ion-card {
+    color: #000;
+
+    &-header {
+      ion-card-title {
+        font-family: "CambriaBoldFont";
+      }
+    }
+    &-content {
+      font-family: "CambriaFont";
+
+      .highlight {
+        background-color: #fffca6;
+      }
+    }
+  }
+}
+
+#mad-science {
+  #mad-science-input {
+    ion-list {
+      ion-item {
+        ion-label {
+          font-family: "CambriaFont";
+        }
+
+        ion-checkbox {
+          --ion-color-base: #332b22 !important;
+        }
+      }
+    }
+    .important {
+      color: #9d0000;
+    }
+  }
+  #mad-science-result {
+    ion-card {
+      ion-card-header {
+        ion-card-subtitle {
+          color: var(--ion-color-step-850, #262626);
+        }
+      }
+    }
+  }
+}
+
+#doctors-tool {
+  #scan {
+    color: #464137;
+    font-family: "CambriaFont";
+    .button.custom-large {
+      --background: url("../assets/images/qr.png") no-repeat center / contain !important;
+      color: #464137;
+    }
+  }
+
+  #scan-result {
+    .sc-ion-input-md-h {
+      background: #42392173;
+      color: #000;
+    }
+
+    .fail-result {
+      color: #620101;
+      text-decoration: underline;
+    }
+  }
+}
+
+#cancel-button,
+#confirm-button,
 ion-button.custom-button {
-  background-image: url("../assets/images/btn_small.png");
+  background-image: url("../assets/images/arbor2022/btn_small.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: var(--text-color-light);
+  color: #cdc4c7;
   font-family: "CambriaBoldFont";
 }
 
 ion-button.custom-button-big {
-  background-image: url("../assets/images/btn_big.png");
+  background-image: url("../assets/images/arbor2022/btn_big.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: var(--text-color-light);
+  color: #cdc4c7;
   font-family: "CambriaBoldFont";
 }
 
 ion-popover {
   ion-content {
-    --background: url("../assets/images/menu_backdrop.png") no-repeat center;
+    --background: url("../assets/images/arbor2022/menu_backdrop.png") no-repeat
+      center;
     ion-list ion-item {
       &::after {
-        background-image: url("../src/../assets/images/line_mini.png");
+        background-image: url("../src/../assets/images/arbor2022/line_mini.png");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: 80%;
@@ -125,7 +266,7 @@ ion-popover {
 
 ion-card.result-card {
   font-family: "CambriaFont";
-  background-image: url("../assets/images/thief_card.png");
+  background-image: url("../assets/images/arbor2022/thief_card.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
@@ -136,14 +277,14 @@ ion-card.result-card {
 
 ion-alert {
   .alert-wrapper {
-    background-image: url("../assets/images/thief_card.png") !important;
+    background-image: url("../assets/images/arbor2022/thief_card.png") !important;
     background-repeat: no-repeat !important;
     background-size: 100% 100% !important;
     font-family: "CambriaFont";
 
     .alert-button-group {
       button {
-        background-image: url("../assets/images/btn_small.png") !important;
+        background-image: url("../assets/images/arbor2022/btn_small.png") !important;
         background-repeat: no-repeat !important;
         background-size: 100% 100% !important;
         color: var(--text-color-light) !important;

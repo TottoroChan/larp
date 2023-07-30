@@ -22,20 +22,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="rules-page">
   <section *ngIf="noContent; else elseblock">
     Похоже что информации о правилах нет на устройстве. Перейдите во вкладку
     "домой" и нажмите на кнопку "Синхронизировать данные"
   </section>
 
   <ng-template #elseblock>
-    <ion-list>
-      <ion-item
-        *ngFor="let rule of listOfRules"
-        (click)="showItem(rule, $event)"
-      >
-        <ion-label><h2>{{ rule.title }}</h2></ion-label>
-      </ion-item>
+    <ion-list class="rules-list">
+      <ng-template ngFor let-rule [ngForOf]="listOfRules">
+        <ion-item class="rules-item" (click)="showItem(rule, $event)">
+          <ion-label><h2>{{ rule.title }}</h2></ion-label>
+        </ion-item>
+        <div class="rules-item-divider"></div>
+      </ng-template>
     </ion-list>
   </ng-template>
 </ion-content>

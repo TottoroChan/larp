@@ -14,6 +14,7 @@ import { Config } from 'src/app/shared/models/config.model';
 @Component({
   selector: 'app-home-toolbar',
   templateUrl: 'toolbar.component.html',
+  styleUrls: ['toolbar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolbarComponent implements OnInit {

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Disease } from '../../models/disease.model';
+import { appSettings } from 'src/app/app.config';
 
 @Component({
   selector: 'success-result',
@@ -9,8 +10,8 @@ import { Disease } from '../../models/disease.model';
 })
 export class SuccessResultComponent implements OnInit {
   @Input() realDisiase: Disease;
-  cardBackImage = './../../../../../assets/images/doctors-tool/card_back.jpg';
-  cardFrontImage = './../../../../../assets/images/doctors-tool/';
+  cardBackImage = `${appSettings.doctorsToolImagePath}card_back.jpg`;
+  cardFrontImage = appSettings.doctorsToolImagePath;
 
   constructor() {}
 

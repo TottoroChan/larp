@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="madScience">
-  <section id="mad-science" *ngIf="!result">
+<ion-content id="mad-science" *ngIf="madScience">
+  <section id="mad-science-input" *ngIf="!result">
     <ion-list>
       <ion-item *ngFor="let entry of madScience.checkList">
         <span *ngIf="!entry.isOptional" class="important">*</span>

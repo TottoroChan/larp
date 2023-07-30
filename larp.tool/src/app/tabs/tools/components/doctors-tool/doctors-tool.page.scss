@@ -10,89 +10,14 @@ ion-content {
   }
 
   section#scan {
-    color: #464137;
-    font-family: "CambriaFont";
     ion-button.custom-large {
       height: 200px;
       width: 200px;
-      --background: url("../../../../../assets/images/doctors-tool/qr.png")
-        no-repeat center / contain;
       --box-shadow: none;
-      color: #464137;
 
       ion-icon {
         font-size: 9em;
       }
-    }
-  }
-
-  section#scan-result {
-    ion-input {
-      background: #f4f5f8;
-      color: #000;
-      padding: 5px 10px !important;
-      margin: 15px 0;
-      border: 1px solid #d7d8da;
-      border-radius: 4px;
-    }
-
-    #buttons {
-      display: flex;
-      justify-content: space-evenly;
-      flex-direction: row;
-      width: 100%;
-    }
-  }
-
-  section#fail-result {
-    color: red;
-  }
-
-  section#success-result {
-    height: 100%;
-    .card {
-      position: relative;
-      top: 10px;
-      height: auto;
-      width: 80%;
-      margin: 0 auto;
-      transition: transform 2s;
-      transform-style: preserve-3d;
-
-      &-back {
-        transform: rotateY(180deg);
-      }
-
-      &-front,
-      &-back {
-        position: absolute;
-        backface-visibility: hidden;
-
-        .result {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          background-color: #ffffff8f;
-          padding: 0px 35px;
-          width: 100%;
-          font-size: 3vw;
-          box-shadow: 0px 0px 30px 30px #ffffff8f;
-          transform: translate(-50%, -50%);
-          -webkit-box-shadow: 0px 0px 30px 30px #ffffff8f;
-          -moz-box-shadow: 0px 0px 30px 30px #ffffff8f;
-          box-shadow: 0px 0px 30px 30px #ffffff8f;
-        }
-
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-    }
-
-    span {
-      color: rgb(133, 133, 133);
-      font-size: 2vw;
     }
   }
 }

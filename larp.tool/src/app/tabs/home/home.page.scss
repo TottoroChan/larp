@@ -2,22 +2,16 @@ ion-content {
   section {
     padding: 10px;
     text-align: center;
-    color: #464137;
 
     .header-img {
       margin: 50px 0;
     }
-
-    .synced,
-    .sync-required {
-      font-family: "CambriaFont";
-    }
   }
-}
-ion-footer {
-  text-align: center;
+
   .version {
-    color: #464137;
-    font-family: "CambriaFont";
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    position: absolute;
   }
 }

@@ -5,7 +5,7 @@
   ></app-home-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="home-page">
   <section id="spinner-section" *ngIf="isDataLoading; else elseblock">
     <div class="loader"></div>
   </section>
@@ -34,7 +34,5 @@
       </div>
     </section>
   </ng-template>
-</ion-content>
-<ion-footer>
   <div class="version">Ver. 2.2</div>
-</ion-footer>
+</ion-content>
