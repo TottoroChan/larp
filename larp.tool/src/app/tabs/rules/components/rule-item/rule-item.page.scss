@@ -4,13 +4,13 @@
     background: none;
     margin: 0;
 
-    &-header {
+    .header {
       padding-bottom: 0;
       &.large-font ion-card-title {
         font-size: 30px !important;
       }
     }
-    &-content {
+    .content {
       font-size: 16px !important;
 
       p,

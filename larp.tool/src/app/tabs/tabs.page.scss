@@ -1,5 +1,7 @@
-ion-tab {
-  &-button {
+#larp-tabs-bar {
+  ion-tab-button {
+    background: transparent;
+
     &#tab-button-home {
       background-image: url("../../assets/images/home-outline.svg");
       background-repeat: no-repeat;
@@ -30,6 +32,5 @@ ion-tab {
         background-image: url("../../assets/images/hammer-outline.svg");
       }
     }
-    background: none;
   }
 }

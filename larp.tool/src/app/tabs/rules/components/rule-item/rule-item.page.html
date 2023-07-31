@@ -1,14 +1,21 @@
 <ion-header>
   <ion-toolbar class="larp-toolbar">
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()" class="arrow-button">
-      </ion-button>
+      <ion-button (click)="goBack()" class="arrow-button"> </ion-button>
     </ion-buttons>
     <ion-title> {{rulesFile.title}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button class="minus-button" [disabled]="!largeFontSize" (click)="toSmallFontSize()">
+      <ion-button
+        class="minus-button"
+        [disabled]="!largeFontSize"
+        (click)="toSmallFontSize()"
+      >
       </ion-button>
-      <ion-button class="plus-button" [disabled]="largeFontSize" (click)="toLargeFontSize()">
+      <ion-button
+        class="plus-button"
+        [disabled]="largeFontSize"
+        (click)="toLargeFontSize()"
+      >
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -16,10 +23,18 @@
 
 <ion-content id="rule-page" [scrollEvents]="true">
   <ion-card *ngFor="let rule of rulesFile.content">
-    <ion-card-header [ngClass]="largeFontSize ? 'large-font' : ''" *ngIf="rule.title">
+    <ion-card-header
+      class="header"
+      [ngClass]="largeFontSize ? 'large-font' : ''"
+      *ngIf="rule.title"
+    >
       <ion-card-title [innerHTML]="rule.title"></ion-card-title>
     </ion-card-header>
 
-    <ion-card-content [ngClass]="largeFontSize ? 'large-font' : ''" [innerHTML]="rule.content | highlight: textToSearch"></ion-card-content>
+    <ion-card-content
+      class="content"
+      [ngClass]="largeFontSize ? 'large-font' : ''"
+      [innerHTML]="rule.content | highlight: textToSearch"
+    ></ion-card-content>
   </ion-card>
 </ion-content>
