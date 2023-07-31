@@ -1,8 +1,7 @@
 <ion-header>
-  <ion-toolbar  class="larp-toolbar">
-    <ion-buttons slot="start"> 
-      <ion-button (click)="goBack()" class="arrow-button">
-      </ion-button>
+  <ion-toolbar class="larp-toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" class="arrow-button"> </ion-button>
     </ion-buttons>
     <ion-title> Врачебный инструмент </ion-title>
   </ion-toolbar>
@@ -12,14 +11,27 @@
   <section id="scan" *ngIf="!scanResult">
     <h4>Нажмите для сканирования:</h4>
 
-    <ion-button class="custom-large" (click)="scanQR()">
+    <ion-button class="custom-qr" (click)="scanQR()">
       <ion-icon slot="icon-only" name="scan-outline"></ion-icon>
     </ion-button>
   </section>
 
-  <master-result *ngIf="disiaseChecked && successResult && isMaster" [realDisiase]="realDisiase"></master-result>
-  
-  <scan-result *ngIf="scanResult && !successResult && !isMaster" [disiaseChecked]="disiaseChecked" [successResult]="successResult" (onCheckDisiase)="checkDisiase($event)" (onDisiaseChange)="onDisiaseChange($event)" (onGoBack)="goBack()"></scan-result>
+  <master-result
+    *ngIf="disiaseChecked && successResult && isMaster"
+    [realDisiase]="realDisiase"
+  ></master-result>
 
-  <success-result *ngIf="disiaseChecked && successResult && !isMaster" [realDisiase]="realDisiase"></success-result>
+  <scan-result
+    *ngIf="scanResult && !successResult && !isMaster"
+    [disiaseChecked]="disiaseChecked"
+    [successResult]="successResult"
+    (onCheckDisiase)="checkDisiase($event)"
+    (onDisiaseChange)="onDisiaseChange($event)"
+    (onGoBack)="goBack()"
+  ></scan-result>
+
+  <success-result
+    *ngIf="disiaseChecked && successResult && !isMaster"
+    [realDisiase]="realDisiase"
+  ></success-result>
 </ion-content>

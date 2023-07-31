@@ -8,7 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="tools-page">
   <section *ngIf="noContent; else elseblock">
     Похоже что информации об инструментах нет на устройстве. Перейдите во
     вкладку "домой" и нажмите на кнопку "Синхронизировать данные"
@@ -22,8 +22,9 @@
         expand="block"
         size="large"
         [routerLink]="[tool.path]"
-        >{{tool.name}}</ion-button
       >
+        {{tool.name}}
+      </ion-button>
     </section>
   </ng-template>
 </ion-content>

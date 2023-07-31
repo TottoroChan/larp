@@ -1,54 +1,52 @@
-ion-content {
-  section#success-result {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+#success-result {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+
+  .card {
+    position: relative;
+    top: 10px;
+    width: 90%;
     height: 100%;
+    margin: 0 auto;
+    transition: transform 2s;
+    transform-style: preserve-3d;
 
-    .card {
-      position: relative;
-      top: 10px;
-      width: 90%;
-      height: 100%;
-      margin: 0 auto;
-      transition: transform 2s;
-      transform-style: preserve-3d;
+    &-back {
+      transform: rotateY(180deg);
+    }
 
-      &-back {
-        transform: rotateY(180deg);
-      }
+    &-front,
+    &-back {
+      position: absolute;
+      backface-visibility: hidden;
 
-      &-front,
-      &-back {
+      .result {
         position: absolute;
-        backface-visibility: hidden;
+        top: 50%;
+        left: 50%;
+        padding: 0px 35px;
+        width: 100%;
+        font-size: 4vw;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff8f;
+        box-shadow: 0px 0px 30px 30px #ffffff8f;
+        -webkit-box-shadow: 0px 0px 30px 30px #ffffff8f;
+        -moz-box-shadow: 0px 0px 30px 30px #ffffff8f;
+        box-shadow: 0px 0px 30px 30px #ffffff8f;
+      }
 
-        .result {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          padding: 0px 35px;
-          width: 100%;
-          font-size: 4vw;
-          transform: translate(-50%, -50%);
-          background-color: #ffffff8f;
-          box-shadow: 0px 0px 30px 30px #ffffff8f;
-          -webkit-box-shadow: 0px 0px 30px 30px #ffffff8f;
-          -moz-box-shadow: 0px 0px 30px 30px #ffffff8f;
-          box-shadow: 0px 0px 30px 30px #ffffff8f;
-        }
-
-        img {
-          width: 100%;
-          height: auto;
-        }
+      img {
+        width: 100%;
+        height: auto;
       }
     }
+  }
 
-    span {
-      font-size: 2vw;
-      color: #858585;
-    }
+  span {
+    font-size: 2vw;
+    color: #858585;
   }
 }

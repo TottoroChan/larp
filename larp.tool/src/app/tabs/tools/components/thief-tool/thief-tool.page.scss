@@ -1,11 +1,11 @@
-ion-content {
-  section#thief-tool {
+#thief-tool {
+  section#thief {
     padding: 10px;
     height: 100%;
     display: flex;
     align-items: stretch;
     flex-direction: column;
-    justify-content: space-around
+    justify-content: space-around;
   }
 
   section#thief-tool-result {

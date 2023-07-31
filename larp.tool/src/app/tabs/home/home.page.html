@@ -6,19 +6,20 @@
 </ion-header>
 
 <ion-content id="home-page">
-  <section id="spinner-section" *ngIf="isDataLoading; else elseblock">
+  <section class="spinner-section" *ngIf="isDataLoading; else elseblock">
     <div class="loader"></div>
   </section>
   <ng-template #elseblock>
-    <section>
-      <div class="header-img" ></div>
+    <section class="home-content">
+      <div class="header-img"></div>
       <ng-template ngFor let-tab [ngForOf]="tabs">
         <ion-button
           *ngIf="tab.id != 'home'"
           expand="block"
           class="custom-button-big"
           (click)="switchTab(tab.id)"
-          >{{tab.title}}
+        >
+          {{tab.title}}
         </ion-button>
       </ng-template>
       <ion-button expand="full" class="custom-button-big" (click)="syncData()">

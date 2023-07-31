@@ -1,14 +1,14 @@
-<ion-header>
-  <ion-toolbar  class="larp-toolbar">
+<ion-header *ngIf="madScience">
+  <ion-toolbar class="larp-toolbar">
     <ion-buttons slot="start">
       <ion-button (click)="goBack()" class="arrow-button"> </ion-button>
     </ion-buttons>
-    <ion-title> Безумная Наука</ion-title>
+    <ion-title> {{madScience.name}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="mad-science" *ngIf="madScience">
-  <section id="mad-science-input" *ngIf="!result">
+<ion-content id="mad-science-tool" *ngIf="madScience">
+  <section id="mad-science" *ngIf="!result">
     <ion-list>
       <ion-item *ngFor="let entry of madScience.checkList">
         <span *ngIf="!entry.isOptional" class="important">*</span>
@@ -29,7 +29,9 @@
     >
       Получить результат
     </ion-button>
-    <div class="info"><span class="important">*</span> - обязательный пункт.</div>
+    <div class="info">
+      <span class="important">*</span> - обязательный пункт.
+    </div>
   </section>
 
   <section id="mad-science-result" *ngIf="result">

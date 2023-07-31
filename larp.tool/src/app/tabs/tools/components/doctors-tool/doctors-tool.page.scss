@@ -1,4 +1,4 @@
-ion-content {
+#doctors-tool {
   section#scan,
   section#scan-result,
   section#fail-result,
@@ -10,7 +10,7 @@ ion-content {
   }
 
   section#scan {
-    ion-button.custom-large {
+    ion-button.custom-qr {
       height: 200px;
       width: 200px;
       --box-shadow: none;

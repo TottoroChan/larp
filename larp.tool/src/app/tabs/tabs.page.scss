@@ -1,36 +1,33 @@
 ion-tab {
-  &-bar {
-    background-image: url("../../assets/images/up.png");
-  }
   &-button {
     &#tab-button-home {
-      background-image: url("../../assets/images/home.png");
+      background-image: url("../../assets/images/home-outline.svg");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 30px;
 
       &.tab-selected {
-        background-image: url("../../assets/images/home_hover.png");
+        background-image: url("../../assets/images/home-outline.svg");
       }
     }
     &#tab-button-rules {
-      background-image: url("../../assets/images/book.png");
+      background-image: url("../../assets/images/book-outline.svg");
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 26px;
+      background-size: 30px;
 
       &.tab-selected {
-        background-image: url("../../assets/images/book_hover.png");
+        background-image: url("../../assets/images/book-outline.svg");
       }
     }
     &#tab-button-tools {
-      background-image: url("../../assets/images/tools.png");
+      background-image: url("../../assets/images/hammer-outline.svg");
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 27px;
+      background-size: 30px;
 
       &.tab-selected {
-        background-image: url("../../assets/images/tools_hover.png");
+        background-image: url("../../assets/images/hammer-outline.svg");
       }
     }
     background: none;

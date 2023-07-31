@@ -1,24 +1,24 @@
-ion-content {
+#rules-page {
   section {
     padding: 10px;
   }
 
   ion-list {
-    background: none !important;
     ion-item {
-      --background: none !important;
-      --border-color: transparent;
-
       ion-label {
         .result-list {
           p {
             margin: 15px 0;
             white-space: normal;
-            line-height: 16px;
+            line-height: 20px;
 
             &::before,
             &::after {
               content: "...";
+            }
+
+            b {
+              background-color: #f1f142;
             }
           }
         }
