@@ -21,6 +21,8 @@
 
 :root {
   --ion-font-family: "CandaraFont";
+  --color: #000;
+  --ion-card-color: #000;
 }
 
 ion-content {
@@ -96,7 +98,6 @@ ion-header {
   }
   section {
     color: #464137;
-
     .synced,
     .sync-required {
       font-family: "CambriaFont";
@@ -114,7 +115,6 @@ ion-header {
     .rules-item {
       --background: transparent;
       --border-color: transparent;
-
       ion-label {
         font-family: "CambriaBoldFont" !important;
         .result-list {
@@ -136,11 +136,8 @@ ion-header {
 }
 
 #rule-page {
-  color: #000 !important;
   ion-card {
-    color: #000 !important;
     font-family: "CambriaFont";
-
     .highlight {
       background-color: #fffca6;
     }

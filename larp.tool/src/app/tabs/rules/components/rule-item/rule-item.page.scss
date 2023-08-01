@@ -12,25 +12,20 @@
     }
     .content {
       font-size: 16px !important;
-
       p,
       strong {
         font-size: 16px !important;
       }
-
       table td {
         padding: 5px;
       }
-
       &.large-font {
         font-size: 20px !important;
-
         p,
         strong {
           font-size: 20px !important;
         }
       }
-
       .highlight {
         background-color: #f1f142;
       }
