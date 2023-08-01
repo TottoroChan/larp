@@ -10,17 +10,8 @@
   --larp-text-color: var(--green-color);
   /*---------------- переменные по компонентам*/
   /* rules */
-  --rules-text-highlight-color: #fffca6;
+  --rules-text-highlight-color: #1c1c1c;
   --rule-text-color: var(--green-color);
-
-  /* tools */
-  --doctors-success-result-background-color: #ffffff8f;
-  --doctors-success-result-span-color: #858585;
-  --doctors-input-background: #42392173;
-  --doctors-fail-result-color: #620101;
-  --mad-science-checkbox-color: #332b22;
-  --mad-science-important-color: #9d0000;
-  --mad-science-subtitile-color: #262626;
 
   /* main */
   --custom-button-text-color: var(--green-color);
@@ -41,6 +32,9 @@ ion-content {
 }
 
 #rules-page {
+  ion-list .rules-item ion-label .result-list p b {
+    color: var(--black-color);
+  }
   .rules-item-divider {
     display: block;
     height: 5px;
@@ -48,7 +42,7 @@ ion-content {
   }
 }
 
-#home-page {
+#rules-page #home-page {
   .header-img {
     background-image: url("../assets/images/fallout2024/941-9416740_vault-tec-logo-png.png");
     background-repeat: no-repeat;
