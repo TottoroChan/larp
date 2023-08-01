@@ -6,6 +6,7 @@
   ion-list {
     background: transparent;
     .rules-item {
+      color: var(--rule-text-color);
       --background: transparent;
       --border-color: transparent;
 

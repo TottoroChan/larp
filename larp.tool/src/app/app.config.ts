@@ -20,7 +20,26 @@ var arbor2022: AppSettings = {
     },
   ],
   repo: 'arbor2022',
-  doctorsToolImagePath: './../../../../../assets/images/arbor2022/doctors-tool/'
+  doctorsToolImagePath:
+    './../../../../../assets/images/arbor2022/doctors-tool/',
 };
 
-export var appSettings: AppSettings = arbor2022;
+var fallout2024: AppSettings = {
+  title: 'Fallout',
+  tabs: [
+    {
+      id: 'home',
+      title: 'Домашняя',
+      route: 'home',
+    },
+    {
+      id: 'rules',
+      title: 'Правила',
+      route: 'rules',
+    },
+  ],
+  repo: 'arbor2022',
+  doctorsToolImagePath: '',
+};
+
+export var appSettings: AppSettings = fallout2024;

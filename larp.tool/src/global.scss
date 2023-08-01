@@ -28,7 +28,8 @@
 @import url(./theme/variables.scss);
 
 //импорт стилей конкретной игры
-@import url(theme/arbor2022.scss);
+//@import url(theme/arbor2022.scss);
+@import url(theme/fallout2024.scss);
 
 .larp-toolbar {
   color: var(--toolbar-text-color);

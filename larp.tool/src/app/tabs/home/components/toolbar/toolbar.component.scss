@@ -5,7 +5,7 @@ ion-popover {
     ion-item {
       --background: none !important;
       --border-color: transparent;
-
+      color: var(--larp-text-color);
       &::after {
         content: "";
         display: block;

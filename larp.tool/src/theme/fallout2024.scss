@@ -1,0 +1,175 @@
+:root {
+  --black-color: #000;
+  --green-color: #27b114;
+  --dark-green-color: #166d0a;
+
+  /*---------------- основные переменные */
+  --larp-font-family-default: "UbuntuRegularFont";
+  --larp-font-family: "UbuntuRegularFont";
+  --larp-font-family-bold: "UbuntuRegularBoldFont";
+  --larp-text-color: var(--green-color);
+  /*---------------- переменные по компонентам*/
+  /* rules */
+  --rules-text-highlight-color: #fffca6;
+  --rule-text-color: var(--green-color);
+
+  /* tools */
+  --doctors-success-result-background-color: #ffffff8f;
+  --doctors-success-result-span-color: #858585;
+  --doctors-input-background: #42392173;
+  --doctors-fail-result-color: #620101;
+  --mad-science-checkbox-color: #332b22;
+  --mad-science-important-color: #9d0000;
+  --mad-science-subtitile-color: #262626;
+
+  /* main */
+  --custom-button-text-color: var(--green-color);
+  --custom-button-background-color: #070707;
+  --popower-background: #090a097d;
+  --alert-border-color: var(--dark-green-color);
+  --toolbar-text-color: var(--green-color);
+  --toolbar-master-button-text-color: var(--green-color);
+  --toolbar-search-input-background: #a6e99d;
+}
+
+.larp-toolbar {
+  --background: var(--black-color);
+}
+
+ion-content {
+  --background: var(--black-color);
+}
+
+#rules-page {
+  .rules-item-divider {
+    display: block;
+    height: 5px;
+    border-bottom: 1px solid var(--dark-green-color);
+  }
+}
+
+#home-page {
+  .header-img {
+    background-image: url("../assets/images/fallout2024/941-9416740_vault-tec-logo-png.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 150px;
+  }
+}
+
+#larp-tabs-bar {
+  background: var(--black-color);
+  border-top: 1px solid var(--green-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  #tab-button-home {
+    background-image: url("../assets/images/fallout2024/icons8-home-24-grey.png") !important;
+
+    &.tab-selected {
+      background-image: url("../assets/images/fallout2024/icons8-home-24.png") !important;
+    }
+  }
+  #tab-button-rules {
+    background-image: url("../assets/images/fallout2024/icons8-bookmark-24-grey.png") !important;
+
+    &.tab-selected {
+      background-image: url("../assets/images/fallout2024/icons8-bookmark-24.png") !important;
+    }
+  }
+}
+
+ion-header {
+  .larp-toolbar {
+    border-bottom: 1px solid var(--green-color);
+    .master-button {
+      background-image: url("../assets/images/fallout2024/icons8-tools-24.png");
+    }
+    .arrow-button {
+      background-image: url("../assets/images/fallout2024/icons8-back-24.png");
+    }
+    .plus-button {
+      background-image: url("../assets/images/fallout2024/icons8-plus-24.png");
+    }
+    .minus-button {
+      background-image: url("../assets/images/fallout2024/icons8-minus-24.png");
+      background-size: 20px;
+    }
+    #trigger-button {
+      background-image: url("../assets/images/fallout2024/icons8-menu-vertical-24.png");
+    }
+    .search-button {
+      background-image: url("../assets/images/fallout2024/icons8-search-24.png");
+    }
+  }
+}
+ion-alert {
+  .alert-wrapper {
+    background: var(--black-color) !important;
+    border: 1px solid var(--dark-green-color);
+    .alert-title,
+    input {
+      color: var(--green-color) !important;
+    }
+  }
+}
+
+.loader,
+.loader:before,
+.loader:after {
+  background: var(--green-color);
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: var(--green-color);
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: "";
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}

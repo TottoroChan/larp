@@ -12,13 +12,21 @@
   src: url("../assets/fonts/candara.ttf");
 }
 
+@font-face {
+  font-family: UbuntuRegularFont;
+  src: url("../assets/fonts/Ubuntu_Mono/UbuntuMono-Regular.ttf");
+}
+@font-face {
+  font-family: UbuntuRegularBoldFont;
+  src: url("../assets/fonts/Ubuntu_Mono/UbuntuMono-Bold.ttf");
+}
+
 :root {
   /*---------------- основные переменные */
   --larp-font-family-default: "CandaraFont";
   --larp-font-family: "CambriaFont";
   --larp-font-family-bold: "CambriaBoldFont";
   --ion-font-family: var(--larp-font-family-default);
-
   --larp-text-color: #000;
   /*---------------- переменные по компонентам*/
   /* home */
