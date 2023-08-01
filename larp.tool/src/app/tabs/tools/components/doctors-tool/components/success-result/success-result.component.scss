@@ -31,11 +31,15 @@
         width: 100%;
         font-size: 4vw;
         transform: translate(-50%, -50%);
-        background-color: #ffffff8f;
-        box-shadow: 0px 0px 30px 30px #ffffff8f;
-        -webkit-box-shadow: 0px 0px 30px 30px #ffffff8f;
-        -moz-box-shadow: 0px 0px 30px 30px #ffffff8f;
-        box-shadow: 0px 0px 30px 30px #ffffff8f;
+        background-color: var(--doctors-success-result-background-color);
+        box-shadow: 0px 0px 30px 30px
+          var(--doctors-success-result-background-color);
+        -webkit-box-shadow: 0px 0px 30px 30px
+          var(--doctors-success-result-background-color);
+        -moz-box-shadow: 0px 0px 30px 30px
+          var(--doctors-success-result-background-color);
+        box-shadow: 0px 0px 30px 30px
+          var(--doctors-success-result-background-color);
       }
 
       img {
@@ -47,6 +51,6 @@
 
   span {
     font-size: 2vw;
-    color: #858585;
+    color: var(--doctors-success-result-span-color);
   }
 }

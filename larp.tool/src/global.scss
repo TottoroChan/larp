@@ -25,10 +25,13 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import url(./theme/variables.scss);
+
 //импорт стилей конкретной игры
 @import url(theme/arbor2022.scss);
 
 .larp-toolbar {
+  color: var(--toolbar-text-color);
   ion-label,
   ion-title {
     text-transform: initial;
@@ -46,6 +49,7 @@
     background-position: left;
     background-size: 25px;
     margin-left: 5px;
+    color: var(--toolbar-master-button-text-color);
   }
   .arrow-button {
     background-image: url("./assets/images/chevron-back-outline.svg");
@@ -79,65 +83,52 @@
     background-size: 30px;
     width: 40px;
   }
+  .search {
+    --background: var(--toolbar-search-input-background) !important;
+    input {
+      font-family: var(--toolbar-search-font-family) !important;
+    }
+  }
+}
+
+#cancel-button,
+#confirm-button,
+ion-button.custom-button,
+ion-button.custom-button-big {
+  --background: none;
+  --box-shadow: none;
+  color: var(--custom-button-text-color);
+  text-transform: initial;
+  font-size: 20px;
+  -webkit-text-stroke-color: var(--custom-button-webkit-text-stroke-color);
+  background-color: var(--custom-button-background-color);
+  font-family: var(--custom-button-font-family);
 }
 
 #cancel-button,
 #confirm-button,
 ion-button.custom-button {
-  --background: none;
-  --box-shadow: none;
   margin: 0 15px;
   padding: 10px 12px 16px;
   height: 50px;
-  color: #2f0312;
-  text-transform: initial;
-  font-size: 20px;
-  -webkit-text-stroke-color: #000;
-  background-color: #c3c3c3;
 }
 
 ion-button.custom-button-big {
-  --background: none;
-  --box-shadow: none;
   height: 70px;
-  color: #2f0312;
-  text-transform: initial;
-  font-size: 20px;
-  -webkit-text-stroke-color: #000;
-  background-color: #c3c3c3;
-}
-
-ion-popover {
-  background: #0000007d;
-  ion-content ion-list {
-    background: none !important;
-    ion-item {
-      --background: none !important;
-      --border-color: transparent;
-
-      &::after {
-        content: "";
-        display: block;
-        height: 5px;
-      }
-
-      &:last-child::after {
-        background: none;
-      }
-    }
-  }
 }
 
 ion-card.result-card {
   --background: none;
   box-shadow: none;
   padding: 30px 15px;
+  font-family: var(--card-font-family);
 
   ion-card-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     font-size: 30px;
+    font-family: var(--card-font-family-bold);
   }
 
   ion-card-content {
@@ -145,49 +136,11 @@ ion-card.result-card {
     h2 {
       text-decoration: underline;
       font-size: 18px;
-      color: #000;
+      color: var(--card-contet-color);
     }
     p {
       font-size: 16px;
-      color: #000;
-    }
-  }
-}
-
-ion-alert {
-  .alert-wrapper {
-    --box-shadow: none;
-    padding: 30px 15px;
-    max-width: 80% !important;
-    min-width: 90% !important;
-
-    .alert-message {
-      color: #000;
-    }
-
-    input {
-      border-bottom: 1px solid #211b16 !important;
-
-      &:-internal-autofill-selected {
-        background-color: none;
-      }
-    }
-
-    .alert-button-group {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-
-      button {
-        --background: none;
-        --box-shadow: none;
-        margin: 0 7px !important;
-        padding: 10px 25px 13px !important;
-        height: 50px;
-        text-transform: initial !important;
-        -webkit-text-stroke-color: #000;
-        font-size: 16px !important;
-      }
+      color: var(--card-contet-color);
     }
   }
 }

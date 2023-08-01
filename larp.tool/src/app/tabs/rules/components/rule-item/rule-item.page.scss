@@ -1,12 +1,18 @@
 #rule-page {
   ion-card {
+    color: var(--rule-text-color);
+    font-family: var(--rule-font-family);
     box-shadow: none;
     background: none;
     margin: 0;
 
     .header {
       padding-bottom: 0;
+      ion-card-title {
+        color: var(--rule-text-color);
+      }
       &.large-font ion-card-title {
+        font-family: var(--rule-font-family-bold);
         font-size: 30px !important;
       }
     }
@@ -27,7 +33,7 @@
         }
       }
       .highlight {
-        background-color: #f1f142;
+        background-color: var(--rules-text-highlight-color);
       }
     }
   }

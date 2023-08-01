@@ -11,7 +11,18 @@
 
       ion-item {
         --background: none;
+
+        ion-label {
+          font-family: var(--mad-science-font-family);
+        }
+
+        ion-checkbox {
+          --ion-color-base: var(--mad-science-checkbox-color);
+        }
       }
+    }
+    .important {
+      color: var(--mad-science-important-color);
     }
   }
 
@@ -27,6 +38,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        ion-card-subtitle {
+          color: var(--mad-science-subtitile-color);
+        }
       }
 
       ion-card-content {

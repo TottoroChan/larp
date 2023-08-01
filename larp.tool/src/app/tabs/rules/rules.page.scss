@@ -4,10 +4,17 @@
   }
 
   ion-list {
-    ion-item {
+    background: transparent;
+    .rules-item {
+      --background: transparent;
+      --border-color: transparent;
+
       ion-label {
+        font-family: var(--rule-title-font-family);
+
         .result-list {
           p {
+            color: var(--rule-text-color);
             margin: 15px 0;
             white-space: normal;
             line-height: 20px;
@@ -18,7 +25,7 @@
             }
 
             b {
-              background-color: #f1f142;
+              background-color: var(--rules-text-highlight-color);
             }
           }
         }

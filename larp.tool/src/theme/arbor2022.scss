@@ -1,28 +1,27 @@
-@font-face {
-  font-family: CambriaFont;
-  src: url("../assets/fonts/Cambria.woff");
-}
-@font-face {
-  font-family: CambriaBoldFont;
-  src: url("../assets/fonts/Cambria-Bold.woff");
-}
-@font-face {
-  font-family: CambriaBoldItalicFont;
-  src: url("../assets/fonts/Cambria-BoldItalic.woff");
-}
-@font-face {
-  font-family: CambriaItalicFont;
-  src: url("../assets/fonts/Cambria-Italic.woff");
-}
-@font-face {
-  font-family: CandaraFont;
-  src: url("../assets/fonts/candara.ttf");
-}
-
 :root {
-  --ion-font-family: "CandaraFont";
-  --color: #000;
-  --ion-card-color: #000;
+  --larp-text-color: #464137;
+  /*---------------- переменные по компонентам*/
+  /* rules */
+  --rules-text-highlight-color: #fffca6;
+  --rule-text-color: #000;
+
+  /* tools */
+  --doctors-success-result-background-color: #ffffff8f;
+  --doctors-success-result-span-color: #858585;
+  --doctors-input-background: #42392173;
+  --doctors-fail-result-color: #620101;
+  --mad-science-checkbox-color: #332b22;
+  --mad-science-important-color: #9d0000;
+  --mad-science-subtitile-color: #262626;
+
+  /* main */
+  --custom-button-text-color: #cdc4c7;
+  --custom-button-background-color: #c3c3c3;
+  --popower-background: #0000007d;
+  --alert-border-color: #211b16;
+  --toolbar-text-color: #cbc67e;
+  --toolbar-master-button-text-color: #8a7e76;
+  --toolbar-search-input-background: #ceb692;
 }
 
 ion-content {
@@ -59,10 +58,8 @@ ion-header {
   .larp-toolbar {
     --background: url("../assets/images/arbor2022/up.png") center / cover
       no-repeat;
-    color: #cbc67e;
     .master-button {
       background-image: url("../assets/images/arbor2022/master_icon.png");
-      color: #8a7e76;
     }
     .arrow-button {
       background-image: url("../assets/images/arbor2022/arrow.png");
@@ -80,12 +77,6 @@ ion-header {
     .search-button {
       background-image: url("../assets/images/arbor2022/search.png");
     }
-    .search {
-      --background: #ceb692 !important;
-      input {
-        font-family: "CambriaBoldFont" !important;
-      }
-    }
   }
 }
 
@@ -96,106 +87,24 @@ ion-header {
     background-size: 100% 100%;
     height: 150px;
   }
-  section {
-    color: #464137;
-    .synced,
-    .sync-required {
-      font-family: "CambriaFont";
-    }
-  }
-  .version {
-    color: #464137;
-    font-family: "CambriaFont";
-  }
 }
 
 #rules-page {
-  .rules-list {
-    background: transparent;
-    .rules-item {
-      --background: transparent;
-      --border-color: transparent;
-      ion-label {
-        font-family: "CambriaBoldFont" !important;
-        .result-list {
-          p {
-            color: #000;
-          }
-        }
-      }
-    }
-    .rules-item-divider {
-      display: block;
-      height: 5px;
-      background-image: url("../assets/images/arbor2022/line.png") !important;
-      background-repeat: no-repeat;
-      background-position: bottom;
-      background-size: 90%;
-    }
-  }
-}
-
-#rule-page {
-  ion-card {
-    font-family: "CambriaFont";
-    .highlight {
-      background-color: #fffca6;
-    }
-    ion-card-title {
-      color: #000 !important;
-      font-family: "CambriaBoldFont";
-    }
-  }
-}
-
-#mad-science {
-  #mad-science-input {
-    ion-list {
-      ion-item {
-        ion-label {
-          font-family: "CambriaFont";
-        }
-
-        ion-checkbox {
-          --ion-color-base: #332b22 !important;
-        }
-      }
-    }
-    .important {
-      color: #9d0000;
-    }
-  }
-  #mad-science-result {
-    ion-card {
-      ion-card-header {
-        ion-card-subtitle {
-          color: var(--ion-color-step-850, #262626);
-        }
-      }
-    }
+  .rules-item-divider {
+    display: block;
+    height: 5px;
+    background-image: url("../assets/images/arbor2022/line.png") !important;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 90%;
   }
 }
 
 #doctors-tool {
   #scan {
-    color: #464137;
-    font-family: "CambriaFont";
-    .button.custom-large {
+    .button.custom-qr {
       --background: url("../assets/images/arbor2022/qr.png") no-repeat center /
         contain !important;
-      color: #464137;
-    }
-  }
-
-  #scan-result {
-    .sc-ion-input-md-h {
-      background: #42392173;
-      color: #000;
-    }
-
-    .fail-result {
-      color: #620101;
-      text-decoration: underline;
     }
   }
 }
@@ -207,8 +116,6 @@ ion-button.custom-button {
   background-image: url("../assets/images/arbor2022/btn_small.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: #cdc4c7 !important;
-  font-family: "CambriaBoldFont";
 }
 
 ion-button.custom-button-big {
@@ -216,8 +123,6 @@ ion-button.custom-button-big {
   background-image: url("../assets/images/arbor2022/btn_big.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  color: #cdc4c7 !important;
-  font-family: "CambriaBoldFont";
 }
 
 ion-popover {
@@ -236,14 +141,9 @@ ion-popover {
 }
 
 ion-card.result-card {
-  font-family: "CambriaFont";
   background-image: url("../assets/images/arbor2022/thief_card.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
-
-  ion-card-header {
-    font-family: "CambriaBoldFont";
-  }
 }
 
 ion-alert {
@@ -252,7 +152,6 @@ ion-alert {
     background-image: url("../assets/images/arbor2022/thief_card.png") !important;
     background-repeat: no-repeat !important;
     background-size: 100% 100% !important;
-    font-family: "CambriaFont";
 
     .alert-button-group {
       button {
@@ -260,7 +159,6 @@ ion-alert {
         background-repeat: no-repeat !important;
         background-size: 100% 100% !important;
         color: var(--text-color-light) !important;
-        font-family: "CambriaBoldFont";
       }
     }
   }
