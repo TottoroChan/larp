@@ -60,9 +60,12 @@ export class RulesPage implements OnInit {
 
   search(event) {
     const query = event.target.value.toLowerCase();
-    const items = Array.from(
+    const allChildren = Array.from(
       document.querySelector('ion-list')
         .children as HTMLCollectionOf<HTMLElement>
+    );
+    let items = allChildren.filter(
+      (item) => !item.classList.contains('rules-item-divider')
     );
 
     if (query.length > 2) {
@@ -184,7 +187,7 @@ export class RulesPage implements OnInit {
     });
   }
 
-  goHome(){
+  goHome() {
     this.router.navigateByUrl(`tabs/home`);
   }
 }
