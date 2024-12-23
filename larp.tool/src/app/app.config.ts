@@ -1,6 +1,6 @@
 import { AppSettings } from './shared/models/app-settings.model';
 
-var arbor2022: AppSettings = {
+const arbor2022: AppSettings = {
   title: 'Арбор',
   tabs: [
     {
@@ -29,7 +29,7 @@ var arbor2022: AppSettings = {
   hasHeader: true,
 };
 
-var fallout2024: AppSettings = {
+const fallout2024: AppSettings = {
   title: 'Fallout',
   tabs: [
     {
@@ -51,4 +51,4 @@ var fallout2024: AppSettings = {
   hasMasterMode: true,
 };
 
-export var appSettings: AppSettings = arbor2022;
+export const appSettings: AppSettings = arbor2022;

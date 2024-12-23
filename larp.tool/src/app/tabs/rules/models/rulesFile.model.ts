@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export interface RulesFile {
   title: string;
   content: RuleContent[];
@@ -8,7 +9,7 @@ export interface RuleContent {
   content: string;
 }
 
-export var testRules: RulesFile[] = [
+export const testRules: RulesFile[] = [
   {
     title: 'Magic',
     content: [

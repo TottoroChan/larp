@@ -24,7 +24,7 @@ export class FilesService {
       });
     }
 
-    let commitList: any = await octokit.rest.repos.listCommits(
+    const commitList: any = await octokit.rest.repos.listCommits(
       this.octokitParams
     );
 
@@ -55,18 +55,112 @@ export class FilesService {
     } catch (error) {}
   }
 
+  async readLocalData<Type>(contentFolder?: string, fileName?: string) {
+    let result: Type[] = null;
+
+    try {
+      const path = await this.getRootPath();
+
+      if (fileName) {
+        result = await this.readFileByName<Type>(
+          `${this.contentFolder}/${path}/${contentFolder}/${fileName}`
+        );
+      } else {
+        result = await this.readFilesFromFolder<Type>(
+          `${this.contentFolder}/${path}/${contentFolder}`
+        );
+      }
+    } catch (error) {
+    } finally {
+      // eslint-disable-next-line no-unsafe-finally
+      return result;
+    }
+  }
+
+  async readToolList() {
+    let result: Tool[] = null;
+
+    try {
+      const path = await this.getRootPath();
+
+      const tools = await Filesystem.readdir({
+        path: `${this.contentFolder}/${path}/tools`,
+        directory: Directory.External,
+      });
+
+      if (tools.files.length) {
+        result = [];
+
+        for (const file of tools.files) {
+          const fileContent = await Filesystem.readFile({
+            path: `${this.contentFolder}/${path}/tools/${file}`,
+            directory: Directory.External,
+            encoding: Encoding.UTF8,
+          });
+
+          const data = JSON.parse(fileContent.data);
+
+          const tool: Tool = {
+            name: data.name,
+            path: data.path,
+          };
+
+          result.push(tool);
+        }
+      }
+    } catch (error) {
+    } finally {
+      // eslint-disable-next-line no-unsafe-finally
+      return result;
+    }
+  }
+
+  async initConfig(config: Config) {
+    try {
+      await Filesystem.readFile({
+        path: this.configFile,
+        directory: Directory.External,
+        encoding: Encoding.UTF8,
+      });
+    } catch (e) {
+      await Filesystem.writeFile({
+        path: this.configFile,
+        data: JSON.stringify(config),
+        directory: Directory.External,
+        encoding: Encoding.UTF8,
+      });
+    }
+  }
+
+  async writeConfig(config: Config) {
+    await Filesystem.writeFile({
+      path: this.configFile,
+      data: JSON.stringify(config),
+      directory: Directory.External,
+      encoding: Encoding.UTF8,
+    });
+  }
+
+  async readConfig(): Promise<Config> {
+    const config = await Filesystem.readFile({
+      path: this.configFile,
+      directory: Directory.External,
+      encoding: Encoding.UTF8,
+    });
+
+    return JSON.parse(config.data);
+  }
+
   private async getFilesFromFolder(octokit: Octokit, repoFolder: string) {
     this.octokitParams.path = repoFolder;
 
-    let folderContent: any = await octokit.rest.repos.getContent(
+    const folderContent: any = await octokit.rest.repos.getContent(
       this.octokitParams
     );
 
     await this.createFolder(`${this.contentFolder}/${repoFolder}`);
 
-    for (let index = 0; index < folderContent.data.length; index++) {
-      const item = folderContent.data[index];
-
+    for (const item of folderContent.data) {
       this.octokitParams.path = item.path;
       const file: any = await octokit.rest.repos.getContent(this.octokitParams);
 
@@ -120,38 +214,15 @@ export class FilesService {
     return decoder.decode(bytes);
   }
 
-  async readLocalData<Type>(contentFolder?: string, fileName?: string) {
-    let result: Type[] = null;
-
-    try {
-      const path = await this.getRootPath();
-
-      if (fileName) {
-        result = await this.readFileByName<Type>(
-          `${this.contentFolder}/${path}/${contentFolder}/${fileName}`
-        );
-      } else {
-        result = await this.readFilesFromFolder<Type>(
-          `${this.contentFolder}/${path}/${contentFolder}`
-        );
-      }
-    } catch (error) {
-    } finally {
-      return result;
-    }
-  }
-
   private async readFilesFromFolder<Type>(path: string) {
-    let result: Type[] = [];
+    const result: Type[] = [];
 
     const dir = await Filesystem.readdir({
-      path: path,
+      path,
       directory: Directory.External,
     });
 
-    for (let index = 0; index < dir.files.length; index++) {
-      const file = dir.files[index];
-
+    for (const file of dir.files) {
       const fileContent = await Filesystem.readFile({
         path: `${path}/${file}`,
         directory: Directory.External,
@@ -167,10 +238,10 @@ export class FilesService {
   }
 
   private async readFileByName<Type>(path: string) {
-    let result: Type[] = [];
+    const result: Type[] = [];
 
     const fileContent = await Filesystem.readFile({
-      path: path,
+      path,
       directory: Directory.External,
       encoding: Encoding.UTF8,
     });
@@ -180,81 +251,6 @@ export class FilesService {
     result.push(data);
 
     return result;
-  }
-
-  async readToolList() {
-    let result: Tool[] = null;
-
-    try {
-      const path = await this.getRootPath();
-
-      const tools = await Filesystem.readdir({
-        path: `${this.contentFolder}/${path}/tools`,
-        directory: Directory.External,
-      });
-
-      if (tools.files.length) {
-        result = [];
-
-        for (let index = 0; index < tools.files.length; index++) {
-          const file = tools.files[index];
-
-          const fileContent = await Filesystem.readFile({
-            path: `${this.contentFolder}/${path}/tools/${file}`,
-            directory: Directory.External,
-            encoding: Encoding.UTF8,
-          });
-
-          const data = JSON.parse(fileContent.data);
-
-          const tool: Tool = {
-            name: data.name,
-            path: data.path,
-          };
-
-          result.push(tool);
-        }
-      }
-    } catch (error) {
-    } finally {
-      return result;
-    }
-  }
-
-  async initConfig(config: Config) {
-    try {
-      await Filesystem.readFile({
-        path: this.configFile,
-        directory: Directory.External,
-        encoding: Encoding.UTF8,
-      });
-    } catch (e) {
-      await Filesystem.writeFile({
-        path: this.configFile,
-        data: JSON.stringify(config),
-        directory: Directory.External,
-        encoding: Encoding.UTF8,
-      });
-    }
-  }
-
-  async writeConfig(config: Config) {
-    await Filesystem.writeFile({
-      path: this.configFile,
-      data: JSON.stringify(config),
-      directory: Directory.External,
-      encoding: Encoding.UTF8,
-    });
-  }
-
-  async readConfig(): Promise<Config> {
-    const config = await Filesystem.readFile({
-      path: this.configFile,
-      directory: Directory.External,
-      encoding: Encoding.UTF8,
-    });
-
-    return JSON.parse(config.data);
   }
 
   private async getRootPath() {

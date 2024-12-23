@@ -8,15 +8,15 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'scan-result',
+  selector: 'app-scan-result',
   templateUrl: './scan-result.component.html',
   styleUrls: ['./scan-result.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class ScanResultComponent implements OnInit {
-  @Output() onCheckDisiase = new EventEmitter<string>();
-  @Output() onDisiaseChange = new EventEmitter<boolean>();
-  @Output() onGoBack = new EventEmitter();
+  @Output() checkDisiase = new EventEmitter<string>();
+  @Output() disiaseChange = new EventEmitter<boolean>();
+  @Output() goBack = new EventEmitter();
   @Input() disiaseChecked: boolean;
   @Input() successResult: boolean;
   disiaseName: string;
@@ -25,16 +25,16 @@ export class ScanResultComponent implements OnInit {
 
   ngOnInit() {}
 
-  checkDisiase() {
-    this.onCheckDisiase.emit(this.disiaseName);
+  onCheckDisiase() {
+    this.checkDisiase.emit(this.disiaseName);
   }
 
-  disiaseChange() {
+  onDisiaseChange() {
     this.disiaseChecked = false;
-    this.onDisiaseChange.emit(this.disiaseChecked);
+    this.disiaseChange.emit(this.disiaseChecked);
   }
 
-  goBack() {
-    this.onGoBack.emit();
+  onGoBack() {
+    this.goBack.emit();
   }
 }

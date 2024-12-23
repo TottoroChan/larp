@@ -16,7 +16,7 @@ import { FilesService } from 'src/app/shared/services/files.service';
 export class MadScienceToolPage implements OnInit {
   madScience: MadScience = null;
   result: { successRate: MadScienceItem; effect: MadScienceItem } = null;
-  madScienceAllowed: boolean = false;
+  madScienceAllowed = false;
 
   constructor(private router: Router, private filesService: FilesService) {}
 
@@ -60,11 +60,11 @@ export class MadScienceToolPage implements OnInit {
     };
   }
 
-  private randomIntFromInterval(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   goBack() {
     this.router.navigate(['tabs/tools']);
+  }
+
+  private randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }

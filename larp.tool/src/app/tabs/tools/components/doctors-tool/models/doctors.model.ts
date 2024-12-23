@@ -1,4 +1,4 @@
-import { Disease } from "./disease.model";
+import { Disease } from './disease.model';
 
 export class DoctorsTool {
   name: string;
@@ -12,4 +12,8 @@ export class DoctorsTool {
   }
 }
 
-export var testDisiases = new DoctorsTool('Инструмент врача', './doctors', testDisiases);
+export const testDisiases = new DoctorsTool(
+  'Инструмент врача',
+  './doctors',
+  []
+);

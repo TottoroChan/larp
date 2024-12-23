@@ -55,7 +55,7 @@ export class ToolbarComponent implements OnInit {
             text: 'Подтвердить',
             id: 'confirm-button',
             handler: (data) => {
-              if (data.code == environment.masterCode) {
+              if (data.code === environment.masterCode) {
                 this.switchMode();
               }
             },
@@ -69,15 +69,15 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
+  onSyncData() {
+    this.syncData.emit();
+  }
+
   private switchMode() {
     this.config.isMaster = !this.config.isMaster;
 
     this.filesService.writeConfig(this.config).then(async () => {
       this.config = await this.filesService.readConfig();
     });
-  }
-
-  onSyncData() {
-    this.syncData.emit();
   }
 }

@@ -10,11 +10,11 @@
     <section class="home-content">
       <div class="header-img"></div>
       <ng-template ngFor let-tab [ngForOf]="appSettings.tabs">
-        <ion-button *ngIf="tab.id != 'home'" expand="block" class="custom-button-big" (click)="switchTab(tab.id)">
+        <ion-button *ngIf="tab.id !== 'home'" expand="block" class="custom-button-big" (click)="switchTab(tab.id)">
           {{tab.title}}
         </ion-button>
       </ng-template>
-      <ng-container *ngIf="appSettings.repo != null">
+      <ng-container *ngIf="appSettings.repo !== null">
         <ion-button expand="full" class="custom-button-big" (click)="syncData()">
           Синхронизировать данные
         </ion-button>

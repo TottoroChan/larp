@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export interface MadScienceItem {
   title: string;
   description: string;
@@ -17,7 +18,8 @@ export interface MadScience {
   effects: MadScienceItem[];
 }
 
-export var testMadScience: MadScience = {
+// eslint-disable-next-line no-var
+export const testMadScience: MadScience = {
   name: 'Безумная наука',
   path: './mad-science',
   checkList: [

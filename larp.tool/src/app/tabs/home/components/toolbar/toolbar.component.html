@@ -10,7 +10,7 @@
       <ng-template>
         <ion-content>
           <ion-list>
-            <ion-item [button]="true" (click)="onSyncData()" *ngIf="appSettings.repo != null">
+            <ion-item [button]="true" (click)="onSyncData()" *ngIf="appSettings.repo !== null">
               <ion-label>Синхронизировать данные</ion-label>
             </ion-item>
             <ion-item [button]="true" *ngIf="appSettings.hasMasterMode && !config.isMaster" (click)="onSwitchMode()">

@@ -14,9 +14,9 @@ import { DoctorsTool } from './models/doctors.model';
 export class DoctorsToolPage implements OnInit {
   scanResult: string;
   realDisiase: Disease;
-  isMaster: boolean = false;
-  disiaseChecked: boolean = false;
-  successResult: boolean = false;
+  isMaster = false;
+  disiaseChecked = false;
+  successResult = false;
   listOfDiseases: Disease[] = [];
 
   constructor(
@@ -72,10 +72,9 @@ export class DoctorsToolPage implements OnInit {
 
   checkDisiase(disiaseName: string) {
     this.realDisiase = testDisiases[0];
-    if(this.realDisiase.name == disiaseName){
-      this.successResult =true
-    }
-    else {
+    if (this.realDisiase.name === disiaseName) {
+      this.successResult = true;
+    } else {
       this.successResult = false;
     }
     this.disiaseChecked = true;
@@ -91,17 +90,17 @@ export class DoctorsToolPage implements OnInit {
     // this.disiaseChecked = true;
   }
 
+  goBack() {
+    this.router.navigate(['tabs/tools']);
+  }
+
   private getRealDisiase() {
     const code = this.scanResult.charAt(32);
 
     const realDisiase = this.listOfDiseases.find(
-      (disiase) => disiase.code == code
+      (disiase) => disiase.code === code
     );
 
     return realDisiase;
-  }
-
-  goBack() {
-    this.router.navigate(['tabs/tools']);
   }
 }

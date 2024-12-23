@@ -10,10 +10,10 @@ import { RulesFile, testRules } from './models/rulesFile.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class RulesPage implements OnInit {
-  content: string = '';
+  content = '';
   listOfRules: RulesFile[] = [];
-  showSearchBar: boolean = false;
-  noContent: boolean = false;
+  showSearchBar = false;
+  noContent = false;
 
   constructor(private router: Router, private filesService: FilesService) {}
 
@@ -44,10 +44,10 @@ export class RulesPage implements OnInit {
       event.target.parentElement.classList.contains('result-list');
     const textToSearch = resultEvent ? event.target.textContent : null;
 
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       state: {
-        rulesFile: rulesFile,
-        textToSearch: textToSearch,
+        rulesFile,
+        textToSearch,
       },
     };
 
@@ -64,7 +64,7 @@ export class RulesPage implements OnInit {
       document.querySelector('ion-list')
         .children as HTMLCollectionOf<HTMLElement>
     );
-    let items = allChildren.filter(
+    const items = allChildren.filter(
       (item) => !item.classList.contains('rules-item-divider')
     );
 
@@ -90,47 +90,6 @@ export class RulesPage implements OnInit {
     }
   }
 
-  private cleanResultList(items: HTMLElement[], index: number) {
-    items[index].style.display = 'block';
-
-    if (items[index].querySelector('.result-list')) {
-      items[index].querySelector('.result-list').remove();
-    }
-  }
-
-  private buildResultList(
-    rule: RulesFile,
-    query: string,
-    items: HTMLElement[],
-    index: number
-  ) {
-    let searchResultList = [];
-
-    rule.content.forEach((item) => {
-      const content: any = item.content.toLowerCase();
-
-      if (content.indexOf(query) > -1) {
-        const regex = new RegExp(`(\\s)(.{0,50})(${query})(.{0,50})(\\s)`, 'g');
-        let match = [...content.matchAll(regex)];
-
-        match.forEach((element) => {
-          let foundString = this.trimString(element[0]);
-
-          const searchResult = item.content.substring(
-            content.indexOf(foundString),
-            content.indexOf(foundString) + foundString.length
-          );
-
-          searchResultList.push(searchResult);
-        });
-      }
-    });
-
-    items[index].style.display = searchResultList.length ? 'block' : 'none';
-
-    return searchResultList;
-  }
-
   trimString(stringToTrim: any): string {
     stringToTrim = stringToTrim.trim();
 
@@ -147,7 +106,7 @@ export class RulesPage implements OnInit {
 
     while (
       stringToTrim.indexOf('>') < stringToTrim.length / 2 &&
-      stringToTrim.indexOf('>') != -1
+      stringToTrim.indexOf('>') !== -1
     ) {
       stringToTrim = stringToTrim.slice(
         stringToTrim.indexOf('>') + 1,
@@ -158,6 +117,51 @@ export class RulesPage implements OnInit {
     stringToTrim = stringToTrim.trim();
 
     return stringToTrim;
+  }
+
+  goHome() {
+    this.router.navigateByUrl(`tabs/home`);
+  }
+
+  private buildResultList(
+    rule: RulesFile,
+    query: string,
+    items: HTMLElement[],
+    index: number
+  ) {
+    const searchResultList = [];
+
+    rule.content.forEach((item) => {
+      const content: any = item.content.toLowerCase();
+
+      if (content.indexOf(query) > -1) {
+        const regex = new RegExp(`(\\s)(.{0,50})(${query})(.{0,50})(\\s)`, 'g');
+        const match = [...content.matchAll(regex)];
+
+        match.forEach((element) => {
+          const foundString = this.trimString(element[0]);
+
+          const searchResult = item.content.substring(
+            content.indexOf(foundString),
+            content.indexOf(foundString) + foundString.length
+          );
+
+          searchResultList.push(searchResult);
+        });
+      }
+    });
+
+    items[index].style.display = searchResultList.length ? 'block' : 'none';
+
+    return searchResultList;
+  }
+
+  private cleanResultList(items: HTMLElement[], index: number) {
+    items[index].style.display = 'block';
+
+    if (items[index].querySelector('.result-list')) {
+      items[index].querySelector('.result-list').remove();
+    }
   }
 
   private renderResultList(
@@ -171,7 +175,7 @@ export class RulesPage implements OnInit {
     items[index].querySelector('ion-label').appendChild(resultListElement);
 
     searchResultList.forEach((result) => {
-      let resultlement = document.createElement('p');
+      const resultlement = document.createElement('p');
 
       const searchQuery = result.substring(
         result.toLowerCase().indexOf(query),
@@ -185,9 +189,5 @@ export class RulesPage implements OnInit {
 
       items[index].querySelector('.result-list').appendChild(resultlement);
     });
-  }
-
-  goHome() {
-    this.router.navigateByUrl(`tabs/home`);
   }
 }

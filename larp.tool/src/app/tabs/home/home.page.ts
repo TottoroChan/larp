@@ -5,7 +5,6 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Config } from 'src/app/shared/models/config.model';
 import { appSettings } from 'src/app/app.config';
-import { Tab } from 'src/app/shared/models/tab.models';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +13,9 @@ import { Tab } from 'src/app/shared/models/tab.models';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePage implements OnInit {
-  isDataLoading: boolean = false;
+  isDataLoading = false;
   config: Config = null;
-  syncRequired: boolean = false;
+  syncRequired = false;
   lastSyncDate: string;
   appSettings = appSettings;
 
@@ -67,7 +66,7 @@ export class HomePage implements OnInit {
             text: 'Подтвердить',
             id: 'confirm-button',
             handler: (data) => {
-              if (data.code == environment.masterCode) {
+              if (data.code === environment.masterCode) {
                 this.switchMode();
               }
             },
@@ -79,14 +78,6 @@ export class HomePage implements OnInit {
     } else {
       this.switchMode();
     }
-  }
-
-  private switchMode() {
-    this.config.isMaster = !this.config.isMaster;
-
-    this.filesService.writeConfig(this.config).then(async () => {
-      this.config = await this.filesService.readConfig();
-    });
   }
 
   switchTab(tabName) {
@@ -108,6 +99,14 @@ export class HomePage implements OnInit {
     await this.delay(3000);
 
     this.isDataLoading = false;
+  }
+
+  private switchMode() {
+    this.config.isMaster = !this.config.isMaster;
+
+    this.filesService.writeConfig(this.config).then(async () => {
+      this.config = await this.filesService.readConfig();
+    });
   }
 
   private async delay(ms: number) {

@@ -13,13 +13,13 @@ export class RuleItemPage implements OnInit {
   @ViewChild(IonContent) ionContent: IonContent;
   rulesFile: RulesFile;
   textToSearch: string;
-  largeFontSize: boolean = false;
+  largeFontSize = false;
 
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      var data = this.router.getCurrentNavigation().extras.state;
+      const data = this.router.getCurrentNavigation().extras.state;
 
       if (data) {
         this.rulesFile = data.rulesFile;
@@ -51,11 +51,11 @@ export class RuleItemPage implements OnInit {
     }
   }
 
-  toLargeFontSize(){
+  toLargeFontSize() {
     this.largeFontSize = true;
   }
 
-  toSmallFontSize(){
+  toSmallFontSize() {
     this.largeFontSize = false;
   }
 
