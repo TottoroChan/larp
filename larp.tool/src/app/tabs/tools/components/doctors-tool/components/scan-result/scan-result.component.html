@@ -1,17 +1,12 @@
 <section id="scan-result">
   <h4>Введите название болезни:</h4>
 
-  <ion-input
-    clearInput
-    placeholder="Название"
-    (ionChange)="disiaseChange()"
-    [(ngModel)]="disiaseName"
-  >
+  <ion-input clearInput placeholder="Название" (ionChange)="onDisiaseChange()" [(ngModel)]="disiaseName">
   </ion-input>
 
   <section class="buttons">
-    <ion-button (click)="goBack()" class="custom-button">отмена</ion-button>
-    <ion-button (click)="checkDisiase()" class="custom-button">подтвердить</ion-button>
+    <ion-button (click)="onGoBack()" class="custom-button">отмена</ion-button>
+    <ion-button (click)="onCheckDisiase()" class="custom-button">подтвердить</ion-button>
   </section>
 
   <section class="fail-result" *ngIf="disiaseChecked && !successResult">

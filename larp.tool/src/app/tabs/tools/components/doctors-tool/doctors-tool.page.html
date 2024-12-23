@@ -16,22 +16,13 @@
     </ion-button>
   </section>
 
-  <master-result
-    *ngIf="disiaseChecked && successResult && isMaster"
-    [realDisiase]="realDisiase"
-  ></master-result>
+  <app-master-result *ngIf="disiaseChecked && successResult && isMaster"
+    [realDisiase]="realDisiase"></app-master-result>
 
-  <scan-result
-    *ngIf="scanResult && !successResult && !isMaster"
-    [disiaseChecked]="disiaseChecked"
-    [successResult]="successResult"
-    (onCheckDisiase)="checkDisiase($event)"
-    (onDisiaseChange)="onDisiaseChange($event)"
-    (onGoBack)="goBack()"
-  ></scan-result>
+  <app-scan-result *ngIf="scanResult && !successResult && !isMaster" [disiaseChecked]="disiaseChecked"
+    [successResult]="successResult" (onCheckDisiase)="checkDisiase($event)" (onDisiaseChange)="onDisiaseChange($event)"
+    (onGoBack)="goBack()"></app-scan-result>
 
-  <success-result
-    *ngIf="disiaseChecked && successResult && !isMaster"
-    [realDisiase]="realDisiase"
-  ></success-result>
+  <app-success-result *ngIf="disiaseChecked && successResult && !isMaster"
+    [realDisiase]="realDisiase"></app-success-result>
 </ion-content>

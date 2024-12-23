@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FilesService } from 'src/app/shared/services/files.service';
 
 @Component({
-  selector: 'thief-tool',
+  selector: 'app-thief-tool',
   templateUrl: 'thief-tool.page.html',
   styleUrls: ['thief-tool.page.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -48,11 +48,11 @@ export class ThiefToolPage implements OnInit {
     };
   }
 
-  private randomIntFromInterval(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   goBack() {
     this.router.navigate(['tabs/tools']);
+  }
+
+  private randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }

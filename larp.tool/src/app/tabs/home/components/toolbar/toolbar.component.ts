@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Config } from 'src/app/shared/models/config.model';
+import { AppSettings } from 'src/app/shared/models/app-settings.model';
 
 @Component({
   selector: 'app-home-toolbar',
@@ -18,6 +19,7 @@ import { Config } from 'src/app/shared/models/config.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToolbarComponent implements OnInit {
+  @Input() appSettings: AppSettings;
   @Input() config: Config;
   @Input() isDataLoading: boolean;
   @Input() syncRequired: boolean;
@@ -53,7 +55,7 @@ export class ToolbarComponent implements OnInit {
             text: 'Подтвердить',
             id: 'confirm-button',
             handler: (data) => {
-              if (data.code == environment.masterCode) {
+              if (data.code === environment.masterCode) {
                 this.switchMode();
               }
             },
@@ -67,15 +69,15 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
+  onSyncData() {
+    this.syncData.emit();
+  }
+
   private switchMode() {
     this.config.isMaster = !this.config.isMaster;
 
     this.filesService.writeConfig(this.config).then(async () => {
       this.config = await this.filesService.readConfig();
     });
-  }
-
-  onSyncData() {
-    this.syncData.emit();
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export class Disease {
   name: string;
   image: string;
@@ -12,7 +13,7 @@ export class Disease {
   }
 }
 
-export var testDisiases = [
+export const testDisiases = [
   new Disease(
     'Корововирус',
     'corovovirus.jpg',
