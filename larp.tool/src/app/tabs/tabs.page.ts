@@ -1,14 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { appSettings } from '../app.config';
 import { Tab } from '../shared/models/tab.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
   tabs: Tab[] = appSettings.tabs;
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    var defaultTab = this.tabs.find((tab) => tab.isDefault === true);
+    this.router.navigate([`tabs/${defaultTab.id}`]);
+  }
 }

@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
   config: Config = null;
   syncRequired: boolean = false;
   lastSyncDate: string;
-  tabs: Tab[] = appSettings.tabs;
+  appSettings = appSettings;
 
   constructor(
     private filesService: FilesService,
@@ -27,17 +27,21 @@ export class HomePage implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    try {
-      this.config = await this.filesService.readConfig();
-      const lastModifiedDate = await this.filesService.getGitLastModifiedDate(
-        null
-      );
+    if (appSettings.repo != null) {
+      try {
+        this.config = await this.filesService.readConfig();
+        const lastModifiedDate = await this.filesService.getGitLastModifiedDate(
+          null
+        );
 
-      if (new Date(this.config.lastSyncDate) < lastModifiedDate) {
-        this.lastSyncDate = new Date(this.config.lastSyncDate).toLocaleString();
-        this.syncRequired = true;
-      }
-    } catch (error) {}
+        if (new Date(this.config.lastSyncDate) < lastModifiedDate) {
+          this.lastSyncDate = new Date(
+            this.config.lastSyncDate
+          ).toLocaleString();
+          this.syncRequired = true;
+        }
+      } catch (error) {}
+    }
   }
 
   async onSwitchMode() {

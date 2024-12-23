@@ -1,8 +1,5 @@
-<ion-header>
-  <app-home-toolbar
-    [config]="config"
-    (syncData)="syncData()"
-  ></app-home-toolbar>
+<ion-header *ngIf="appSettings.hasHeader">
+  <app-home-toolbar [config]="config" (syncData)="syncData()" [appSettings]="appSettings"></app-home-toolbar>
 </ion-header>
 
 <ion-content id="home-page">
@@ -12,28 +9,25 @@
   <ng-template #elseblock>
     <section class="home-content">
       <div class="header-img"></div>
-      <ng-template ngFor let-tab [ngForOf]="tabs">
-        <ion-button
-          *ngIf="tab.id != 'home'"
-          expand="block"
-          class="custom-button-big"
-          (click)="switchTab(tab.id)"
-        >
+      <ng-template ngFor let-tab [ngForOf]="appSettings.tabs">
+        <ion-button *ngIf="tab.id != 'home'" expand="block" class="custom-button-big" (click)="switchTab(tab.id)">
           {{tab.title}}
         </ion-button>
       </ng-template>
-      <ion-button expand="full" class="custom-button-big" (click)="syncData()">
-        Синхронизировать данные
-      </ion-button>
-      <div *ngIf="config && syncRequired" class="sync-required">
-        Дата последней синхронизации: {{ lastSyncDate }}.
-        <br />
-        Необходимо синхронизировать данные приложения.
-      </div>
-      <div *ngIf="config && !syncRequired" class="synced">
-        Данные обновлены.
-      </div>
-      <div class="version">Ver. 2.2</div>
+      <ng-container *ngIf="appSettings.repo != null">
+        <ion-button expand="full" class="custom-button-big" (click)="syncData()">
+          Синхронизировать данные
+        </ion-button>
+        <div *ngIf="config && syncRequired" class="sync-required">
+          Дата последней синхронизации: {{ lastSyncDate }}.
+          <br />
+          Необходимо синхронизировать данные приложения.
+        </div>
+        <div *ngIf="config && !syncRequired" class="synced">
+          Данные обновлены.
+        </div>
+        <div class="version">Ver. 2.2</div>
+      </ng-container>
     </section>
   </ng-template>
 </ion-content>

@@ -5,4 +5,6 @@ export interface AppSettings {
   tabs: Tab[];
   repo: string;
   doctorsToolImagePath: string;
+  hasMasterMode: boolean;
+  hasHeader: boolean;
 }
