@@ -42,4 +42,17 @@ var fallout2024: AppSettings = {
   doctorsToolImagePath: '',
 };
 
-export var appSettings: AppSettings = fallout2024;
+var pathalogic2025: AppSettings = {
+  title: 'Fallout',
+  tabs: [
+    {
+      id: 'home',
+      title: 'Домашняя',
+      route: 'home',
+    },
+  ],
+  repo: 'pathalogic2025',
+  doctorsToolImagePath: '',
+};
+
+export var appSettings: AppSettings = pathalogic2025;
