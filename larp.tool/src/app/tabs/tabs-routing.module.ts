@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('./tools/tools.module').then(m => m.ToolsPageModule)
       },
       {
+        path: 'pathologic',
+        loadChildren: () => import('./pathologic/pathologic.module').then(m => m.PathologicPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

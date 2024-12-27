@@ -1,0 +1,24 @@
+<ion-content id="pathologic-page">
+  <div id="pathologic-page">
+    PATHOLOGIC
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label  position="stacked">Код симптома</ion-label>
+      <ion-input formControlName="symptomCode"></ion-input>
+    </ion-item>
+    <div *ngIf="form.get('symptomCode')?.errors?.invalidSymptomCode" class="error">
+      Неверный код симптома. Формат: [Симптом][Слой][Номер].
+    </div>
+
+    <ion-item>
+      <ion-label  position="stacked">Код лекарства</ion-label>
+      <ion-input formControlName="medicineCode"></ion-input>
+    </ion-item>
+    <div *ngIf="form.get('medicineCode')?.errors?.invalidMedicineCode" class="error">
+      Неверный код лекарства. Формат: [Тип][Состав][Номер].
+    </div>
+
+    <ion-button expand="full" type="submit">Отправить</ion-button>
+  </form>
+</ion-content>

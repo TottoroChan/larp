@@ -15,6 +15,6 @@ export class TabsPage implements OnInit {
 
   ngOnInit(): void {
     const defaultTab = this.tabs.find((tab) => tab.isDefault === true);
-    this.router.navigate([`tabs/${defaultTab.id}`]);
+    this.router.navigate([`tabs/${defaultTab.route}`]);
   }
 }
