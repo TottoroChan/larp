@@ -1,10 +1,10 @@
-name: Deploy Angular Project B
+name: Deploy LARP tool
 
 on:
   push:
     branches: ["pathologic_tool"]
     paths: 
-      - 'larp.tool/**'  # Триггерим деплой только при изменениях в папке `b`
+      - 'larp.tool/**'  # Триггерим деплой только при изменениях в папке
 
 jobs:
   deploy:
