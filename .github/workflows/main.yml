@@ -17,5 +17,5 @@ jobs:
       - run: cd larp.tool && npm install && npm run build
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: www  # Путь до собранного Angular-проекта
+          folder: larp.tool/www  # Путь до собранного Angular-проекта
           branch: gh-pages
