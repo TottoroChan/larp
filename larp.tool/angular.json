@@ -39,7 +39,9 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "baseHref": "/larp.tool/",  // Важно! Если репозиторий НЕ USERNAME.github.io
+            "deployUrl": "/larp.tool/"
           },
           "configurations": {
             "production": {
@@ -166,6 +168,9 @@
               "devServerTarget": "app:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
