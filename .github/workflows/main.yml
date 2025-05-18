@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '16.x'
-      - run: cd larp.tool && npm install && npm run build
+      - run: cd larp.tool && npm install && npm run build --configuration=production
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: larp.tool/www  # Путь до собранного Angular-проекта
