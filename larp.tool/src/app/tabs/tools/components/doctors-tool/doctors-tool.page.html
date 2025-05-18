@@ -20,7 +20,7 @@
     [realDisiase]="realDisiase"></app-master-result>
 
   <app-scan-result *ngIf="scanResult && !successResult && !isMaster" [disiaseChecked]="disiaseChecked"
-    [successResult]="successResult" (onCheckDisiase)="checkDisiase($event)" (onDisiaseChange)="onDisiaseChange($event)"
+    [successResult]="successResult" (checkDisiase)="checkDisiase($event)" (disiaseChange)="onDisiaseChange($event)"
     (onGoBack)="goBack()"></app-scan-result>
 
   <app-success-result *ngIf="disiaseChecked && successResult && !isMaster"
