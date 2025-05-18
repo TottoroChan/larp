@@ -38,6 +38,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "namedChunks": true,
               "budgets": [
                 {
                   "type": "initial",
