@@ -2,7 +2,7 @@ import { ThiefToolPage } from '@app/tabs/tools/components/thief-tool/thief-tool.
 import { MasterResultComponent } from '@app/tabs/tools/components/doctors-tool/components/master-result/master-result.component';
 import { SuccessResultComponent } from '@app/tabs/tools/components/doctors-tool/components/success-result/success-result.component';
 import { ScanResultComponent } from '@app/tabs/tools/components/doctors-tool/components/scan-result/scan-result.component';
-import { FilesService } from 'src/app/shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 import { DoctorsToolPage } from '@app/tabs/tools/components/doctors-tool/doctors-tool.page';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';

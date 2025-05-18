@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { Disease } from '../../models/disease.model';
-import { appSettings } from 'src/app/app.config';
+import { Disease } from '@app/tabs/tools/components/doctors-tool/models/disease.model';
+import { appSettings } from '@app/app.config';
 
 @Component({
   selector: 'app-success-result',

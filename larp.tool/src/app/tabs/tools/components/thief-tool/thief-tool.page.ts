@@ -1,7 +1,7 @@
 import { ThiefItem, ThiefTool } from '@app/tabs/tools/components/thief-tool/models/thief-tool.model';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FilesService } from 'src/app/shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 
 @Component({
   selector: 'app-thief-tool',

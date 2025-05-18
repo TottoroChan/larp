@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { FilesService } from '../../shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Config } from 'src/app/shared/models/config.model';
-import { appSettings } from 'src/app/app.config';
+import { Config } from '@app/shared/models/config.model';
+import { appSettings } from '@app/app.config';
 
 @Component({
   selector: 'app-home',

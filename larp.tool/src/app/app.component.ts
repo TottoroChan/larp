@@ -1,5 +1,5 @@
 import { Config } from '@app/shared/models/config.model';
-import { FilesService } from 'src/app/shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 import { Component, OnInit } from '@angular/core';
 import { appSettings } from '@app/app.config';
 

@@ -1,5 +1,5 @@
 import { environment } from 'src/environments/environment';
-import { FilesService } from '../../../../shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 import {
   Component,
   ViewEncapsulation,
@@ -9,8 +9,8 @@ import {
   Output,
 } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { Config } from 'src/app/shared/models/config.model';
-import { AppSettings } from 'src/app/shared/models/app-settings.model';
+import { Config } from '@app/shared/models/config.model';
+import { AppSettings } from '@app/shared/models/app-settings.model';
 
 @Component({
   selector: 'app-home-toolbar',

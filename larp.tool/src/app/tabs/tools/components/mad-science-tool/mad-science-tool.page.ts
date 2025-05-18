@@ -5,7 +5,7 @@ import {
 } from '@app/tabs/tools/components/mad-science-tool/models/mad-science.model';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FilesService } from 'src/app/shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 
 @Component({
   selector: 'app-mad-science-tool',

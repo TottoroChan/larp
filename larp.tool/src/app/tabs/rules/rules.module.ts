@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { RulesPage } from '@app/tabs/rules/rules.page';
 
 import { RulesPageRoutingModule } from '@app/tabs/rules/rules-routing.module';
-import { FilesService } from 'src/app/shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 
 @NgModule({ declarations: [RulesPage, RuleItemPage, HighlightPipe], imports: [IonicModule,
         CommonModule,

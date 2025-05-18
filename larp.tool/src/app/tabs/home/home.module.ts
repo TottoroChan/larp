@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from '@app/tabs/home/home.page';
 
 import { HomePageRoutingModule } from '@app/tabs/home/home-routing.module';
-import { FilesService } from '../../shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 import { Octokit } from '@octokit/rest';
 import { ToolbarComponent } from '@app/tabs/home/components/toolbar/toolbar.component';
 

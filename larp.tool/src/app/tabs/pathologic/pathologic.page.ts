@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { FilesService } from '../../shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { appSettings } from '../app.config';
-import { Tab } from '../shared/models/tab.models';
+import { appSettings } from '@app/app.config';
+import { Tab } from '@app/shared/models/tab.models';
 import { Router } from '@angular/router';
 
 @Component({

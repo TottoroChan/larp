@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { FilesService } from 'src/app/shared/services/files.service';
+import { FilesService } from '@app/shared/services/files.service';
 import { Tool } from '@app/tabs/tools/models/tools.model';
 
 @Component({
