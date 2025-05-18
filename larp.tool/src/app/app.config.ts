@@ -1,6 +1,7 @@
 import { AppSettings } from './shared/models/app-settings.model';
 
 const arbor2022: AppSettings = {
+  isMobileApp: true,
   title: 'Арбор',
   tabs: [
     {
@@ -30,6 +31,7 @@ const arbor2022: AppSettings = {
 };
 
 const fallout2024: AppSettings = {
+  isMobileApp: true,
   title: 'Fallout',
   tabs: [
     {
@@ -52,6 +54,7 @@ const fallout2024: AppSettings = {
 };
 
 const pathologic2025: AppSettings = {
+  isMobileApp: false,
   title: 'Fallout',
   tabs: [
     {
