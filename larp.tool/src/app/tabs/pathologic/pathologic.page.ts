@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { validateMedicineCode, validateSymptomCode } from './utils/utils';
 
 @Component({
@@ -12,12 +12,12 @@ import { validateMedicineCode, validateSymptomCode } from './utils/utils';
   encapsulation: ViewEncapsulation.None,
 })
 export class PathologicPage implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   validateSymptomCode = validateSymptomCode;
   validateMedicineCode = validateMedicineCode;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     this.form = this.fb.group({
       symptomCode: [
         '',
