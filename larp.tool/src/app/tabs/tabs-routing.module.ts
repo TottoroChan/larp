@@ -9,19 +9,19 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+        loadChildren: () => import('@app/tabs/home/home.module').then(m => m.HomePageModule)
       },
       {
         path: 'rules',
-        loadChildren: () => import('./rules/rules.module').then(m => m.RulesPageModule)
+        loadChildren: () => import('@app/tabs/rules/rules.module').then(m => m.RulesPageModule)
       },
       {
         path: 'tools',
-        loadChildren: () => import('./tools/tools.module').then(m => m.ToolsPageModule)
+        loadChildren: () => import('@app/tabs/tools/tools.module').then(m => m.ToolsPageModule)
       },
       {
         path: 'pathologic',
-        loadChildren: () => import('./pathologic/pathologic.module').then(m => m.PathologicPageModule)
+        loadChildren: () => import('@app/tabs/pathologic/pathologic.module').then(m => m.PathologicPageModule)
       },
       {
         path: '',
