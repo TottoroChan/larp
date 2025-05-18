@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Tool } from '../../tabs/tools/models/tools.model';
 import { Config } from './../models/config.model';
-import { Octokit } from 'octokit';
+import { Octokit } from "@octokit/rest";
 import { environment } from 'src/environments/environment';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { appSettings } from 'src/app/app.config';
@@ -98,7 +98,7 @@ export class FilesService {
             encoding: Encoding.UTF8,
           });
 
-          const data = JSON.parse(fileContent.data);
+          const data = JSON.parse(fileContent.data.toString());
 
           const tool: Tool = {
             name: data.name,
@@ -148,7 +148,7 @@ export class FilesService {
       encoding: Encoding.UTF8,
     });
 
-    return JSON.parse(config.data);
+    return JSON.parse(config.data.toString());
   }
 
   private async getFilesFromFolder(octokit: Octokit, repoFolder: string) {
@@ -229,7 +229,7 @@ export class FilesService {
         encoding: Encoding.UTF8,
       });
 
-      const data = JSON.parse(fileContent.data) as Type;
+      const data = JSON.parse(fileContent.data.toString()) as Type;
 
       result.push(data);
     }
@@ -246,7 +246,7 @@ export class FilesService {
       encoding: Encoding.UTF8,
     });
 
-    const data = JSON.parse(fileContent.data) as Type;
+    const data = JSON.parse(fileContent.data.toString()) as Type;
 
     result.push(data);
 

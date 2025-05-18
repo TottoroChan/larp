@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { Disease, testDisiases } from './models/disease.model';
 import { DoctorsTool } from './models/doctors.model';
+import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner';
 
 @Component({
   selector: 'app-doctors-tool',
@@ -20,7 +20,7 @@ export class DoctorsToolPage implements OnInit {
   listOfDiseases: Disease[] = [];
 
   constructor(
-    private barcodeScanner: BarcodeScanner,
+    private barcodeScanner: CapacitorBarcodeScanner,
     private router: Router,
     private filesService: FilesService
   ) {}
@@ -49,21 +49,24 @@ export class DoctorsToolPage implements OnInit {
   }
 
   scanQR() {
-    this.scanResult = 'A';
+    // this.scanResult = 'A';
     if (this.isMaster) {
       this.successResult = true;
       this.disiaseChecked = true;
       this.realDisiase = testDisiases[0];
+    } else {
+      CapacitorBarcodeScanner.scanBarcode({
+        cameraDirection: 1,
+        hint: 17,
+      }).then((barcodeData) => {
+        this.scanResult = barcodeData.ScanResult;
+        if (this.isMaster) {
+          this.successResult = true;
+          this.disiaseChecked = true;
+          this.realDisiase = this.getRealDisiase();
+        }
+      });
     }
-
-    // this.barcodeScanner.scan().then((barcodeData) => {
-    //   this.scanResult = barcodeData.text;
-    //   if (this.isMaster) {
-    //     this.successResult = true;
-    //     this.disiaseChecked = true;
-    //     this.realDisiase = this.getRealDisiase();
-    //   }
-    // });
   }
 
   onDisiaseChange(disiaseChecked: boolean) {
@@ -71,23 +74,23 @@ export class DoctorsToolPage implements OnInit {
   }
 
   checkDisiase(disiaseName: string) {
-    this.realDisiase = testDisiases[0];
-    if (this.realDisiase.name === disiaseName) {
-      this.successResult = true;
-    } else {
-      this.successResult = false;
-    }
-    this.disiaseChecked = true;
-
-    // this.realDisiase = this.getRealDisiase();
-
-    // if (disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
+    // this.realDisiase = testDisiases[0];
+    // if (this.realDisiase.name === disiaseName) {
     //   this.successResult = true;
     // } else {
     //   this.successResult = false;
     // }
-
     // this.disiaseChecked = true;
+
+    this.realDisiase = this.getRealDisiase();
+
+    if (disiaseName.toLowerCase() == this.realDisiase.name.toLowerCase()) {
+      this.successResult = true;
+    } else {
+      this.successResult = false;
+    }
+
+    this.disiaseChecked = true;
   }
 
   goBack() {

@@ -13,7 +13,6 @@ import { ToolsPage } from './tools.page';
 
 import { ToolsPageRoutingModule } from './tools-routing.module';
 
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { MadScienceToolPage } from './components/mad-science-tool/mad-science-tool.page';
 
 @NgModule({
@@ -33,6 +32,6 @@ import { MadScienceToolPage } from './components/mad-science-tool/mad-science-to
     MadScienceToolPage,
     ThiefToolPage
   ],
-  providers: [BarcodeScanner, FilesService],
+  providers: [FilesService],
 })
 export class ToolsPageModule {}
