@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration=production",
     "dev-android": "ionic capacitor run android --livereload --external",
     "copy-android": "ionic capacitor copy android",
     "test": "ng test",
