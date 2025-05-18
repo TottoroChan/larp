@@ -18,6 +18,16 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "styles": ["src/global.scss"],
+            "scripts": [],
+            "aot": false,
+            "preserveSymlinks": true,
+            "extractLicenses": false,
+            "vendorChunk": true,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true,
             "assets": [
               {
                 "glob": "**/*",
@@ -30,15 +40,6 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss"],
-            "scripts": [],
-            "aot": false,
-            "vendorChunk": true,
-            "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true,
             "baseHref": "/larp.tool/"
           },
           "configurations": {
@@ -49,7 +50,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": true,
