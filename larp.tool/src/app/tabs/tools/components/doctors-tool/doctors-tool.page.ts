@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FilesService } from 'src/app/shared/services/files.service';
-import { Disease, testDisiases } from './models/disease.model';
-import { DoctorsTool } from './models/doctors.model';
+import { FilesService } from '@app/shared/services/files.service';
 import { CapacitorBarcodeScanner } from '@capacitor/barcode-scanner';
+import { Disease, testDisiases } from '@app/tabs/tools/components/doctors-tool/models/disease.model';
+import { DoctorsTool } from '@app/tabs/tools/components/doctors-tool/models/doctors.model';
 
 @Component({
   selector: 'app-doctors-tool',

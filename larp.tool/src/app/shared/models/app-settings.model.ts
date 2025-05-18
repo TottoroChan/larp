@@ -1,4 +1,4 @@
-import { Tab } from './tab.models';
+import { Tab } from '@app/shared/models/tab.models';
 
 export interface AppSettings {
   isMobileApp: boolean;

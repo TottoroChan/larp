@@ -1,9 +1,9 @@
-import { ThiefToolPage } from './components/thief-tool/thief-tool.page';
+import { ThiefToolPage } from '@app/tabs/tools/components/thief-tool/thief-tool.page';
 import { NgModule } from '@angular/core';
-import { MadScienceToolPage } from './components/mad-science-tool/mad-science-tool.page';
-import { DoctorsToolPage } from './components/doctors-tool/doctors-tool.page';
+import { MadScienceToolPage } from '@app/tabs/tools/components/mad-science-tool/mad-science-tool.page';
+import { DoctorsToolPage } from '@app/tabs/tools/components/doctors-tool/doctors-tool.page';
 import { RouterModule, Routes } from '@angular/router';
-import { ToolsPage } from './tools.page';
+import { ToolsPage } from '@app/tabs/tools/tools.page';
 
 const routes: Routes = [
   {

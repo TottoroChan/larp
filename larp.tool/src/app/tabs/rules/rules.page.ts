@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FilesService } from 'src/app/shared/services/files.service';
-import { RulesFile, testRules } from './models/rulesFile.model';
+import { RulesFile, testRules } from '@app/tabs/rules/models/rulesFile.model';
 
 @Component({
   selector: 'app-rules',

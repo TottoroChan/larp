@@ -3,7 +3,7 @@ import { FilesService } from '../../shared/services/files.service';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { validateMedicineCode, validateSymptomCode } from './utils/utils';
+import { validateMedicineCode, validateSymptomCode } from '@app/tabs/pathologic/utils/utils';
 
 @Component({
   selector: 'app-pathologic',

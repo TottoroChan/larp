@@ -1,4 +1,4 @@
-import { AppSettings } from './shared/models/app-settings.model';
+import { AppSettings } from '@app/shared/models/app-settings.model';
 
 const arbor2022: AppSettings = {
   isMobileApp: true,

@@ -1,4 +1,4 @@
-import { Disease } from './disease.model';
+import { Disease } from '@app/tabs/tools/components/doctors-tool/models/disease.model';
 
 export class DoctorsTool {
   name: string;

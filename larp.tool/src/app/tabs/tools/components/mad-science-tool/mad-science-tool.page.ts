@@ -1,8 +1,8 @@
-import { MadScienceItem } from './models/mad-science.model';
 import {
   MadScience,
   testMadScience,
-} from './../mad-science-tool/models/mad-science.model';
+  MadScienceItem
+} from '@app/tabs/tools/components/mad-science-tool/models/mad-science.model';
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FilesService } from 'src/app/shared/services/files.service';

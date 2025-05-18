@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Tool } from '../../tabs/tools/models/tools.model';
-import { Config } from './../models/config.model';
+import { Config } from '@app/shared/models/config.model';
 import { Octokit } from "@octokit/rest";
 import { environment } from 'src/environments/environment';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';

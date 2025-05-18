@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { HomePageRoutingModule } from './pathologic-routing.module';
-import { PathologicPage } from './pathologic.page';
+import { HomePageRoutingModule } from '@app/tabs/pathologic/pathologic-routing.module';
+import { PathologicPage } from '@app/tabs/pathologic/pathologic.page';
 
 @NgModule({
   imports: [

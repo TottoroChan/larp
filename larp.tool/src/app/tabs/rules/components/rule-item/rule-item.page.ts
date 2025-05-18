@@ -1,4 +1,4 @@
-import { RulesFile } from './../../models/rulesFile.model';
+import { RulesFile } from '@app/tabs/rules/models/rulesFile.model';
 import { Component, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
