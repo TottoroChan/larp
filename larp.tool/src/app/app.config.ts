@@ -51,7 +51,7 @@ const fallout2024: AppSettings = {
   hasMasterMode: true,
 };
 
-const pathalogic2025: AppSettings = {
+const pathologic2025: AppSettings = {
   title: 'Fallout',
   tabs: [
     {
@@ -67,4 +67,4 @@ const pathalogic2025: AppSettings = {
   hasMasterMode: false,
 };
 
-export const appSettings: AppSettings = pathalogic2025;
+export const appSettings: AppSettings = pathologic2025;
