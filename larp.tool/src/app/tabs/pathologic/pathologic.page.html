@@ -1,24 +1,185 @@
 <ion-content id="pathologic-page">
-  <div id="pathologic-page">
-    PATHOLOGIC
-  </div>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label  position="stacked">Код симптома</ion-label>
-      <ion-input formControlName="symptomCode"></ion-input>
-    </ion-item>
-    <div *ngIf="form.get('symptomCode')?.errors?.invalidSymptomCode" class="error">
-      Неверный код симптома. Формат: [Симптом][Слой][Номер].
-    </div>
+  <div id="pathologic-page">PATHOLOGIC</div>
 
-    <ion-item>
-      <ion-label  position="stacked">Код лекарства</ion-label>
-      <ion-input formControlName="medicineCode"></ion-input>
-    </ion-item>
-    <div *ngIf="form.get('medicineCode')?.errors?.invalidMedicineCode" class="error">
-      Неверный код лекарства. Формат: [Тип][Состав][Номер].
-    </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Симптомы слой 1</ion-card-title>
+    </ion-card-header>
 
-    <ion-button expand="full" type="submit">Отправить</ion-button>
-  </form>
+    <ion-card-content>
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let item of layerOneSymptoms(); index as i;">
+          <ion-label>{{ item.symptom }}</ion-label>
+
+          <ion-button fill="clear" shape="round" (click)="onDeleteSymptom(i)">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <div class="card-footer">
+      <ion-input
+        label="Outline input"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Enter text"
+        [formControl]="symptomOneControl"
+      ></ion-input>
+      <ion-button fill="outline" (click)="onAddSymptom(1)">добавить</ion-button>
+    </div>
+    <ion-note
+      *ngIf="symptomOneControl.touched && symptomOneControl.invalid"
+      color="danger"
+    >
+      <div *ngIf="symptomOneControl.errors?.['required']">
+        Обязательное поле
+      </div>
+      <div *ngIf="symptomOneControl.errors?.['minlength']">
+        Минимум {{ symptomOneControl.errors?.['minlength'].requiredLength }}
+        символов
+      </div>
+      <div *ngIf="symptomOneControl.errors?.['maxlength']">
+        Максимум {{ symptomOneControl.errors?.['maxlength'].requiredLength }}
+        символов
+      </div>
+    </ion-note>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Симптомы слой 2</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let item of layerTwoSymptoms(); index as i;">
+          <ion-label>{{ item.symptom }}</ion-label>
+
+          <ion-button fill="clear" shape="round" (click)="onDeleteSymptom(i)">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <div class="card-footer">
+      <ion-input
+        label="Outline input"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Enter text"
+        [formControl]="symptomTwoControl"
+      ></ion-input>
+      <ion-button fill="outline" (click)="onAddSymptom(2)">добавить</ion-button>
+    </div>
+    <ion-note
+      *ngIf="symptomTwoControl.touched && symptomTwoControl.invalid"
+      color="danger"
+    >
+      <div *ngIf="symptomTwoControl.errors?.['required']">
+        Обязательное поле
+      </div>
+      <div *ngIf="symptomTwoControl.errors?.['minlength']">
+        Минимум {{ symptomTwoControl.errors?.['minlength'].requiredLength }}
+        символов
+      </div>
+      <div *ngIf="symptomTwoControl.errors?.['maxlength']">
+        Максимум {{ symptomTwoControl.errors?.['maxlength'].requiredLength }}
+        символов
+      </div>
+    </ion-note>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Симптомы слой 3</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let item of layerThreeSymptoms(); index as i;">
+          <ion-label>{{ item.symptom }}</ion-label>
+
+          <ion-button fill="clear" shape="round" (click)="onDeleteSymptom(i)">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <div class="card-footer">
+      <ion-input
+        label="Outline input"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Enter text"
+        [formControl]="symptomThreeControl"
+      ></ion-input>
+      <ion-button fill="outline" (click)="onAddSymptom(3)">добавить</ion-button>
+    </div>
+    <ion-note
+      *ngIf="symptomThreeControl.touched && symptomThreeControl.invalid"
+      color="danger"
+    >
+      <div *ngIf="symptomThreeControl.errors?.['required']">
+        Обязательное поле
+      </div>
+      <div *ngIf="symptomThreeControl.errors?.['minlength']">
+        Минимум {{ symptomThreeControl.errors?.['minlength'].requiredLength }}
+        символов
+      </div>
+      <div *ngIf="symptomThreeControl.errors?.['maxlength']">
+        Максимум {{ symptomThreeControl.errors?.['maxlength'].requiredLength }}
+        символов
+      </div>
+    </ion-note>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Лекарства</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list [inset]="true">
+        <ion-item *ngFor="let item of meds; index as i;">
+          <ion-label>{{ item }}</ion-label>
+
+          <ion-button fill="clear" shape="round" (click)="onDeleteMed(i)">
+            <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <div class="card-footer">
+      <ion-input
+        label="Outline input"
+        label-placement="floating"
+        fill="outline"
+        placeholder="Enter text"
+        [formControl]="medsControl"
+      ></ion-input>
+      <ion-button fill="outline" (click)="onAddMed()">добавить</ion-button>
+    </div>
+    <ion-note
+      *ngIf="medsControl.touched && medsControl.invalid"
+      color="danger"
+    >
+      <div *ngIf="medsControl.errors?.['required']">
+        Обязательное поле
+      </div>
+      <div *ngIf="medsControl.errors?.['minlength']">
+        Минимум {{ medsControl.errors?.['minlength'].requiredLength }}
+        символов
+      </div>
+      <div *ngIf="medsControl.errors?.['maxlength']">
+        Максимум {{ medsControl.errors?.['maxlength'].requiredLength }}
+        символов
+      </div>
+    </ion-note>
+  </ion-card>
+
+        <ion-button (click)="onCalculate()">Расчитать</ion-button>
 </ion-content>
