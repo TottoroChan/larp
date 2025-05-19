@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HomePageRoutingModule } from '@app/tabs/pathologic/pathologic-routing.module';
-import { PathologicPage } from '@app/tabs/pathologic/pathologic.page';
+import { PathologicPageComponent } from '@app/tabs/pathologic/pathologic.page';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { PathologicPage } from '@app/tabs/pathologic/pathologic.page';
     ReactiveFormsModule,
     HomePageRoutingModule,
   ],
-  declarations: [PathologicPage],
+  declarations: [PathologicPageComponent],
   providers: [],
 })
 export class PathologicPageModule {}

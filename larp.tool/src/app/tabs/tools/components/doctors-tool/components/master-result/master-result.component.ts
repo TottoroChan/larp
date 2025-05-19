@@ -7,10 +7,8 @@ import { Disease } from '@app/tabs/tools/components/doctors-tool/models/disease.
   styleUrls: ['./master-result.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MasterResultComponent implements OnInit {
+export class MasterResultComponent {
   @Input() realDisiase: Disease;
 
   constructor() {}
-
-  ngOnInit() {}
 }

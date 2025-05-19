@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
 })
-export class TabsPage implements OnInit {
+export class TabsPageComponent implements OnInit {
   tabs: Tab[] = appSettings.tabs;
 
   constructor(private router: Router) {}

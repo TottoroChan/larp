@@ -11,7 +11,7 @@ import { validateMedicineCode, validateSymptomCode } from '@app/tabs/pathologic/
   styleUrls: ['pathologic.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PathologicPage implements OnInit {
+export class PathologicPageComponent {
   form: UntypedFormGroup;
 
   validateSymptomCode = validateSymptomCode;
@@ -29,8 +29,6 @@ export class PathologicPage implements OnInit {
       ],
     });
   }
-
-  async ngOnInit(): Promise<void> {}
 
   onSubmit() {
     if (this.form.valid) {

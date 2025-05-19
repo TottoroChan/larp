@@ -30,7 +30,9 @@ export class ToolbarComponent implements OnInit {
     private alertController: AlertController
   ) {}
 
-  async ngOnInit() {}
+  async ngOnInit() {
+    console.log('init toolbar')
+  }
 
   async onSwitchMode() {
     if (!this.config.isMaster) {

@@ -9,12 +9,10 @@ import { Tool } from '@app/tabs/tools/models/tools.model';
   styleUrls: ['tools.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ToolsPage implements OnInit {
+export class ToolsPageComponent {
   noContent: boolean;
   listOfTools: Tool[];
   constructor(private filesService: FilesService, private router: Router) {}
-
-  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

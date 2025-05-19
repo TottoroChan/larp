@@ -12,7 +12,7 @@ import { appSettings } from '@app/app.config';
   styleUrls: ['home.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class HomePage implements OnInit {
+export class HomePageComponent implements OnInit {
   isDataLoading = false;
   config: Config = null;
   syncRequired = false;
@@ -80,7 +80,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  switchTab(tabName) {
+  switchTab(tabName: string) {
     this.router.navigateByUrl(`tabs/${tabName}`);
   }
 

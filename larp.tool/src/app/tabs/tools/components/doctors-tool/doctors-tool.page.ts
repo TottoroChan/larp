@@ -11,7 +11,7 @@ import { DoctorsTool } from '@app/tabs/tools/components/doctors-tool/models/doct
   styleUrls: ['doctors-tool.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DoctorsToolPage implements OnInit {
+export class DoctorsToolPageComponent {
   scanResult: string;
   realDisiase: Disease;
   isMaster = false;
@@ -24,8 +24,6 @@ export class DoctorsToolPage implements OnInit {
     private router: Router,
     private filesService: FilesService
   ) {}
-
-  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

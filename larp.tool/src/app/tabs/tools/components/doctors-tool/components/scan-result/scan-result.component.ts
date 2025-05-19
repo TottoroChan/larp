@@ -13,7 +13,7 @@ import {
   styleUrls: ['./scan-result.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ScanResultComponent implements OnInit {
+export class ScanResultComponent {
   @Output() checkDisiase = new EventEmitter<string>();
   @Output() disiaseChange = new EventEmitter<boolean>();
   @Output() goBack = new EventEmitter();
@@ -22,8 +22,6 @@ export class ScanResultComponent implements OnInit {
   disiaseName: string;
 
   constructor() {}
-
-  ngOnInit() {}
 
   onCheckDisiase() {
     this.checkDisiase.emit(this.disiaseName);

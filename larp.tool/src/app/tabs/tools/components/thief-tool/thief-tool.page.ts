@@ -9,13 +9,11 @@ import { FilesService } from '@app/shared/services/files.service';
   styleUrls: ['thief-tool.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ThiefToolPage implements OnInit {
+export class ThiefToolPageComponent {
   thiefTool: ThiefTool = null;
   result: { successRate: ThiefItem; effect: ThiefItem } = null;
 
   constructor(private router: Router, private filesService: FilesService) {}
-
-  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

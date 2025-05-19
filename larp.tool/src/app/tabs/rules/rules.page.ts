@@ -9,15 +9,13 @@ import { RulesFile, testRules } from '@app/tabs/rules/models/rulesFile.model';
   styleUrls: ['rules.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class RulesPage implements OnInit {
+export class RulesPageComponent {
   content = '';
   listOfRules: RulesFile[] = [];
   showSearchBar = false;
   noContent = false;
 
   constructor(private router: Router, private filesService: FilesService) {}
-
-  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

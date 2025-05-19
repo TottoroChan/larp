@@ -13,14 +13,12 @@ import { FilesService } from '@app/shared/services/files.service';
   styleUrls: ['mad-science-tool.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MadScienceToolPage implements OnInit {
+export class MadScienceToolPageComponent {
   madScience: MadScience = null;
   result: { successRate: MadScienceItem; effect: MadScienceItem } = null;
   madScienceAllowed = false;
 
   constructor(private router: Router, private filesService: FilesService) {}
-
-  ngOnInit(): void {}
 
   ionViewDidEnter() {
     try {

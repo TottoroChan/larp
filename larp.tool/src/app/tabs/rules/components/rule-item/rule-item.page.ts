@@ -9,7 +9,7 @@ import { IonContent } from '@ionic/angular';
   styleUrls: ['rule-item.page.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class RuleItemPage implements OnInit {
+export class RuleItemPageComponent implements OnInit {
   @ViewChild(IonContent) ionContent: IonContent;
   rulesFile: RulesFile;
   textToSearch: string;
