@@ -14,21 +14,10 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "www",
-            "baseHref": "",
-            "deployUrl": "",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "styles": ["src/global.scss"],
-            "scripts": [],
-            "aot": false,
-            "extractLicenses": false,
-            "vendorChunk": true,
-            "buildOptimizer": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true,
             "assets": [
               {
                 "glob": "**/*",
@@ -40,7 +29,16 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               }
-            ]
+            ],
+            "styles": ["src/global.scss"],
+            "scripts": [],
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -53,7 +51,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": true,
+              "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -63,13 +61,9 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
                 }
-              ]
+              ],
+              "baseHref": ""
             },
             "ci": {
               "progress": false
