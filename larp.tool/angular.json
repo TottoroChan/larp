@@ -63,7 +63,7 @@
                   "maximumError": "5mb"
                 }
               ],
-              "baseHref": ""
+              "baseHref": "larp"
             },
             "ci": {
               "progress": false
