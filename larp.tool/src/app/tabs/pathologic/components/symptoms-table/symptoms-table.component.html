@@ -1,0 +1,26 @@
+<ion-content *ngIf="tableData != null">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          placeholder="Введите симптом"
+          [(ngModel)]="tableData.symptomFirst"
+          [maskito]="allowedSymptomsMask"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          placeholder="Введите симптом"
+          [(ngModel)]="tableData.symptomSecond"
+          [maskito]="allowedSymptomsMask"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

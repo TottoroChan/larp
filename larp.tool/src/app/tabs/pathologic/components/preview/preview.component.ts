@@ -1,0 +1,31 @@
+import { Component, ViewEncapsulation } from '@angular/core';
+import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
+import { allowedSymptomsMask } from '@app/tabs/pathologic/utils/utils';
+import { SymptomTable } from '../../models/symptom.model';
+import { combineLatest } from 'rxjs';
+
+@Component({
+  selector: 'app-pathologic-preview',
+  templateUrl: './preview.component.html',
+  styleUrls: ['./preview.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+})
+export class PreviewComponent {
+  tableData: SymptomTable[] = null;
+  meds: string[] = null;
+  allowedSymptomsMask = allowedSymptomsMask;
+
+  constructor(
+    private pathologicService: PathologicService
+  ) {}
+
+  ngOnInit(): void {
+    combineLatest([
+      this.pathologicService.getMeds(),
+      this.pathologicService.getSymptoms(),
+    ]).subscribe(([meds, symptoms]) => {
+      this.meds = meds;
+      this.tableData = symptoms;
+    });
+  }
+}

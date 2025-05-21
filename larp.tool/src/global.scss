@@ -25,10 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-@import url(./theme/variables.scss);
+@import "theme/variables.scss";
 
 //импорт стилей конкретной игры
-@import url(theme/pathololgic2025.scss);
+@import "theme/pathololgic2025.scss";
 
 .larp-toolbar {
   color: var(--toolbar-text-color);

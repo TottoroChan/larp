@@ -22,11 +22,6 @@ const routes: Routes = [
       {
         path: 'pathologic',
         loadChildren: () => import('@app/tabs/pathologic/pathologic.module').then(m => m.PathologicPageModule)
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/home',
-        pathMatch: 'full'
       }
     ]
   },

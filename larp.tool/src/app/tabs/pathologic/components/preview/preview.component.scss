@@ -1,0 +1,21 @@
+  .centered-table {
+    border: 1px solid #ddd; /* Внешняя граница таблицы */
+
+    ion-row {
+      border-bottom: 1px solid #ddd;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    ion-col {
+      border-right: 1px solid #ddd;
+      padding: 16px;
+      text-align: center;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }

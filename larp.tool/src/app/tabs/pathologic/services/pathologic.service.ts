@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Symptom } from '@app/tabs/pathologic/models/symptom.model';
+import { SymptomTable } from '@app/tabs/pathologic/models/symptom.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PathologicService {
-  private symptoms$ = new BehaviorSubject<Symptom[]>(
-    []
-  );
-  private meds$ = new BehaviorSubject<string[]>(
-    []
-  );
+  private symptoms$ = new BehaviorSubject<SymptomTable[]>([
+    { symptomFirst: 'А', symptomSecond: '' },
+    { symptomFirst: 'Д', symptomSecond: 'Ж' },
+    { symptomFirst: 'Б', symptomSecond: '' },
+  ]);
+  private meds$ = new BehaviorSubject<string[]>(['sadasd', 'asdasd', 'asdasd']);
 
-  addSymptom(symptom: string, layer: number) {
+  addSymptomsRow(layer: number, symptoms: SymptomTable) {
     const current = this.symptoms$.value;
-    this.symptoms$.next([...current, { symptom: symptom, layer: layer }]);
+    current[layer] = symptoms;
+    this.symptoms$.next(current);
   }
 
   addMed(med: string) {
@@ -46,7 +47,7 @@ export class PathologicService {
   clearSymptoms() {
     this.symptoms$.next([]);
   }
-  
+
   calculate() {
     throw new Error('Method not implemented.');
   }

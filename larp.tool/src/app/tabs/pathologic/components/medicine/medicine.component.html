@@ -1,0 +1,26 @@
+<ion-content>
+  <ion-toolbar class="meds-toolbar" slot="fixed">
+    <ion-buttons>
+      <ion-input
+        fill="outline"
+        placeholder="Принятое лекарство"
+        [(ngModel)]="newMed"
+      ></ion-input>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button  fill="clear" shape="round"  (click)="onAddMed()" size="large">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-list [inset]="true">
+    <ion-item *ngFor="let item of medsList; index as i">
+      <ion-label>{{ item }}</ion-label>
+
+      <ion-button fill="clear" shape="round" (click)="onDeleteMed(i)">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

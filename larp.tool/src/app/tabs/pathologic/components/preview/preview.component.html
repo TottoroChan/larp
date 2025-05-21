@@ -1,0 +1,26 @@
+<ion-content class="ion-padding">
+  <ion-text>
+    <h3>Симптомы:</h3>
+  </ion-text>
+  <ion-grid class="centered-table">
+    <ion-row>
+      <ion-col class="" *ngFor="let row of tableData">
+        {{ row.symptomFirst }}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="" *ngFor="let row of tableData">
+        {{ row.symptomSecond }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text>
+    <h3>Принятые лекарства:</h3>
+  </ion-text>
+  <ion-list [inset]="true">
+    <ion-item *ngFor="let item of meds; index as i">
+      <ion-label>{{ item }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

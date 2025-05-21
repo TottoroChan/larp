@@ -24,89 +24,9 @@
   --toolbar-search-input-background: #ceb692;
 }
 
-ion-content {
-  --background: url("../assets/images/arbor2022/background.jpg") no-repeat
-    center / cover;
-}
 
-#larp-tabs-bar {
-  background-image: url("../assets/images/arbor2022/up.png");
-  #tab-button-home {
-    background-image: url("../assets/images/arbor2022/home.png") !important;
-
-    &.tab-selected {
-      background-image: url("../assets/images/arbor2022/home_hover.png") !important;
-    }
-  }
-  #tab-button-rules {
-    background-image: url("../assets/images/arbor2022/book.png") !important;
-
-    &.tab-selected {
-      background-image: url("../assets/images/arbor2022/book_hover.png") !important;
-    }
-  }
-  #tab-button-tools {
-    background-image: url("../assets/images/arbor2022/tools.png") !important;
-
-    &.tab-selected {
-      background-image: url("../assets/images/arbor2022/tools_hover.png") !important;
-    }
-  }
-}
-
-ion-header {
-  .larp-toolbar {
-    --background: url("../assets/images/arbor2022/up.png") center / cover
-      no-repeat;
-    .master-button {
-      background-image: url("../assets/images/arbor2022/master_icon.png");
-    }
-    .arrow-button {
-      background-image: url("../assets/images/arbor2022/arrow.png");
-    }
-    .plus-button {
-      background-image: url("../assets/images/arbor2022/+.png");
-    }
-    .minus-button {
-      background-image: url("../assets/images/arbor2022/-.png");
-      background-size: 20px;
-    }
-    #trigger-button {
-      background-image: url("../assets/images/arbor2022/menu.png");
-    }
-    .search-button {
-      background-image: url("../assets/images/arbor2022/search.png");
-    }
-  }
-}
-
-#home-page {
-  .header-img {
-    background-image: url("../assets/images/arbor2022/header.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    height: 150px;
-  }
-}
-
-#rules-page {
-  .rules-item-divider {
-    display: block;
-    height: 5px;
-    background-image: url("../assets/images/arbor2022/line.png") !important;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: 90%;
-  }
-}
-
-#doctors-tool {
-  #scan {
-    .button.custom-qr {
-      --background: url("../assets/images/arbor2022/qr.png") no-repeat center /
-        contain !important;
-    }
-  }
+* {
+font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 
 #cancel-button,
@@ -178,6 +98,7 @@ ion-alert {
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
 @-webkit-keyframes load5 {
   0%,
   100% {

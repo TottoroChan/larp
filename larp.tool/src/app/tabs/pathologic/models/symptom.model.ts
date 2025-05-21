@@ -1,4 +1,4 @@
-export interface Symptom {
-  symptom: string;
-  layer: number;
+export interface SymptomTable {
+  symptomFirst: string;
+  symptomSecond: string;
 }
