@@ -9,16 +9,28 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar *ngIf="currentStep != 0 else result">
     <ion-buttons slot="start">
-      <ion-button (click)="prevStep()" [disabled]="currentStep === 1">
+      <ion-button (click)="prevStep()" *ngIf="currentStep > 1">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="nextStep()" [disabled]="currentStep === 5">
+      <ion-button
+        (click)="nextStep()"
+        *ngIf="currentStep != 0 && currentStep < 3 else calculate"
+      >
         <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
       </ion-button>
+
+      <ng-template #calculate>
+        <ion-button (click)="calculate()"> Лечить </ion-button>
+      </ng-template>
     </ion-buttons>
   </ion-toolbar>
+  <ng-template #result>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToStart()"> На старт </ion-button>
+    </ion-buttons>
+  </ng-template>
 </ion-footer>

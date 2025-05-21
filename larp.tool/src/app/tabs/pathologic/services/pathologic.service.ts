@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom.model';
+import { CalculationResult } from '@app/tabs/pathologic/models/calculation-result.model';
+import { checkSymptomsTable } from '@app/tabs/pathologic/utils/utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PathologicService {
   private symptoms$ = new BehaviorSubject<SymptomTable[]>([
-    { symptomFirst: 'А', symptomSecond: '' },
-    { symptomFirst: 'Д', symptomSecond: 'Ж' },
-    { symptomFirst: 'Б', symptomSecond: '' },
+    { value: 'А', layer: 1, isLast: false },
+    { value: '', layer: 1, isLast: true },
+    { value: 'Е', layer: 2, isLast: false },
+    { value: 'Б', layer: 2, isLast: true },
+    { value: 'Е', layer: 3, isLast: false },
+    { value: 'Ж', layer: 3, isLast: true },
   ]);
   private meds$ = new BehaviorSubject<string[]>(['sadasd', 'asdasd', 'asdasd']);
 
@@ -50,5 +55,22 @@ export class PathologicService {
 
   calculate() {
     throw new Error('Method not implemented.');
+  }
+
+  validateStep(currentStep: number): CalculationResult {
+    var symptoms = this.symptoms$.value;
+    var meds = this.meds$.value;
+    switch (currentStep) {
+      case 1:
+        return checkSymptomsTable(symptoms);
+        break;
+      case 2:
+        break;
+
+      default:
+        break;
+    }
+
+    return { isCalculated: false, result: '', isDead: false };
   }
 }

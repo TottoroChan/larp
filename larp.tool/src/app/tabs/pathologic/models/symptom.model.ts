@@ -1,4 +1,5 @@
 export interface SymptomTable {
-  symptomFirst: string;
-  symptomSecond: string;
+  layer: number;
+  value: string;
+  isLast: boolean
 }

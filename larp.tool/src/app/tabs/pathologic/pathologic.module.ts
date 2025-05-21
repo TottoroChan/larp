@@ -9,6 +9,7 @@ import { MaskitoDirective } from '@maskito/angular';
 import { SymptomsTableComponent } from '@app/tabs/pathologic/components/symptoms-table/symptoms-table.component';
 import { MedicineComponent } from '@app/tabs/pathologic/components/medicine/medicine.component';
 import { PreviewComponent } from '@app/tabs/pathologic/components/preview/preview.component';
+import { ResultComponent } from '@app/tabs/pathologic/components/result/result.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { PreviewComponent } from '@app/tabs/pathologic/components/preview/previe
     SymptomsTableComponent,
     MedicineComponent,
     PreviewComponent,
+    ResultComponent
   ],
   providers: [],
 })

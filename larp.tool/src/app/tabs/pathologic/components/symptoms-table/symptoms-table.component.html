@@ -1,4 +1,7 @@
-<ion-content *ngIf="tableData != null">
+<ion-content class="ion-padding" *ngIf="symptomsTable != null">
+  <ion-text>
+    <h3>Симптомы 1 слой:</h3>
+  </ion-text>
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -6,7 +9,7 @@
           fill="outline"
           [clearInput]="true"
           placeholder="Введите симптом"
-          [(ngModel)]="tableData.symptomFirst"
+          [(ngModel)]="firstLayer()[0].value"
           [maskito]="allowedSymptomsMask"
         ></ion-input>
       </ion-col>
@@ -17,7 +20,61 @@
           fill="outline"
           [clearInput]="true"
           placeholder="Введите симптом"
-          [(ngModel)]="tableData.symptomSecond"
+          [(ngModel)]="firstLayer()[1].value"
+          [maskito]="allowedSymptomsMask"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-text>
+    <h3>Симптомы 2 слой:</h3>
+  </ion-text>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          placeholder="Введите симптом"
+          [(ngModel)]="secondLayer()[0].value"
+          [maskito]="allowedSymptomsMask"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          placeholder="Введите симптом"
+          [(ngModel)]="secondLayer()[1].value"
+          [maskito]="allowedSymptomsMask"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-text>
+    <h3>Симптомы 3 слой:</h3>
+  </ion-text>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          placeholder="Введите симптом"
+          [(ngModel)]="thirdLayer()[0].value"
+          [maskito]="allowedSymptomsMask"
+        ></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-input
+          fill="outline"
+          [clearInput]="true"
+          placeholder="Введите симптом"
+          [(ngModel)]="thirdLayer()[1].value"
           [maskito]="allowedSymptomsMask"
         ></ion-input>
       </ion-col>

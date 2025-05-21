@@ -13,8 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PathologicPageComponent {
   getTitle = getWizardTitle;
 
-  symptoms: SymptomTable[] = [];
-  meds: string[] = [];
   currentStep = 1;
 
   constructor(
@@ -23,22 +21,38 @@ export class PathologicPageComponent {
     private activatedRoute: ActivatedRoute
   ) {}
 
+  goToStart() {
+    this.currentStep = 1;
+    this.router.navigate([`./step${this.currentStep}`], {
+      relativeTo: this.activatedRoute,
+    });
+  }
+
   nextStep() {
-    this.currentStep++;
-    this.router.navigate([`./step${this.currentStep}`], {relativeTo: this.activatedRoute});
+    var result = this.pathologicService.validateStep(this.currentStep);
+
+    if (result.result == '' && !result.isCalculated) {
+      this.currentStep++;
+      this.router.navigate([`./step${this.currentStep}`], {
+        relativeTo: this.activatedRoute,
+      });
+    } else {
+      this.currentStep = 0;
+      this.router.navigate([`./result`], {
+        relativeTo: this.activatedRoute,
+        state: result,
+      });
+    }
   }
 
   prevStep() {
     this.currentStep--;
-    this.router.navigate([`./step${this.currentStep}`], {relativeTo: this.activatedRoute});
+    this.router.navigate([`./step${this.currentStep}`], {
+      relativeTo: this.activatedRoute,
+    });
   }
 
-  ionViewWillEnter() {
-    this.pathologicService.getSymptoms().subscribe((symptoms) => {
-      this.symptoms = symptoms;
-    });
-    this.pathologicService.getMeds().subscribe((meds) => {
-      this.meds = meds;
-    });
+  calculate() {
+    this.pathologicService.calculate();
   }
 }

@@ -12,8 +12,12 @@ import { combineLatest, map } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class SymptomsTableComponent implements OnInit {
-  tableData: SymptomTable = null;
+  symptomsTable: SymptomTable[] = null;
   allowedSymptomsMask = allowedSymptomsMask;
+
+  firstLayer = () => this.symptomsTable.filter((x) => x.layer == 1);
+  secondLayer = () => this.symptomsTable.filter((x) => x.layer == 2);
+  thirdLayer = () => this.symptomsTable.filter((x) => x.layer == 3);
 
   constructor(
     private pathologicService: PathologicService,
@@ -21,8 +25,11 @@ export class SymptomsTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    combineLatest([this.route.data, this.pathologicService.getSymptoms()]).subscribe(([data, symptoms]) => {
-        this.tableData = symptoms[data.layer];
-      });
+    combineLatest([
+      this.route.data,
+      this.pathologicService.getSymptoms(),
+    ]).subscribe(([data, symptoms]) => {
+      this.symptomsTable = symptoms;
+    });
   }
 }

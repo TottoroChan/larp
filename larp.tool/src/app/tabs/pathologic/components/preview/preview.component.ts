@@ -11,9 +11,12 @@ import { combineLatest } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class PreviewComponent {
-  tableData: SymptomTable[] = null;
+  symptomsTable: SymptomTable[];
   meds: string[] = null;
   allowedSymptomsMask = allowedSymptomsMask;
+
+  firstRow = () => this.symptomsTable.filter((x) => x.isLast);
+  secondRow = () => this.symptomsTable.filter((x) => !x.isLast);
 
   constructor(
     private pathologicService: PathologicService
@@ -25,7 +28,7 @@ export class PreviewComponent {
       this.pathologicService.getSymptoms(),
     ]).subscribe(([meds, symptoms]) => {
       this.meds = meds;
-      this.tableData = symptoms;
+      this.symptomsTable = symptoms;
     });
   }
 }
