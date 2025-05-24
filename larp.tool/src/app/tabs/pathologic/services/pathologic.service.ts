@@ -62,14 +62,17 @@ export class PathologicService {
     }
     const current = this.meds$.value;
     const medItem = { type: type, value: `${firstPart}${secondPart}` };
-    current.meds.push(medItem);
+    
     if (medItem.type == 'обезболивающее') {
       current.limits.antibiotics++;
     }
     if (medItem.type == 'антисептик') {
       current.limits.immunes++;
     }
-    this.meds$.next(current);
+    this.meds$.next({
+      meds: [...current.meds, medItem}],
+      limits: current.limits
+    });
   }
 
   private isMedExist(
@@ -100,7 +103,10 @@ export class PathologicService {
     if (med.type == 'антисептик') {
       current.limits.immunes--;
     }
-    this.meds$.next(current);
+    this.meds$.next({
+      meds: [...current.meds],
+      limits: current.limits
+    });
   }
 
   getSymptoms() {
