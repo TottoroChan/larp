@@ -12,7 +12,7 @@ import { combineLatest } from 'rxjs';
 })
 export class PreviewComponent {
   symptomsTable: SymptomTable[];
-  meds: string[] = null;
+  medsList: MedsList = null;
   allowedSymptomsMask = allowedSymptomsMask;
 
   firstRow = () => this.symptomsTable.filter((x) => x.isLast);
@@ -27,7 +27,7 @@ export class PreviewComponent {
       this.pathologicService.getMeds(),
       this.pathologicService.getSymptoms(),
     ]).subscribe(([meds, symptoms]) => {
-      this.meds = meds;
+      this.medsList = meds;
       this.symptomsTable = symptoms;
     });
   }

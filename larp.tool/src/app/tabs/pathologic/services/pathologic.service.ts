@@ -51,17 +51,17 @@ export class PathologicService {
     if (this.isMedExist(immuneCombinations, firstPart, secondPart)) {
       type = 'имунник';
     }
-    if (this.isMedExist(immuneCombinations, firstPart, secondPart)) {
+    if (this.isMedExist(antibioticCombinations, firstPart, secondPart)) {
       type = 'антибиотик';
     }
-    if (this.isMedExist(immuneCombinations, firstPart, secondPart)) {
+    if (this.isMedExist(antisepticCombinations, firstPart, secondPart)) {
       type = 'антисептик';
     }
-    if (painkillerCombinations.some((x) => this.isMedExist(x))) {
+    if (this.isMedExist(painkillerCombinations, firstPart, secondPart)) {
       type = 'обезболивающее';
     }
     const current = this.meds$.value;
-    const medItem = { type: type, value: med };
+    const medItem = { type: type, value: `${firstPart}${secondPart}` };
     current.meds.push();
     if (medItem.type == 'обезболивающее') {
       current.limits.antibiotics++;

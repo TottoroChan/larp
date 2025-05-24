@@ -37,7 +37,7 @@ export class MedicineComponent {
   }
 
   onAddMed() {
-    this.pathologicService.addMed(`${this.medPartFirst}${this.medPartSecond}`);
+    this.pathologicService.addMed(this.medPartFirst, this.medPartSecond);
 
     this.medPartFirst = '';
     this.medPartSecond = '';
