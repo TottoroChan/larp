@@ -1,8 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { getWizardTitle } from '@app/tabs/pathologic/utils/utils';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
-import { SymptomTable } from '@app/tabs/pathologic/models/symptom.model';
+import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SymptomsValidationService } from './services/symptoms-validation.service';
 
 @Component({
   selector: 'app-pathologic',
@@ -17,6 +18,7 @@ export class PathologicPageComponent {
 
   constructor(
     private pathologicService: PathologicService,
+    private symptomsValidation: SymptomsValidationService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}

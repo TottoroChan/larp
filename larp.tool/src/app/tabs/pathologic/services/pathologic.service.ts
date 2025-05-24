@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SymptomTable } from '@app/tabs/pathologic/models/symptom.model';
+import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { CalculationResult } from '@app/tabs/pathologic/models/calculation-result.model';
-import { checkSymptomsTable } from '@app/tabs/pathologic/utils/utils';
+import { ALLOWED_SYMPTOMS } from '@app/tabs/pathologic/utils/utils';
+import { SymptomsValidationService } from '@app/tabs/pathologic/services/symptoms-validation.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PathologicService {
   private symptoms$ = new BehaviorSubject<SymptomTable[]>([
-    { value: 'А', layer: 1, isLast: false },
-    { value: '', layer: 1, isLast: true },
-    { value: 'Е', layer: 2, isLast: false },
-    { value: 'Б', layer: 2, isLast: true },
-    { value: 'Е', layer: 3, isLast: false },
-    { value: 'Ж', layer: 3, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
   ]);
   private meds$ = new BehaviorSubject<string[]>(['sadasd', 'asdasd', 'asdasd']);
+
+  constructor(private symptomsValidationService: SymptomsValidationService) {}
 
   addSymptomsRow(layer: number, symptoms: SymptomTable) {
     const current = this.symptoms$.value;
@@ -62,7 +65,7 @@ export class PathologicService {
     var meds = this.meds$.value;
     switch (currentStep) {
       case 1:
-        return checkSymptomsTable(symptoms);
+        return this.symptomsValidationService.checkSymptomsTable(symptoms);
         break;
       case 2:
         break;

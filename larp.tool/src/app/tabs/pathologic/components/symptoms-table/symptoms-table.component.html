@@ -5,24 +5,34 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-input
-          fill="outline"
-          [clearInput]="true"
-          placeholder="Введите симптом"
-          [(ngModel)]="firstLayer()[0].value"
-          [maskito]="allowedSymptomsMask"
-        ></ion-input>
+        <ion-list>
+          <ion-select
+            fill="outline"
+            placeholder="Выберите симптом"
+            [(ngModel)]="firstLayer()[0].value"
+          >
+            <ion-select-option
+              *ngFor="let symptom of allowedSymptoms; index as i"
+              [value]="symptom"
+              >{{ symptom }}</ion-select-option
+            >
+          </ion-select>
+        </ion-list>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-input
+        <ion-select
           fill="outline"
-          [clearInput]="true"
-          placeholder="Введите симптом"
+          placeholder="Выберите симптом"
           [(ngModel)]="firstLayer()[1].value"
-          [maskito]="allowedSymptomsMask"
-        ></ion-input>
+        >
+          <ion-select-option
+            *ngFor="let symptom of allowedSymptoms; index as i"
+            [value]="symptom"
+            >{{ symptom }}</ion-select-option
+          >
+        </ion-select>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -32,24 +42,32 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-input
+        <ion-select
           fill="outline"
-          [clearInput]="true"
-          placeholder="Введите симптом"
+          placeholder="Выберите симптом"
           [(ngModel)]="secondLayer()[0].value"
-          [maskito]="allowedSymptomsMask"
-        ></ion-input>
+        >
+          <ion-select-option
+            *ngFor="let symptom of allowedSymptoms; index as i"
+            [value]="symptom"
+            >{{ symptom }}</ion-select-option
+          >
+        </ion-select>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-input
+        <ion-select
           fill="outline"
-          [clearInput]="true"
-          placeholder="Введите симптом"
+          placeholder="Выберите симптом"
           [(ngModel)]="secondLayer()[1].value"
-          [maskito]="allowedSymptomsMask"
-        ></ion-input>
+        >
+          <ion-select-option
+            *ngFor="let symptom of allowedSymptoms; index as i"
+            [value]="symptom"
+            >{{ symptom }}</ion-select-option
+          >
+        </ion-select>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -59,24 +77,32 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-input
+        <ion-select
           fill="outline"
-          [clearInput]="true"
-          placeholder="Введите симптом"
+          placeholder="Выберите симптом"
           [(ngModel)]="thirdLayer()[0].value"
-          [maskito]="allowedSymptomsMask"
-        ></ion-input>
+        >
+          <ion-select-option
+            *ngFor="let symptom of allowedSymptoms; index as i"
+            [value]="symptom"
+            >{{ symptom }}</ion-select-option
+          >
+        </ion-select>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-input
+        <ion-select
           fill="outline"
-          [clearInput]="true"
-          placeholder="Введите симптом"
+          placeholder="Выберите симптом"
           [(ngModel)]="thirdLayer()[1].value"
-          [maskito]="allowedSymptomsMask"
-        ></ion-input>
+        >
+          <ion-select-option
+            *ngFor="let symptom of allowedSymptoms; index as i"
+            [value]="symptom"
+            >{{ symptom }}</ion-select-option
+          >
+        </ion-select>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
-import { allowedSymptomsMask } from '@app/tabs/pathologic/utils/utils';
-import { SymptomTable } from '../../models/symptom.model';
+import { ALLOWED_SYMPTOMS, allowedSymptomsMask } from '@app/tabs/pathologic/utils/utils';
+import { SymptomTable } from '../../models/symptom-table.model';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
+import { antibioticCombinations, antisepticCombinations, immuneCombinations, painkillerCombinations } from '../../models/medic-item.model';
 
 @Component({
   selector: 'app-pathologic-symptoms-table',
@@ -19,6 +20,8 @@ export class SymptomsTableComponent implements OnInit {
   secondLayer = () => this.symptomsTable.filter((x) => x.layer == 2);
   thirdLayer = () => this.symptomsTable.filter((x) => x.layer == 3);
 
+  allowedSymptoms = ALLOWED_SYMPTOMS;
+
   constructor(
     private pathologicService: PathologicService,
     private route: ActivatedRoute
@@ -32,4 +35,10 @@ export class SymptomsTableComponent implements OnInit {
       this.symptomsTable = symptoms;
     });
   }
+
+  getTextInParentheses(input: string): string | null {
+  const regex = /\(([^)]+)\)/;
+  const match = input.match(regex);
+  return match ? match[1] : null;
+}
 }
