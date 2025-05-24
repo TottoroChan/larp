@@ -62,7 +62,7 @@ export class PathologicService {
     }
     const current = this.meds$.value;
     const medItem = { type: type, value: `${firstPart}${secondPart}` };
-    current.meds.push();
+    current.meds.push(medItem);
     if (medItem.type == 'обезболивающее') {
       current.limits.antibiotics++;
     }

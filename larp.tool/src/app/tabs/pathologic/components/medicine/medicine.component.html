@@ -8,9 +8,9 @@
           [(ngModel)]="medPartFirst"
         >
           <ion-select-option
-            *ngFor="let symptom of allowedMeds; index as i"
-            [value]="symptom"
-            >{{ symptom }}</ion-select-option
+            *ngFor="let med of allowedMeds; index as i"
+            [value]="med"
+            >{{ med }}</ion-select-option
           >
         </ion-select>
       </ion-list>
@@ -21,9 +21,9 @@
           [(ngModel)]="medPartSecond"
         >
           <ion-select-option
-            *ngFor="let symptom of allowedMeds; index as i"
-            [value]="symptom"
-            >{{ symptom }}</ion-select-option
+            *ngFor="let med of allowedMeds; index as i"
+            [value]="med"
+            >{{ med }}</ion-select-option
           >
         </ion-select>
       </ion-list>
