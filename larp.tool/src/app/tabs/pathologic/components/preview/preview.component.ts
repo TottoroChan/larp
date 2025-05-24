@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
 import { allowedSymptomsMask } from '@app/tabs/pathologic/utils/utils';
-import { SymptomTable } from '../../models/symptom-table.model';
+import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
+import { MedsList } from '@app/tabs/pathologic/models/meds-list.model';
 import { combineLatest } from 'rxjs';
 
 @Component({

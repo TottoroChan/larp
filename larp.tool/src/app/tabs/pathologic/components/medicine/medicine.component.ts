@@ -9,8 +9,8 @@ import {
   painkillerCombinations,
 } from '@app/tabs/pathologic/utils/utils';
 import { ActivatedRoute } from '@angular/router';
-import { MedsList } from '../../models/meds-list.model';
-import { CombinationItem } from '../../models/combination-item.model';
+import { MedsList } from '@app/tabs/pathologic/models/meds-list.model';
+import { CombinationItem } from '@app/tabs/pathologic/models/combination-item.model';
 
 @Component({
   selector: 'app-pathologic-medicine',
