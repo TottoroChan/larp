@@ -70,7 +70,7 @@ export class PathologicService {
       current.limits.immunes++;
     }
     this.meds$.next({
-      meds: [...current.meds, medItem}],
+      meds: [...current.meds, medItem],
       limits: current.limits
     });
   }
