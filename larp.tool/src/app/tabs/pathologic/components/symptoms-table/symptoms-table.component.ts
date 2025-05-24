@@ -4,7 +4,6 @@ import { ALLOWED_SYMPTOMS, allowedSymptomsMask } from '@app/tabs/pathologic/util
 import { SymptomTable } from '../../models/symptom-table.model';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
-import { antibioticCombinations, antisepticCombinations, immuneCombinations, painkillerCombinations } from '../../models/medic-item.model';
 
 @Component({
   selector: 'app-pathologic-symptoms-table',

@@ -1,7 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
-import { allowedSymptomsMask } from '@app/tabs/pathologic/utils/utils';
+import {
+  ALLOWED_MEDS,
+  allowedSymptomsMask,
+  antibioticCombinations,
+  antisepticCombinations,
+  immuneCombinations,
+  painkillerCombinations,
+} from '@app/tabs/pathologic/utils/utils';
 import { ActivatedRoute } from '@angular/router';
+import { MedsList } from '../../models/meds-list.model';
+import { CombinationItem } from '../../models/combination-item.model';
 
 @Component({
   selector: 'app-pathologic-medicine',
@@ -10,9 +19,11 @@ import { ActivatedRoute } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class MedicineComponent {
-  medsList: string[] = null;
-  newMed: string;
+  medsList: MedsList = null;
   allowedSymptomsMask = allowedSymptomsMask;
+  allowedMeds = ALLOWED_MEDS;
+  medPartFirst = '';
+  medPartSecond = '';
 
   constructor(
     private pathologicService: PathologicService,
@@ -26,7 +37,10 @@ export class MedicineComponent {
   }
 
   onAddMed() {
-    this.pathologicService.addMed(this.newMed.trim());
+    this.pathologicService.addMed(`${this.medPartFirst}${this.medPartSecond}`);
+
+    this.medPartFirst = '';
+    this.medPartSecond = '';
   }
 
   onDeleteSymptom(index: number) {

@@ -2,8 +2,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { CalculationResult } from '@app/tabs/pathologic/models/calculation-result.model';
-import { ALLOWED_SYMPTOMS } from '@app/tabs/pathologic/utils/utils';
+import {
+  ALLOWED_SYMPTOMS,
+  antibioticCombinations,
+  antisepticCombinations,
+  immuneCombinations,
+  painkillerCombinations,
+} from '@app/tabs/pathologic/utils/utils';
 import { SymptomsValidationService } from '@app/tabs/pathologic/services/symptoms-validation.service';
+import {
+  MedsItem,
+  MedsList,
+} from '@app/tabs/pathologic/models/meds-list.model';
+import { CombinationItem } from '@app/tabs/pathologic/models/combination-item.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +28,14 @@ export class PathologicService {
     { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: false },
     { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
   ]);
-  private meds$ = new BehaviorSubject<string[]>(['sadasd', 'asdasd', 'asdasd']);
+
+  private meds$ = new BehaviorSubject<MedsList>({
+    limits: {
+      antibiotics: 1,
+      immunes: 1,
+    },
+    meds: [],
+  });
 
   constructor(private symptomsValidationService: SymptomsValidationService) {}
 
@@ -27,9 +45,43 @@ export class PathologicService {
     this.symptoms$.next(current);
   }
 
-  addMed(med: string) {
+  addMed(firstPart: string, secondPart: string) {
+    let type;
+
+    if (this.isMedExist(immuneCombinations, firstPart, secondPart)) {
+      type = 'имунник';
+    }
+    if (this.isMedExist(immuneCombinations, firstPart, secondPart)) {
+      type = 'антибиотик';
+    }
+    if (this.isMedExist(immuneCombinations, firstPart, secondPart)) {
+      type = 'антисептик';
+    }
+    if (painkillerCombinations.some((x) => this.isMedExist(x))) {
+      type = 'обезболивающее';
+    }
     const current = this.meds$.value;
-    this.meds$.next([...current, med]);
+    const medItem = { type: type, value: med };
+    current.meds.push();
+    if (medItem.type == 'обезболивающее') {
+      current.limits.antibiotics++;
+    }
+    if (medItem.type == 'антисептик') {
+      current.limits.immunes++;
+    }
+    this.meds$.next(current);
+  }
+
+  private isMedExist(
+    combination: CombinationItem[],
+    firstPart: string,
+    secondPart: string
+  ): boolean {
+    return combination.some(
+      (x) =>
+        x.type.includes(`(${firstPart})`) &&
+        x.addons.some((y) => y.type.includes(`(${secondPart})`))
+    );
   }
 
   removeSymptom(index: number) {
@@ -40,8 +92,15 @@ export class PathologicService {
 
   removeMed(index: number) {
     const current = this.meds$.value;
-    current.splice(index, 1);
-    this.meds$.next([...current]);
+    const med = current.meds[index];
+    current.meds.splice(index, 1);
+    if (med.type == 'обезболивающее') {
+      current.limits.antibiotics--;
+    }
+    if (med.type == 'антисептик') {
+      current.limits.immunes--;
+    }
+    this.meds$.next(current);
   }
 
   getSymptoms() {
