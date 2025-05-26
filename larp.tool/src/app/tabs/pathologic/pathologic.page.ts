@@ -31,20 +31,22 @@ export class PathologicPageComponent {
   }
 
   nextStep() {
-    var result = this.pathologicService.validateStep(this.currentStep);
-
-    if (result.result == '' && !result.isCalculated) {
-      this.currentStep++;
-      this.router.navigate([`./step${this.currentStep}`], {
-        relativeTo: this.activatedRoute,
-      });
-    } else {
-      this.currentStep = 0;
-      this.router.navigate([`./result`], {
-        relativeTo: this.activatedRoute,
-        state: result,
-      });
+    if (this.currentStep == 1) {
+      var result = this.pathologicService.validateSymptomsStep();
+      
+      if (result.result != '') {
+        this.currentStep = 0;
+        this.router.navigate([`./result`], {
+          relativeTo: this.activatedRoute,
+          state: result,
+        });
+      }
     }
+
+    this.currentStep++;
+    this.router.navigate([`./step${this.currentStep}`], {
+      relativeTo: this.activatedRoute,
+    });
   }
 
   prevStep() {

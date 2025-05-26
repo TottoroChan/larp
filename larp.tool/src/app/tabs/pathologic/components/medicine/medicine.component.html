@@ -1,50 +1,52 @@
-<ion-content>
-  <ion-toolbar class="meds-toolbar" slot="fixed">
-    <ion-buttons>
-      <ion-list>
-        <ion-select
-          fill="outline"
-          placeholder="Выберите ингредиент 1"
-          [(ngModel)]="medPartFirst"
+<div class="page-container">
+  <!-- Фиксированный тулбар -->
+  <div class="meds-toolbar">
+    <div class="meds-toolbar__actions">
+      <ion-select
+        fill="outline"
+        placeholder="Ингредиент 1"
+        [(ngModel)]="medPartFirst"
+      >
+        <ion-select-option
+          *ngFor="let med of allowedMeds; index as i"
+          [value]="med"
+          >{{ med }}</ion-select-option
         >
-          <ion-select-option
-            *ngFor="let med of allowedMeds; index as i"
-            [value]="med"
-            >{{ med }}</ion-select-option
-          >
-        </ion-select>
-      </ion-list>
-      <ion-list>
-        <ion-select
-          fill="outline"
-          placeholder="Выберите ингредиент 2"
-          [(ngModel)]="medPartSecond"
+      </ion-select>
+      <ion-select
+        fill="outline"
+        placeholder="Ингредиент 2"
+        [(ngModel)]="medPartSecond"
+      >
+        <ion-select-option
+          *ngFor="let med of allowedMeds; index as i"
+          [value]="med"
+          >{{ med }}</ion-select-option
         >
-          <ion-select-option
-            *ngFor="let med of allowedMeds; index as i"
-            [value]="med"
-            >{{ med }}</ion-select-option
-          >
-        </ion-select>
-      </ion-list>
-    </ion-buttons>
-    <ion-buttons slot="end">
+      </ion-select>
       <ion-button fill="clear" shape="round" (click)="onAddMed()" size="large">
         <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
       </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-  <div style="height: 50px; width: 100%;">
-    антибиотики: {{ medsList.limits.antibiotics }} иммунники:
-    {{ medsList.limits.immunes }}
+    </div>
+    <div class="meds-toolbar__info">
+      антибиотики:
+      {{ antibioticsCount() }}/{{ antibLimit }} иммунники:
+      {{ immunesCount }}/{{ immuneLimit }} антисептики:
+      {{ antisepticsCount() }} обезболивающее:
+      {{ painkillerCount() }}
+    </div>
   </div>
-  <ion-list [inset]="true">
-    <ion-item *ngFor="let item of medsList.meds; index as i">
-      <ion-label>{{ item.type }}: {{ item.value }}</ion-label>
 
-      <ion-button fill="clear" shape="round" (click)="onDeleteMed(i)">
-        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-list>
-</ion-content>
+  <!-- Блок с контентом и скроллом -->
+  <div class="scrollable-content">
+    <ion-list class="meds-list">
+      <ion-item *ngFor="let item of medsList; index as i">
+        <ion-label>{{ item.type }}: {{ item.value }}</ion-label>
+
+        <ion-button fill="clear" shape="round" (click)="onDeleteMed(i)">
+          <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>

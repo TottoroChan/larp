@@ -1,14 +1,14 @@
-export interface MedsList {
-  meds: MedsItem[];
-  limits: MedsLimits;
+export interface MedicineList {
+  meds: Medicine[];
+  limits: Limits;
 }
 
-interface MedsLimits {
+interface Limits {
   antibiotics: number;
   immunes: number;
 }
 
-export interface MedsItem {
+export interface Medicine {
   type: 'антибиотик' | 'иммуник' | 'обезболивающее' | 'антисептик';
   value: string;
 }

@@ -1,4 +1,34 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Занимаем всю высоту viewport */
+  overflow: hidden;
+}
 .meds-toolbar {
-    padding: 10px;
+  flex-shrink: 0;
+  position: sticky; /* Добавляем вместо фиксированной позиции */
+  top: 0;
+  z-index: 10;
 
+  &__actions {
+    display: flex;
+    gap: 15px;
+  }
+  &__info {
+    margin-top: 10px;
+  }
+}
+
+.scrollable-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: calc(100% - var(--toolbar-height, 56px)); /* Динамический расчёт */
+}
+
+.content-item {
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

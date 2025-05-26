@@ -19,7 +19,7 @@
     <h3>Принятые лекарства:</h3>
   </ion-text>
   <ion-list [inset]="true">
-    <ion-item *ngFor="let item of medsList.meds; index as i">
+    <ion-item *ngFor="let item of medsList; index as i">
       <ion-label>{{ item.type }}: {{item.value}}</ion-label>
     </ion-item>
   </ion-list>
