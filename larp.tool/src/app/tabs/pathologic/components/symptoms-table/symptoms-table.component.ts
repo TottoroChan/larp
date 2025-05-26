@@ -4,6 +4,7 @@ import { ALLOWED_SYMPTOMS, allowedSymptomsMask } from '@app/tabs/pathologic/util
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
+import { SymptomsService } from '../../services/symptoms.service';
 
 @Component({
   selector: 'app-pathologic-symptoms-table',
@@ -22,14 +23,14 @@ export class SymptomsTableComponent implements OnInit {
   allowedSymptoms = ALLOWED_SYMPTOMS;
 
   constructor(
-    private pathologicService: PathologicService,
+    private symptomsService: SymptomsService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     combineLatest([
       this.route.data,
-      this.pathologicService.getSymptoms(),
+      this.symptomsService.getSymptoms(),
     ]).subscribe(([data, symptoms]) => {
       this.symptomsTable = symptoms;
     });

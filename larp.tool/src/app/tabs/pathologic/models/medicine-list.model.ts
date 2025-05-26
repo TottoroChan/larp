@@ -11,4 +11,5 @@ interface Limits {
 export interface Medicine {
   type: 'антибиотик' | 'иммуник' | 'обезболивающее' | 'антисептик';
   value: string;
+  power: number[];
 }

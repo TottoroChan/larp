@@ -8,8 +8,8 @@ import {
   immuneCombinations,
   painkillerCombinations,
 } from '@app/tabs/pathologic/utils/utils';
-import { CombinationItem } from '../models/combination-item.model';
-import { Medicine } from '../models/meds-list.model';
+import { AddonItem, CombinationItem } from '../models/combination-item.model';
+import { Medicine } from '../models/medicine-list.model';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -68,35 +68,39 @@ export class MedicineService {
     firstPart: string,
     secondPart: string
   ): Medicine | null {
-    let type = null;
-    if (this.isMedExist(immuneCombinations, firstPart, secondPart)) {
-      type = 'иммуник';
+    const combinations: {
+      type: 'иммуник' | 'антибиотик' | 'антисептик' | 'обезболивающее';
+      source: CombinationItem[];
+    }[] = [
+      { type: 'иммуник', source: immuneCombinations },
+      { type: 'антибиотик', source: antibioticCombinations },
+      { type: 'антисептик', source: antisepticCombinations },
+      { type: 'обезболивающее', source: painkillerCombinations },
+    ];
+
+    for (const combo of combinations) {
+      const medicine = this.findMedicine(combo.source, firstPart, secondPart);
+      if (medicine) {
+        return {
+          type: combo.type,
+          value: `${firstPart}${secondPart}`,
+          power: medicine.power,
+        };
+      }
     }
-    if (this.isMedExist(antibioticCombinations, firstPart, secondPart)) {
-      type = 'антибиотик';
-    }
-    if (this.isMedExist(antisepticCombinations, firstPart, secondPart)) {
-      type = 'антисептик';
-    }
-    if (this.isMedExist(painkillerCombinations, firstPart, secondPart)) {
-      type = 'обезболивающее';
-    }
-    if (!type) {
-      return null;
-    }
-    return { type: type, value: `${firstPart}${secondPart}` };
+
+    return null;
   }
 
-  private isMedExist(
-    combination: CombinationItem[],
+  private findMedicine(
+    combinations: CombinationItem[],
     firstPart: string,
     secondPart: string
-  ): boolean {
-    return combination.some(
-      (x) =>
-        x.type.includes(`(${firstPart})`) &&
-        x.addons.some((y) => y.type.includes(`(${secondPart})`))
-    );
+  ): AddonItem {
+    return combinations
+      .filter((item) => item.type === firstPart)
+      .flatMap((item) => item.addons)
+      .find((addon) => addon.type === secondPart);
   }
 
   public checkLimits(medicine: Medicine) {

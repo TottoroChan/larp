@@ -2,11 +2,22 @@ import { Injectable } from '@angular/core';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { CalculationResult } from '@app/tabs/pathologic/models/calculation-result.model';
 import { ALLOWED_SYMPTOMS } from '@app/tabs/pathologic/utils/utils';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SymptomsValidationService {
+export class SymptomsService {
+  private symptoms$ = new BehaviorSubject<SymptomTable[]>([
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
+  ]);
+
+  
   validationResults = {
     atLeastOneEmpty: true,
     noTwoPairs: true,
@@ -21,9 +32,26 @@ export class SymptomsValidationService {
     allValid: true,
   };
 
-  public checkSymptomsTable(symptomTable: SymptomTable[]): CalculationResult {
+  
+  removeSymptom(index: number) {
+    const current = this.symptoms$.value;
+    current.splice(index, 1);
+    this.symptoms$.next([...current]);
+  }
+
+  getSymptoms() {
+    return this.symptoms$.asObservable();
+  }
+
+  clearSymptoms() {
+    this.symptoms$.next([]);
+  }
+
+  public checkSymptomsTable(): CalculationResult {
     // Сбрасываем результаты проверки
     this.resetValidationResults();
+
+    const symptomTable = this.symptoms$.value;
 
     // 1. Хотя бы одна нижняя ячейка не должна быть занята (иначе больной мёртв).
     this.validationResults.atLeastOneEmpty = symptomTable

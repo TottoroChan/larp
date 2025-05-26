@@ -3,7 +3,7 @@ export interface CombinationItem {
   addons: AddonItem[];
 }
 
-interface AddonItem {
+export interface AddonItem {
   type: string;
   isCraftOnly: boolean;
   power: number[];

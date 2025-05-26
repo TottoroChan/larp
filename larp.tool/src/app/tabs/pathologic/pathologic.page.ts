@@ -3,7 +3,7 @@ import { getWizardTitle } from '@app/tabs/pathologic/utils/utils';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SymptomsValidationService } from './services/symptoms-validation.service';
+import { SymptomsService } from './services/symptoms.service';
 
 @Component({
   selector: 'app-pathologic',
@@ -18,7 +18,7 @@ export class PathologicPageComponent {
 
   constructor(
     private pathologicService: PathologicService,
-    private symptomsValidation: SymptomsValidationService,
+    private symptomsService: SymptomsService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -32,8 +32,8 @@ export class PathologicPageComponent {
 
   nextStep() {
     if (this.currentStep == 1) {
-      var result = this.pathologicService.validateSymptomsStep();
-      
+      var result = this.symptomsService.checkSymptomsTable();
+
       if (result.result != '') {
         this.currentStep = 0;
         this.router.navigate([`./result`], {
