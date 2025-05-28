@@ -1,4 +1,4 @@
-<ion-content class="ion-padding" *ngIf="symptomsTable != null">
+<div *ngIf="symptomsTable != null">
   <ion-text>
     <h3>Симптомы:</h3>
   </ion-text>
@@ -20,7 +20,7 @@
   </ion-text>
   <ion-list [inset]="true">
     <ion-item *ngFor="let item of medsList; index as i">
-      <ion-label>{{ item.type }}: {{item.value}}</ion-label>
+      <ion-label>{{ item.type }}: {{ item.value }}</ion-label>
     </ion-item>
   </ion-list>
-</ion-content>
+</div>

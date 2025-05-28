@@ -16,7 +16,7 @@ export const validateMedicineCode = (control: any) => {
 
 export const getWizardTitle = (step: number) => {
   switch (step) {
-    case 1:
+    case 0:
       return 'Результат лечения';
       break;
     case 1:

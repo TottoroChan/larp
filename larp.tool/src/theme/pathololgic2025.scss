@@ -29,61 +29,6 @@
 font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 
-#cancel-button,
-#confirm-button,
-ion-button.custom-button {
-  background-color: transparent !important;
-  background-image: url("../assets/images/arbor2022/btn_small.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-ion-button.custom-button-big {
-  background-color: transparent !important;
-  background-image: url("../assets/images/arbor2022/btn_big.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-ion-popover {
-  ion-content {
-    --background: url("../assets/images/arbor2022/menu_backdrop.png") no-repeat
-      center;
-    ion-list ion-item {
-      &::after {
-        background-image: url("../src/../assets/images/arbor2022/line_mini.png");
-        background-repeat: no-repeat;
-        background-position: bottom;
-        background-size: 80%;
-      }
-    }
-  }
-}
-
-ion-card.result-card {
-  background-image: url("../assets/images/arbor2022/thief_card.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-ion-alert {
-  .alert-wrapper {
-    --background: transparent;
-    background-image: url("../assets/images/arbor2022/thief_card.png") !important;
-    background-repeat: no-repeat !important;
-    background-size: 100% 100% !important;
-
-    .alert-button-group {
-      button {
-        background-image: url("../assets/images/arbor2022/btn_small.png") !important;
-        background-repeat: no-repeat !important;
-        background-size: 100% 100% !important;
-        color: var(--text-color-light) !important;
-      }
-    }
-  }
-}
-
 .loader {
   margin: 100px auto;
   font-size: 25px;
