@@ -18,8 +18,8 @@ export class PreviewComponent {
   medsList: Medicine[] = null;
   allowedSymptomsMask = allowedSymptomsMask;
 
-  firstRow = () => this.symptomsTable.filter((x) => x.isLast);
-  secondRow = () => this.symptomsTable.filter((x) => !x.isLast);
+  firstRow = () => this.symptomsTable.filter((x) => !x.isLast);
+  secondRow = () => this.symptomsTable.filter((x) => x.isLast);
 
   constructor(
     private symptomsService: SymptomsService,

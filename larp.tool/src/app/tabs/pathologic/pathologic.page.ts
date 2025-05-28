@@ -4,6 +4,7 @@ import { PathologicService } from '@app/tabs/pathologic/services/pathologic.serv
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SymptomsService } from './services/symptoms.service';
+import { CalculationResult } from './models/calculation-result.model';
 
 @Component({
   selector: 'app-pathologic',
@@ -35,17 +36,21 @@ export class PathologicPageComponent {
       var result = this.symptomsService.checkSymptomsTable();
 
       if (result.result != '') {
-        this.currentStep = 0;
-        this.router.navigate([`./result`], {
-          relativeTo: this.activatedRoute,
-          state: result,
-        });
+        this.navigateToResult(result);
       }
     }
 
     this.currentStep++;
     this.router.navigate([`./step${this.currentStep}`], {
       relativeTo: this.activatedRoute,
+    });
+  }
+
+  private navigateToResult(result: CalculationResult) {
+    this.currentStep = 0;
+    this.router.navigate([`./result`], {
+      relativeTo: this.activatedRoute,
+      state: result,
     });
   }
 
@@ -57,6 +62,8 @@ export class PathologicPageComponent {
   }
 
   calculate() {
-    this.pathologicService.calculate();
+    this.pathologicService
+      .calculate()
+      .subscribe((result) => this.navigateToResult(result));
   }
 }

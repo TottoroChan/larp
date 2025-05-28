@@ -1,4 +1,15 @@
-<ion-content class="ion-padding">
+<app-pathologic-preview></app-pathologic-preview>
+
+<div *ngIf="calculationResult != null">
   <p>{{ calculationResult.isDead ? "Персонаж умер" : "" }}</p>
   <p>{{ calculationResult.result }}</p>
-</ion-content>
+
+  <div *ngIf="calculationResult.healingTable != null">
+    <div *ngFor="let leyer of calculationResult.healingTable; index as i">
+      <p>Слой {{ i }}:</p>
+      <p *ngFor="let result of leyer; index as i">
+        {{ result.result }}
+      </p>
+    </div>
+  </div>
+</div>

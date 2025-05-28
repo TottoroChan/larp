@@ -17,7 +17,6 @@ export class SymptomsService {
     { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
   ]);
 
-  
   validationResults = {
     atLeastOneEmpty: true,
     noTwoPairs: true,
@@ -32,7 +31,6 @@ export class SymptomsService {
     allValid: true,
   };
 
-  
   removeSymptom(index: number) {
     const current = this.symptoms$.value;
     current.splice(index, 1);
@@ -79,11 +77,14 @@ export class SymptomsService {
       (symptom) => !symptom.isLast && symptom.value === 'Ж'
     );
 
+    var onlyOneCellLeft =
+      symptomTable.filter((x) => x.value == ALLOWED_SYMPTOMS[0] && x.isLast)
+        .length == 1;
     var hasEmpty1and2 = symptomTable.some(
       (x) => (x.layer == 1 || x.layer == 2) && x.value == ALLOWED_SYMPTOMS[0]
     );
 
-    if (hasEmpty1and2) {
+    if (hasEmpty1and2 && !onlyOneCellLeft) {
       // 5. Симптом А не может находиться в 3 столбце
       this.validationResults.aNotInThirdCol = !symptomTable.some(
         (symptom) => symptom.layer === 3 && symptom.value === 'А'
@@ -99,7 +100,7 @@ export class SymptomsService {
       (x) => (x.layer == 2 || x.layer == 3) && x.value == ALLOWED_SYMPTOMS[0]
     );
 
-    if (hasEmpty2and3) {
+    if (hasEmpty2and3 && !onlyOneCellLeft) {
       // 6. Симптом Б не может находиться в 1 столбце
       this.validationResults.bNotInFirstCol = !symptomTable.some(
         (symptom) => symptom.layer === 1 && symptom.value === 'Б'
@@ -114,7 +115,7 @@ export class SymptomsService {
       (x) => (x.layer == 2 || x.layer == 3) && x.value == ALLOWED_SYMPTOMS[0]
     );
 
-    if (hasEmpty1and3) {
+    if (hasEmpty1and3 && !onlyOneCellLeft) {
       // 7. Симптом В не может находиться в 2 столбце
       this.validationResults.vNotInSecondCol = !symptomTable.some(
         (symptom) => symptom.layer === 2 && symptom.value === 'В'
@@ -144,7 +145,12 @@ export class SymptomsService {
 
   getValidationMessage(): CalculationResult {
     if (this.validationResults.allValid) {
-      return { isCalculated: false, result: '', isDead: false };
+      return {
+        isCalculated: false,
+        result: '',
+        isDead: false,
+        healingTable: [],
+      };
     }
 
     const messages = [];
@@ -173,6 +179,7 @@ export class SymptomsService {
       isCalculated: false,
       result: `Найдены ошибки: ${messages.join(';')}`,
       isDead: true,
+      healingTable: [],
     };
   }
 

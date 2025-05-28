@@ -18,13 +18,13 @@
     <ion-buttons slot="end">
       <ion-button
         (click)="nextStep()"
-        *ngIf="currentStep != 0 && currentStep < 3 else calculate"
+        *ngIf="currentStep != 0 && currentStep < 3 else calculateTempl"
       >
         <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
       </ion-button>
 
-      <ng-template #calculate>
-        <ion-button> Лечить </ion-button>
+      <ng-template #calculateTempl>
+        <ion-button (click)="calculate()"> Лечить </ion-button>
       </ng-template>
     </ion-buttons>
   </ion-toolbar>

@@ -51,7 +51,7 @@ export const allowedSymptomsMask: MaskitoOptions = {
   mask: /^[А-ГДЖ]$/, // Регулярка для разрешённых символов
 };
 
-function getTextInParentheses(input: string): string | null {
+export const getTextInParentheses = (input: string): string | null => {
   const regex = /\(([^)]+)\)/;
   const match = input.match(regex);
   return match ? match[1] : null;

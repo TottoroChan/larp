@@ -5,6 +5,7 @@ import {
   ALLOWED_SYMPTOMS,
   antibioticCombinations,
   antisepticCombinations,
+  getTextInParentheses,
   immuneCombinations,
   painkillerCombinations,
 } from '@app/tabs/pathologic/utils/utils';
@@ -98,9 +99,9 @@ export class MedicineService {
     secondPart: string
   ): AddonItem {
     return combinations
-      .filter((item) => item.type === firstPart)
+      .filter((item) =>  getTextInParentheses(item.type) === firstPart)
       .flatMap((item) => item.addons)
-      .find((addon) => addon.type === secondPart);
+      .find((addon) => getTextInParentheses(addon.type) === secondPart);
   }
 
   public checkLimits(medicine: Medicine) {
@@ -118,7 +119,7 @@ export class MedicineService {
         const antibCount = currentList.filter(
           (x) => x.type == 'антибиотик'
         ).length;
-        return antibCount < this.immuneLimit$.value
+        return antibCount < this.antibLimit$.value
           ? ''
           : 'Достигнут лимит антибиотиков.';
         break;
