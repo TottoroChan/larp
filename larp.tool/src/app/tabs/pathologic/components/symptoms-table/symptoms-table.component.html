@@ -1,15 +1,18 @@
-<div *ngIf="symptomsTable != null">
+<div class="symptoms-page" *ngIf="symptomsTable != null">
   <ion-text>
-    <h3>Симптомы 1 слой:</h3>
+    <h4>Симптомы 1 слой:</h4>
   </ion-text>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngFor="let layer of firstLayer(); index as i">
       <ion-col>
         <ion-list>
           <ion-select
             fill="outline"
-            placeholder="Выберите симптом"
-            [(ngModel)]="firstLayer()[0].value"
+            [(ngModel)]="layer.value"
+            okText="Выбрать"
+            cancelText="Отмена"
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
           >
             <ion-select-option
               *ngFor="let symptom of allowedSymptoms; index as i"
@@ -20,89 +23,54 @@
         </ion-list>
       </ion-col>
     </ion-row>
-    <ion-row>
+  </ion-grid>
+  <ion-text>
+    <h4>Симптомы 2 слой:</h4>
+  </ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let layer of secondLayer(); index as i">
       <ion-col>
-        <ion-select
-          fill="outline"
-          placeholder="Выберите симптом"
-          [(ngModel)]="firstLayer()[1].value"
-        >
-          <ion-select-option
-            *ngFor="let symptom of allowedSymptoms; index as i"
-            [value]="symptom"
-            >{{ symptom }}</ion-select-option
+        <ion-list>
+          <ion-select
+            fill="outline"
+            [(ngModel)]="layer.value"
+            okText="Выбрать"
+            cancelText="Отмена"
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
           >
-        </ion-select>
+            <ion-select-option
+              *ngFor="let symptom of allowedSymptoms; index as i"
+              [value]="symptom"
+              >{{ symptom }}</ion-select-option
+            >
+          </ion-select>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-text>
-    <h3>Симптомы 2 слой:</h3>
+    <h4>Симптомы 3 слой:</h4>
   </ion-text>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngFor="let layer of thirdLayer(); index as i">
       <ion-col>
-        <ion-select
-          fill="outline"
-          placeholder="Выберите симптом"
-          [(ngModel)]="secondLayer()[0].value"
-        >
-          <ion-select-option
-            *ngFor="let symptom of allowedSymptoms; index as i"
-            [value]="symptom"
-            >{{ symptom }}</ion-select-option
+        <ion-list>
+          <ion-select
+            fill="outline"
+            [(ngModel)]="layer.value"
+            okText="Выбрать"
+            cancelText="Отмена"
+            [interfaceOptions]="customActionSheetOptions"
+            interface="action-sheet"
           >
-        </ion-select>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-select
-          fill="outline"
-          placeholder="Выберите симптом"
-          [(ngModel)]="secondLayer()[1].value"
-        >
-          <ion-select-option
-            *ngFor="let symptom of allowedSymptoms; index as i"
-            [value]="symptom"
-            >{{ symptom }}</ion-select-option
-          >
-        </ion-select>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-text>
-    <h3>Симптомы 3 слой:</h3>
-  </ion-text>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-select
-          fill="outline"
-          placeholder="Выберите симптом"
-          [(ngModel)]="thirdLayer()[0].value"
-        >
-          <ion-select-option
-            *ngFor="let symptom of allowedSymptoms; index as i"
-            [value]="symptom"
-            >{{ symptom }}</ion-select-option
-          >
-        </ion-select>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-select
-          fill="outline"
-          placeholder="Выберите симптом"
-          [(ngModel)]="thirdLayer()[1].value"
-        >
-          <ion-select-option
-            *ngFor="let symptom of allowedSymptoms; index as i"
-            [value]="symptom"
-            >{{ symptom }}</ion-select-option
-          >
-        </ion-select>
+            <ion-select-option
+              *ngFor="let symptom of allowedSymptoms; index as i"
+              [value]="symptom"
+              >{{ symptom }}</ion-select-option
+            >
+          </ion-select>
+        </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>

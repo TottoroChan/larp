@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
-import { ALLOWED_SYMPTOMS, allowedSymptomsMask } from '@app/tabs/pathologic/utils/utils';
+import {
+  ALLOWED_SYMPTOMS,
+  allowedSymptomsMask,
+} from '@app/tabs/pathologic/utils/utils';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map } from 'rxjs';
@@ -22,6 +25,11 @@ export class SymptomsTableComponent implements OnInit {
 
   allowedSymptoms = ALLOWED_SYMPTOMS;
 
+  customActionSheetOptions = {
+    header: 'Выберите симптом:',
+    cssClass: 'custom-selector'
+  };
+
   constructor(
     private symptomsService: SymptomsService,
     private route: ActivatedRoute
@@ -37,8 +45,8 @@ export class SymptomsTableComponent implements OnInit {
   }
 
   getTextInParentheses(input: string): string | null {
-  const regex = /\(([^)]+)\)/;
-  const match = input.match(regex);
-  return match ? match[1] : null;
-}
+    const regex = /\(([^)]+)\)/;
+    const match = input.match(regex);
+    return match ? match[1] : null;
+  }
 }

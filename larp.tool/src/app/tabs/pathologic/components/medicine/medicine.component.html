@@ -6,6 +6,10 @@
         fill="outline"
         placeholder="Ингредиент 1"
         [(ngModel)]="medPartFirst"
+        okText="Выбрать"
+        cancelText="Отмена"
+        [interfaceOptions]="customActionSheetOptions"
+        interface="action-sheet"
       >
         <ion-select-option
           *ngFor="let med of allowedMeds; index as i"
@@ -14,12 +18,17 @@
         >
       </ion-select>
       <ion-select
+        [disabled]="!medPartFirst"
         fill="outline"
         placeholder="Ингредиент 2"
         [(ngModel)]="medPartSecond"
+        okText="Выбрать"
+        cancelText="Отмена"
+        [interfaceOptions]="customActionSheetOptions"
+        interface="action-sheet"
       >
         <ion-select-option
-          *ngFor="let med of allowedMeds; index as i"
+          *ngFor="let med of allowedSecondPart(); index as i"
           [value]="med"
           >{{ med }}</ion-select-option
         >
@@ -30,9 +39,10 @@
     </div>
     <div class="meds-toolbar__info">
       антибиотики:
-      {{ antibioticsCount() }}/{{ antibLimit }} иммунники:
-      {{ immunesCount }}/{{ immuneLimit }} антисептики:
-      {{ antisepticsCount() }} обезболивающее:
+      {{ antibioticsCount() }}/{{ antibLimit }} иммунники: {{ immunesCount }}/{{
+        immuneLimit
+      }}
+      антисептики: {{ antisepticsCount() }} обезболивающее:
       {{ painkillerCount() }}
     </div>
   </div>

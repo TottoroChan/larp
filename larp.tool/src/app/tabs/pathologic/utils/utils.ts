@@ -55,7 +55,7 @@ export const getTextInParentheses = (input: string): string | null => {
   const regex = /\(([^)]+)\)/;
   const match = input.match(regex);
   return match ? match[1] : null;
-}
+};
 
 export const immuneCombinations: CombinationItem[] = [
   {
@@ -171,3 +171,23 @@ export const painkillerCombinations: CombinationItem[] = [
     ],
   },
 ];
+
+export const findAllowedMedicineParts = (firstPart: string): string[] => {
+  if (firstPart) {
+    return [
+      ...medsParts(firstPart, immuneCombinations),
+      ...medsParts(firstPart, antibioticCombinations),
+      ...medsParts(firstPart, antisepticCombinations),
+      ...medsParts(firstPart, painkillerCombinations),
+    ];
+  }
+
+  return [];
+};
+
+const medsParts = (firstPart: string, combination: CombinationItem[]) => {
+  return combination
+    .filter((item) => getTextInParentheses(item.type) === firstPart)
+    .flatMap((item) => item.addons)
+    .flatMap((addon) => getTextInParentheses(addon.type));
+};

@@ -5,15 +5,6 @@
   --rules-text-highlight-color: #fffca6;
   --rule-text-color: #000;
 
-  /* tools */
-  --doctors-success-result-background-color: #ffffff8f;
-  --doctors-success-result-span-color: #858585;
-  --doctors-input-background: #42392173;
-  --doctors-fail-result-color: #620101;
-  --mad-science-checkbox-color: #332b22;
-  --mad-science-important-color: #9d0000;
-  --mad-science-subtitile-color: #262626;
-
   /* main */
   --custom-button-text-color: #cdc4c7;
   --custom-button-background-color: #c3c3c3;
@@ -22,11 +13,164 @@
   --toolbar-text-color: #cbc67e;
   --toolbar-master-button-text-color: #8a7e76;
   --toolbar-search-input-background: #ceb692;
+
+  --ion-color-primary: #fce898;
+  --ion-color-primary-rgb: 252, 232, 152;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #decc86;
+  --ion-color-primary-tint: #fceaa2;
+
+  --ion-color-secondary: #987a5a;
+  --ion-color-secondary-rgb: 152, 122, 90;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #866b4f;
+  --ion-color-secondary-tint: #a2876b;
+
+  --ion-color-tertiary: #9567a2;
+  --ion-color-tertiary-rgb: 149, 103, 162;
+  --ion-color-tertiary-contrast: #000000;
+  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary-shade: #835b8f;
+  --ion-color-tertiary-tint: #a076ab;
+
+  --ion-color-success: #4e8d55;
+  --ion-color-success-rgb: 78, 141, 85;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #457c4b;
+  --ion-color-success-tint: #609866;
+
+  --ion-color-warning: #939759;
+  --ion-color-warning-rgb: 147, 151, 89;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #81854e;
+  --ion-color-warning-tint: #9ea16a;
+
+  --ion-color-danger: #864646;
+  --ion-color-danger-rgb: 134, 70, 70;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #763e3e;
+  --ion-color-danger-tint: #925959;
+
+  --ion-color-light: #f6f8fc;
+  --ion-color-light-rgb: 246, 248, 252;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #d8dade;
+  --ion-color-light-tint: #f7f9fc;
+
+  --ion-color-medium: #5f5f5f;
+  --ion-color-medium-rgb: 95, 95, 95;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #545454;
+  --ion-color-medium-tint: #6f6f6f;
+
+  --ion-color-dark: #2f2f2f;
+  --ion-color-dark-rgb: 47, 47, 47;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #292929;
+  --ion-color-dark-tint: #444444;
+
+  --ion-background-color: #431909;
+  --ion-toolbar-color: #fce898;
+  --ion-text-color: #fce898;
+  --custom-button-text-color: #fce898;
+  --alert-color: #fce898;
+  --alert-border-color: #fce898;
 }
 
+:host {
+  --border-color: #fce898;
+}
+
+@font-face {
+  font-family: "MorFont";
+  src: url("../assets/fonts/ofont.ru_Dudka.ttf") format("truetype"); /* Safari, Android, iOS */
+}
 
 * {
-font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-family: "MorFont", sans-serif;
+}
+
+ion-select {
+  --placeholder-color: var(--ion-text-color);
+  --placeholder-opacity: 1;
+  width: 100%;
+  justify-content: center;
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+  flex: 0 0 auto;
+}
+
+ion-select::part(placeholder)::first-letter {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+ion-select::part(text) {
+  color: var(--ion-text-color);
+}
+
+ion-select::part(icon) {
+  color: var(--ion-text-color);
+  opacity: 1;
+}
+
+.custom-selector {
+  --backdrop-opacity: 0.6;
+  --button-color-hover: var(--ion-text-color);
+
+  /* Стили для заголовка */
+  .action-sheet-title {
+    color: var(--ion-text-color);
+    text-align: center;
+  }
+
+  /* Стили для кнопок */
+  .action-sheet-button {
+    color: var(--ion-color-secondary);
+    font-weight: 500;
+
+    &.ion-focused.sc-ion-action-sheet-md {
+      color: var(--ion-text-color);
+    }
+
+    &.action-sheet-destructive {
+      color: var(--ion-color-danger);
+    }
+
+    &.action-sheet-cancel {
+      color: var(--ion-color-text);
+      font-weight: bold;
+    }
+  }
+}
+
+@media (any-hover: hover) {
+  .action-sheet-button.sc-ion-action-sheet-md:not(:disabled):hover {
+    color: var(--button-color-hover);
+  }
+}
+
+:host(.select-fill-outline),
+.alert-radio-group.sc-ion-alert-md,
+.alert-checkbox-group.sc-ion-alert-md {
+  border-color: var(--ion-text-color);
+}
+.alert-radio-label.sc-ion-alert-md {
+  color: var(--ion-color-secondary);
+}
+
+[aria-checked="true"].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+  color: var(--ion-text-color);
 }
 
 .loader {

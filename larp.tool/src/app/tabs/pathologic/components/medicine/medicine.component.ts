@@ -1,6 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
-import { ALLOWED_MEDS } from '@app/tabs/pathologic/utils/utils';
+import {
+  ALLOWED_MEDS,
+  findAllowedMedicineParts,
+} from '@app/tabs/pathologic/utils/utils';
 import { Medicine } from '@app/tabs/pathologic/models/medicine-list.model';
 import { MedicineService } from '../../services/medicine.service';
 import { ToastController } from '@ionic/angular';
@@ -22,6 +25,7 @@ export class MedicineComponent {
   medPartFirst = '';
   medPartSecond = '';
 
+  allowedSecondPart = () => findAllowedMedicineParts(this.medPartFirst);
   antibioticsCount = () =>
     this.medsList.filter((x) => x.type == 'антибиотик').length;
   antisepticsCount = () =>
@@ -32,6 +36,11 @@ export class MedicineComponent {
   get immunesCount(): number {
     return this.medsList.filter((x) => x.type == 'иммуник').length;
   }
+
+  customActionSheetOptions = {
+    header: 'Выберите компонент:',
+    cssClass: 'custom-selector',
+  };
 
   constructor(
     private symptomsService: SymptomsService,
@@ -62,7 +71,7 @@ export class MedicineComponent {
     } else {
       const result = this.medicineService.checkLimits(medicine);
       if (result) {
-        this.presentToast(result)
+        this.presentToast(result);
       } else {
         this.medicineService.addMedicine(medicine);
       }
