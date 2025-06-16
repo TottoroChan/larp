@@ -1,26 +1,30 @@
 <div *ngIf="symptomsTable != null">
-  <ion-text>
-    <h3>Симптомы:</h3>
-  </ion-text>
-  <ion-grid class="centered-table">
-    <ion-row>
-      <ion-col class="" *ngFor="let row of firstRow()">
-        {{ row.value }}
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="" *ngFor="let row of secondRow()">
-        {{ row.value }}
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div *ngIf="symptomsTable.length">
+    <ion-text>
+      <h3>Симптомы:</h3>
+    </ion-text>
+    <ion-grid class="centered-table">
+      <ion-row>
+        <ion-col class="" *ngFor="let row of firstRow()">
+          {{ row.value }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="" *ngFor="let row of secondRow()">
+          {{ row.value }}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
-  <ion-text>
-    <h3>Принятые лекарства:</h3>
-  </ion-text>
-  <ion-list [inset]="true">
-    <ion-item *ngFor="let item of medsList; index as i">
-      <ion-label>{{ item.type }}: {{ item.value }}</ion-label>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="medsList.length">
+    <ion-text>
+      <h3>Принятые лекарства:</h3>
+    </ion-text>
+    <ion-list [inset]="true">
+      <ion-item *ngFor="let item of medsList; index as i">
+        <ion-label>{{ item.type }}: {{ item.value }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </div>

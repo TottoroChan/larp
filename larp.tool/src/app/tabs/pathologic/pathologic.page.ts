@@ -37,6 +37,7 @@ export class PathologicPageComponent {
 
       if (result.result != '') {
         this.navigateToResult(result);
+        return;
       }
     }
 
