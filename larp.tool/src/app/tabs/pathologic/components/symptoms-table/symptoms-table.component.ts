@@ -43,6 +43,11 @@ export class SymptomsTableComponent implements OnInit {
     });
   }
 
+  onValueChange() {
+    const hasValues = this.symptomsTable.some(x => x.value != ALLOWED_SYMPTOMS[0]);
+    this.symptomsService.canProceed(hasValues);
+  }
+
   getTextInParentheses(input: string): string | null {
     const regex = /\(([^)]+)\)/;
     const match = input.match(regex);

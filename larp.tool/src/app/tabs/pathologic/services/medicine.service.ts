@@ -20,6 +20,11 @@ export class MedicineService {
   private medicineList$ = new BehaviorSubject<Medicine[]>([]);
   private immuneLimit$ = new BehaviorSubject<number>(1);
   private antibLimit$ = new BehaviorSubject<number>(1);
+  canProceed$ = new BehaviorSubject<boolean>(false);
+
+  canProceed(hasValues: boolean) {
+    this.canProceed$.next(hasValues);
+  }
 
   getMeds() {
     return this.medicineList$.asObservable();

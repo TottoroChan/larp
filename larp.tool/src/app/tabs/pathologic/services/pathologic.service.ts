@@ -3,7 +3,10 @@ import { SymptomsService } from './symptoms.service';
 import { MedicineService } from './medicine.service';
 import { combineLatest, map, Observable } from 'rxjs';
 import { Medicine } from '../models/medicine-list.model';
-import { ALLOWED_SYMPTOMS, REQUIRED_POWER } from '@app/tabs/pathologic/utils/utils';
+import {
+  ALLOWED_SYMPTOMS,
+  REQUIRED_POWER,
+} from '@app/tabs/pathologic/utils/utils';
 import {
   CalculationResult,
   HealingTable,
@@ -14,11 +17,34 @@ import { SymptomTable } from '../models/symptom-table.model';
   providedIn: 'root',
 })
 export class PathologicService {
+  canProceedSymptoms$: Observable<boolean>;
+  canProceedMedicine$: Observable<boolean>;
+
   constructor(
     private symptomsService: SymptomsService,
     private medicineService: MedicineService
-  ) {}
+  ) {
+    this.canProceedSymptoms$ = this.symptomsService.canProceed$;
+    this.canProceedMedicine$ = this.medicineService.canProceed$;
+  }
 
+  canProceed(currentStep: number) {
+    return combineLatest([
+      this.canProceedSymptoms$,
+      this.canProceedMedicine$,
+    ]).pipe(
+      map(([symptoms, meds]) => {
+        switch (currentStep) {
+          case 1:
+            return symptoms;
+          case 2:
+            return meds;
+          default:
+            return true;
+        }
+      })
+    );
+  }
 
   calculate(): Observable<CalculationResult> {
     return combineLatest([
@@ -45,12 +71,12 @@ export class PathologicService {
     );
   }
 
-  checkSymptomsTable(): CalculationResult{
+  checkSymptomsTable(): CalculationResult {
     return this.symptomsService.checkSymptomsTable();
   }
 
   cleanUp() {
-    this.medicineService.cleanUp();    
+    this.medicineService.cleanUp();
     this.symptomsService.cleanUp();
   }
 

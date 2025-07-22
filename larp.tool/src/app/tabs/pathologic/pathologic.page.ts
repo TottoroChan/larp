@@ -5,7 +5,7 @@ import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SymptomsService } from './services/symptoms.service';
 import { CalculationResult } from './models/calculation-result.model';
-import { first, pipe } from 'rxjs';
+import { BehaviorSubject, first, Observable, pipe } from 'rxjs';
 
 @Component({
   selector: 'app-pathologic',
@@ -14,19 +14,28 @@ import { first, pipe } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class PathologicPageComponent {
+  canProceed: boolean;
   getTitle = getWizardTitle;
 
   currentStep = 1;
+  private stepChanges$ = new BehaviorSubject<number>(this.currentStep);
 
   constructor(
     private pathologicService: PathologicService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.stepChanges$.subscribe((step) => {
+      this.pathologicService.canProceed(step).subscribe((can) => {
+        this.canProceed = can;
+      });
+    });
+  }
 
   goToStart() {
     this.pathologicService.cleanUp();
     this.currentStep = 1;
+    this.stepChanges$.next(this.currentStep);
     this.router.navigate([`./step${this.currentStep}`], {
       relativeTo: this.activatedRoute,
     });
@@ -43,6 +52,7 @@ export class PathologicPageComponent {
     }
 
     this.currentStep++;
+    this.stepChanges$.next(this.currentStep);
     this.router.navigate([`./step${this.currentStep}`], {
       relativeTo: this.activatedRoute,
     });
@@ -50,6 +60,7 @@ export class PathologicPageComponent {
 
   private navigateToResult(result: CalculationResult) {
     this.currentStep = 0;
+    this.stepChanges$.next(this.currentStep);
     this.router.navigate([`./result`], {
       relativeTo: this.activatedRoute,
       state: result,
@@ -58,6 +69,7 @@ export class PathologicPageComponent {
 
   prevStep() {
     this.currentStep--;
+    this.stepChanges$.next(this.currentStep);
     this.router.navigate([`./step${this.currentStep}`], {
       relativeTo: this.activatedRoute,
     });

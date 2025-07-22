@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
 import {
   ALLOWED_MEDS,
   findAllowedMedicineParts,
@@ -8,7 +7,6 @@ import { Medicine } from '@app/tabs/pathologic/models/medicine-list.model';
 import { MedicineService } from '../../services/medicine.service';
 import { ToastController } from '@ionic/angular';
 import { combineLatest } from 'rxjs';
-import { SymptomsService } from '../../services/symptoms.service';
 
 @Component({
   selector: 'app-pathologic-medicine',
@@ -43,7 +41,6 @@ export class MedicineComponent {
   };
 
   constructor(
-    private symptomsService: SymptomsService,
     private medicineService: MedicineService,
     private toastController: ToastController
   ) {}
@@ -57,6 +54,7 @@ export class MedicineComponent {
       this.medsList = meds;
       this.immuneLimit = immuneLimit;
       this.antibLimit = antibLimit;
+      this.updateProceedState();
     });
   }
 
@@ -73,6 +71,7 @@ export class MedicineComponent {
       if (result) {
         this.presentToast(result);
       } else {
+        this.updateProceedState();
         this.medicineService.addMedicine(medicine);
       }
     }
@@ -92,11 +91,13 @@ export class MedicineComponent {
     await toast.present();
   }
 
-  onDeleteSymptom(index: number) {
-    this.symptomsService.removeSymptom(index);
+  onDeleteMed(index: number) {
+    this.updateProceedState();
+    this.medicineService.removeMed(index);
   }
 
-  onDeleteMed(index: number) {
-    this.medicineService.removeMed(index);
+  private updateProceedState() {
+    const hasValues = this.medsList.length > 0;
+    this.medicineService.canProceed(hasValues);
   }
 }

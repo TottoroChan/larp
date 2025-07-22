@@ -20,6 +20,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button
+        [disabled]="!canProceed"
         class="mor-next-button"
         (click)="nextStep()"
         *ngIf="currentStep != 0 && currentStep < 3 else calculateTempl"

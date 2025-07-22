@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { CalculationResult } from '@app/tabs/pathologic/models/calculation-result.model';
 import { ALLOWED_SYMPTOMS } from '@app/tabs/pathologic/utils/utils';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, map, merge, Subject, withLatestFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SymptomsService {
   private symptoms$ = new BehaviorSubject<SymptomTable[]>([]);
+  canProceed$ = new BehaviorSubject<boolean>(false);
 
   validationResults = {
     atLeastOneEmpty: true,
@@ -23,6 +24,10 @@ export class SymptomsService {
     eOnlyInThirdCol: true,
     allValid: true,
   };
+
+  canProceed(hasValues: boolean) {
+    this.canProceed$.next(hasValues);
+  }
 
   constructor(){
     this.cleanUp();
