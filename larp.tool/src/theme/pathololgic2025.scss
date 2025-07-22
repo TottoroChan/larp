@@ -83,6 +83,9 @@
   --custom-button-text-color: #fce898;
   --alert-color: #fce898;
   --alert-border-color: #fce898;
+
+  --ion-toolbar-background: var(--ion-background-color);
+  --ion-overlay-background-color:  var(--ion-background-color);
 }
 
 :host {
