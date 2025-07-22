@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
 import {
   ALLOWED_SYMPTOMS,
   allowedSymptomsMask,

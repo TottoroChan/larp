@@ -65,6 +65,10 @@ export class MedicineService {
     this.medicineList$.next([...current]);
   }
 
+  cleanUp() {
+    this.medicineList$.next([]);
+  }
+
   public identifyMedicine(
     firstPart: string,
     secondPart: string

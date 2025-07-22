@@ -1,5 +1,6 @@
 import { MaskitoOptions } from '@maskito/core';
 import { CombinationItem } from '@app/tabs/pathologic/models/combination-item.model';
+import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 
 export const validateSymptomCode = (control: any) => {
   const value = control.value;
@@ -191,3 +192,22 @@ const medsParts = (firstPart: string, combination: CombinationItem[]) => {
     .flatMap((item) => item.addons)
     .flatMap((addon) => getTextInParentheses(addon.type));
 };
+
+ export const REQUIRED_POWER: Record<string, number> = {
+    Ж: 5,
+    А: 4,
+    Б: 4,
+    В: 4,
+    Г: 3,
+    Д: 3,
+    Е: 3,
+  };
+
+ export const DEFAULT_SYMPTOMS_TABLE : SymptomTable[] = [
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
+  ]

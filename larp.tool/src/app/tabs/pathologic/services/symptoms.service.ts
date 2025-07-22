@@ -8,14 +8,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SymptomsService {
-  private symptoms$ = new BehaviorSubject<SymptomTable[]>([
-    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: false },
-    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: true },
-    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: false },
-    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: true },
-    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: false },
-    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
-  ]);
+  private symptoms$ = new BehaviorSubject<SymptomTable[]>([]);
 
   validationResults = {
     atLeastOneEmpty: true,
@@ -31,6 +24,10 @@ export class SymptomsService {
     allValid: true,
   };
 
+  constructor(){
+    this.cleanUp();
+  }
+
   removeSymptom(index: number) {
     const current = this.symptoms$.value;
     current.splice(index, 1);
@@ -41,8 +38,15 @@ export class SymptomsService {
     return this.symptoms$.asObservable();
   }
 
-  clearSymptoms() {
-    this.symptoms$.next([]);
+  cleanUp() {
+    this.symptoms$.next([
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 1, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 2, isLast: true },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: false },
+    { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
+  ]);
   }
 
   public checkSymptomsTable(): CalculationResult {

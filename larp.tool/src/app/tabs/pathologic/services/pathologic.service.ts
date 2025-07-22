@@ -3,7 +3,7 @@ import { SymptomsService } from './symptoms.service';
 import { MedicineService } from './medicine.service';
 import { combineLatest, map, Observable } from 'rxjs';
 import { Medicine } from '../models/medicine-list.model';
-import { ALLOWED_SYMPTOMS } from '@app/tabs/pathologic/utils/utils';
+import { ALLOWED_SYMPTOMS, REQUIRED_POWER } from '@app/tabs/pathologic/utils/utils';
 import {
   CalculationResult,
   HealingTable,
@@ -19,15 +19,6 @@ export class PathologicService {
     private medicineService: MedicineService
   ) {}
 
-  REQUIRED_POWER: Record<string, number> = {
-    Ж: 5,
-    А: 4,
-    Б: 4,
-    В: 4,
-    Г: 3,
-    Д: 3,
-    Е: 3,
-  };
 
   calculate(): Observable<CalculationResult> {
     return combineLatest([
@@ -52,6 +43,15 @@ export class PathologicService {
         };
       })
     );
+  }
+
+  checkSymptomsTable(): CalculationResult{
+    return this.symptomsService.checkSymptomsTable();
+  }
+
+  cleanUp() {
+    this.medicineService.cleanUp();    
+    this.symptomsService.cleanUp();
   }
 
   private prepareHealingTable(symptoms: SymptomTable[]): HealingTable[] {
@@ -80,8 +80,8 @@ export class PathologicService {
           symptom: symptom.value,
           isPair: hasPair,
           requiredPower: hasPair
-            ? this.REQUIRED_POWER[symptom.value] * 2
-            : this.REQUIRED_POWER[symptom.value],
+            ? REQUIRED_POWER[symptom.value] * 2
+            : REQUIRED_POWER[symptom.value],
           layer: symptom.layer,
           isLast: symptom.isLast,
           isHealed: false,
