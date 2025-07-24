@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { CalculationResult } from '@app/tabs/pathologic/models/calculation-result.model';
 import { ALLOWED_SYMPTOMS } from '@app/tabs/pathologic/utils/utils';
-import { BehaviorSubject, distinctUntilChanged, map, merge, Subject, withLatestFrom } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -86,14 +86,12 @@ export class SymptomsService {
       (symptom) => !symptom.isLast && symptom.value === 'Ж'
     );
 
-    var onlyOneCellLeft =
-      symptomTable.filter((x) => x.value == ALLOWED_SYMPTOMS[0] && x.isLast)
-        .length == 1;
-    var hasEmpty1and2 = symptomTable.some(
+    var empty1and2 = symptomTable.filter(
       (x) => (x.layer == 1 || x.layer == 2) && x.value == ALLOWED_SYMPTOMS[0]
     );
+    var empty1and2isNotLast = empty1and2.filter((x) => x.isLast).length < empty1and2.length
 
-    if (hasEmpty1and2 && !onlyOneCellLeft) {
+    if (empty1and2.length && empty1and2isNotLast) {
       // 5. Симптом А не может находиться в 3 столбце
       this.validationResults.aNotInThirdCol = !symptomTable.some(
         (symptom) => symptom.layer === 3 && symptom.value === 'А'
@@ -105,11 +103,12 @@ export class SymptomsService {
       );
     }
 
-    var hasEmpty2and3 = symptomTable.some(
+    var empty2and3 = symptomTable.filter(
       (x) => (x.layer == 2 || x.layer == 3) && x.value == ALLOWED_SYMPTOMS[0]
     );
+    var empty2and3isNotLast = empty2and3.filter((x) => x.isLast).length < empty2and3.length
 
-    if (hasEmpty2and3 && !onlyOneCellLeft) {
+    if (empty2and3.length && empty2and3isNotLast) {
       // 6. Симптом Б не может находиться в 1 столбце
       this.validationResults.bNotInFirstCol = !symptomTable.some(
         (symptom) => symptom.layer === 1 && symptom.value === 'Б'
@@ -120,11 +119,12 @@ export class SymptomsService {
       );
     }
 
-    var hasEmpty1and3 = symptomTable.some(
+    var empty1and3 = symptomTable.filter(
       (x) => (x.layer == 2 || x.layer == 3) && x.value == ALLOWED_SYMPTOMS[0]
     );
+    var empty1and3isNotLast = empty1and3.filter((x) => x.isLast).length < empty2and3.length
 
-    if (hasEmpty1and3 && !onlyOneCellLeft) {
+    if (empty1and3.length && empty1and3isNotLast) {
       // 7. Симптом В не может находиться в 2 столбце
       this.validationResults.vNotInSecondCol = !symptomTable.some(
         (symptom) => symptom.layer === 2 && symptom.value === 'В'
