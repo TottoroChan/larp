@@ -1,21 +1,21 @@
-  .centered-table {
-    border: 1px solid #ddd; /* Внешняя граница таблицы */
+.centered-table {
+    border: 1px solid var(--ion-color-primary);
 
-    ion-row {
-      border-bottom: 1px solid #ddd;
+  ion-row {
+    border-bottom: 1px solid var(--ion-color-primary);
 
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    ion-col {
-      border-right: 1px solid #ddd;
-      padding: 16px;
-      text-align: center;
-
-      &:last-child {
-        border-right: none;
-      }
+    &:last-child {
+      border-bottom: none;
     }
   }
+
+  ion-col {
+    border-right: 1px solid var(--ion-color-primary);
+    padding: 16px;
+    text-align: center;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+}

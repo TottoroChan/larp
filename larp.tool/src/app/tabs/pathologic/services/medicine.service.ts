@@ -100,6 +100,7 @@ export class MedicineService {
 
   cleanUp() {
     this.medicineList$.next([]);
+    this.canProceed(false);
   }
 
   public identifyMedicine(

@@ -52,6 +52,7 @@ export class SymptomsService {
     { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: false },
     { value: ALLOWED_SYMPTOMS[0], layer: 3, isLast: true },
   ]);
+    this.canProceed(false);
   }
 
   public checkSymptomsTable(): CalculationResult {

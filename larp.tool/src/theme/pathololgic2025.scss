@@ -86,10 +86,11 @@
 
   --ion-toolbar-background: var(--ion-background-color);
   --ion-overlay-background-color:  var(--ion-background-color);
+  --ion-item-color:  #fce898;
 }
 
 :host {
-  --border-color: #fce898;
+  --border-color: #fce898 !important;
 }
 
 @font-face {
@@ -102,6 +103,7 @@
 }
 
 ion-select {
+  --border-color: #fce898 !important;
   --placeholder-color: var(--ion-text-color);
   --placeholder-opacity: 1;
   width: 100%;
