@@ -23,7 +23,7 @@ export class MedicineComponent {
   medPartFirst = '';
   medPartSecond = '';
 
-  allowedSecondPart = () => findAllowedMedicineParts(this.medPartFirst);
+  //allowedSecondPart = () => findAllowedMedicineParts(this.medPartFirst);
   antibioticsCount = () =>
     this.medsList.filter((x) => x.type == 'антибиотик').length;
   antisepticsCount = () =>
@@ -67,13 +67,8 @@ export class MedicineComponent {
     if (!medicine) {
       this.presentToast('Такой комбинации ингредиентов не существует');
     } else {
-      const result = this.medicineService.checkLimits(medicine);
-      if (result) {
-        this.presentToast(result);
-      } else {
-        this.updateProceedState();
-        this.medicineService.addMedicine(medicine);
-      }
+      this.updateProceedState();
+      this.medicineService.addMedicine(medicine);
     }
 
     this.medPartFirst = '';

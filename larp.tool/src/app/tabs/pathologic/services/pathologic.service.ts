@@ -185,7 +185,7 @@ export class PathologicService {
   private calculatePower(meds: Medicine[]) {
     let totalPower = [0, 0, 0];
 
-    meds.forEach((x) => {
+    meds.filter(x => !x.isUseless).forEach((x) => {
       switch (x.type) {
         case 'иммуник':
         case 'антибиотик':

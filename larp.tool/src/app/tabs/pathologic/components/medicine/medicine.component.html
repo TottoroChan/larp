@@ -4,7 +4,7 @@
     <div class="meds-toolbar__actions">
       <ion-select
         fill="outline"
-        placeholder="Ингредиент 1"
+        placeholder=" - "
         [(ngModel)]="medPartFirst"
         okText="Выбрать"
         cancelText="Отмена"
@@ -19,8 +19,7 @@
       </ion-select>
       <ion-select
         [disabled]="!medPartFirst"
-        fill="outline"
-        placeholder="Ингредиент 2"
+        placeholder=" - "
         [(ngModel)]="medPartSecond"
         okText="Выбрать"
         cancelText="Отмена"
@@ -28,7 +27,7 @@
         interface="action-sheet"
       >
         <ion-select-option
-          *ngFor="let med of allowedSecondPart(); index as i"
+          *ngFor="let med of allowedMeds; index as i"
           [value]="med"
           >{{ med }}</ion-select-option
         >

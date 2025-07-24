@@ -49,6 +49,34 @@ export class MedicineService {
     if (medicine.type == 'антисептик') {
       this.immuneLimit$.next(immuneLimit + 1);
     }
+
+    switch (medicine.type) {
+      case 'обезболивающее':
+        this.antibLimit$.next(antibLimit + 1);
+        break;
+      case 'антисептик':
+        this.immuneLimit$.next(immuneLimit + 1);
+        break;
+      case 'антибиотик':
+        let antibCount = this.medicineList$
+          .getValue()
+          .filter((x) => x.type == 'антибиотик').length;
+        if (antibCount >= this.antibLimit$.value) {
+          medicine.isUseless = true;
+        }
+        break;
+      case 'иммуник':
+        let immuneCount = this.medicineList$
+          .getValue()
+          .filter((x) => x.type == 'иммуник').length;
+        if (immuneCount >= this.immuneLimit$.value) {
+          medicine.isUseless = true;
+        }
+        break;
+      default:
+        break;
+    }
+
     this.medicineList$.next([...current, medicine]);
   }
 
@@ -61,10 +89,10 @@ export class MedicineService {
     current.splice(index, 1);
 
     if (med.type == 'обезболивающее') {
-      this.antibLimit$.next(antibLimit++);
+      this.antibLimit$.next(antibLimit - 1);
     }
     if (med.type == 'антисептик') {
-      this.immuneLimit$.next(immuneLimit++);
+      this.immuneLimit$.next(immuneLimit - 1);
     }
 
     this.medicineList$.next([...current]);
@@ -78,6 +106,18 @@ export class MedicineService {
     firstPart: string,
     secondPart: string
   ): Medicine | null {
+    let result = this.identify(`${firstPart}${secondPart}`);
+    if (!result) {
+      result = this.identify(
+        `${secondPart}${firstPart}`,
+        `${firstPart}${secondPart}`
+      );
+    }
+
+    return result;
+  }
+
+  private identify(meds: string, originName: string = null): Medicine | null {
     const combinations: {
       type: 'иммуник' | 'антибиотик' | 'антисептик' | 'обезболивающее';
       source: CombinationItem[];
@@ -89,12 +129,17 @@ export class MedicineService {
     ];
 
     for (const combo of combinations) {
-      const medicine = this.findMedicine(combo.source, firstPart, secondPart);
+      const medicine = this.findMedicine(
+        combo.source,
+        meds.slice(0, 2),
+        meds.slice(2, 4)
+      );
       if (medicine) {
         return {
           type: combo.type,
-          value: `${firstPart}${secondPart}`,
+          value: originName ?? meds,
           power: medicine.power,
+          isUseless: false,
         };
       }
     }
@@ -108,7 +153,7 @@ export class MedicineService {
     secondPart: string
   ): AddonItem {
     return combinations
-      .filter((item) =>  getTextInParentheses(item.type) === firstPart)
+      .filter((item) => getTextInParentheses(item.type) === firstPart)
       .flatMap((item) => item.addons)
       .find((addon) => getTextInParentheses(addon.type) === secondPart);
   }
