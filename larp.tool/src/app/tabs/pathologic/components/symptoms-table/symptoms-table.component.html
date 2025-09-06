@@ -39,6 +39,7 @@
             cancelText="Отмена"
             [interfaceOptions]="customActionSheetOptions"
             interface="action-sheet"
+            (ionChange)="onValueChange()"
           >
             <ion-select-option
               *ngFor="let symptom of allowedSymptoms; index as i"
@@ -64,6 +65,7 @@
             cancelText="Отмена"
             [interfaceOptions]="customActionSheetOptions"
             interface="action-sheet"
+            (ionChange)="onValueChange()"
           >
             <ion-select-option
               *ngFor="let symptom of allowedSymptoms; index as i"

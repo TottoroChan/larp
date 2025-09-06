@@ -16,3 +16,8 @@
 .mor-back-button {
   transform: scaleX(-1) rotate(349deg);
 }
+
+.mor-next-button.button-disabled, 
+.mor-back-button.button-disabled{
+  opacity: 0.2;
+}
