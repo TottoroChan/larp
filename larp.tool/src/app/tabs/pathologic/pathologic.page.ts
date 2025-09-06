@@ -1,11 +1,14 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { getWizardTitle } from '@app/tabs/pathologic/utils/utils';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  getWizardTitle,
+  WITH_FIREBASE,
+} from '@app/tabs/pathologic/utils/utils';
 import { PathologicService } from '@app/tabs/pathologic/services/pathologic.service';
-import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SymptomsService } from './services/symptoms.service';
 import { CalculationResult } from './models/calculation-result.model';
-import { BehaviorSubject, first, Observable, pipe } from 'rxjs';
+import { BehaviorSubject, first } from 'rxjs';
+import { IonModal, ModalController } from '@ionic/angular';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-pathologic',
@@ -16,6 +19,9 @@ import { BehaviorSubject, first, Observable, pipe } from 'rxjs';
 export class PathologicPageComponent {
   canProceed: boolean;
   getTitle = getWizardTitle;
+  isWithFirebase = WITH_FIREBASE;
+
+  @ViewChild(IonModal) modal!: IonModal;
 
   currentStep = 1;
   private stepChanges$ = new BehaviorSubject<number>(this.currentStep);
@@ -23,7 +29,8 @@ export class PathologicPageComponent {
   constructor(
     private pathologicService: PathologicService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalCtrl: ModalController
   ) {
     this.stepChanges$.subscribe((step) => {
       this.pathologicService.canProceed(step).subscribe((can) => {
@@ -80,5 +87,22 @@ export class PathologicPageComponent {
       .calculate()
       .pipe(first())
       .subscribe((result) => this.navigateToResult(result));
+  }
+
+  cancelModal(data: any) {
+    this.modal.dismiss(null, 'cancel');
+  }
+
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: ModalComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      const message = `Hello, ${data}!`;
+    }
   }
 }

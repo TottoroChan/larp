@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{ getTitle(currentStep) }}</ion-title>
+    <ion-buttons *ngIf="isWithFirebase" slot="end">
+      <ion-button class="mor-admin-button" (click)="openModal()"></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

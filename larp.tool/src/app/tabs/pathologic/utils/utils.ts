@@ -3,7 +3,7 @@ import { CombinationItem } from '@app/tabs/pathologic/models/combination-item.mo
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 
 export  const PATHOLOGIC_DEBUG_MODE = true
-
+export  const WITH_FIREBASE = true
 export const validateSymptomCode = (control: any) => {
   const value = control.value;
   const isValid = /^[А-Ж][1-3][0-30]$/.test(value);
