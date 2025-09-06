@@ -8,14 +8,47 @@ on:
 
 jobs:
   deploy:
+    if: "contains(github.event.head_commit.message, '[deploy]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - run: cd larp.tool && npm install && npm run build --configuration=production
+      - run: cd larp.tool && npm install && npm run build
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: larp.tool/www  # Путь до собранного Angular-проекта
-          branch: gh-pages
+          folder: dist/larp.tool  # Путь до собранного Angular-проекта
+          branch: gh-pages11
+
+
+  add-html-file:
+    if: "contains(github.event.head_commit.message, '[deploy]')"
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout gh-pages11
+      uses: actions/checkout@v3
+      with:
+        ref: gh-pages11
+        path: gh-pages11
+    
+    - name: Create HTML file
+      run: |
+        cd gh-pages11
+        cat > 404.html << 'EOF'
+        <!DOCTYPE html>
+        <script>
+          sessionStorage.redirect = location.href;
+          location.replace('/larp/');
+        </script>
+        EOF
+    
+    - name: Commit and push
+      run: |
+        cd gh-pages11
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add 404.html
+        git commit -m "Add 404 [ci skip]"
+        git push
