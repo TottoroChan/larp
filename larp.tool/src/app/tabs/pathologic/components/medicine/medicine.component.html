@@ -37,7 +37,7 @@
         <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
       </ion-button>
     </div>
-    <div class="meds-toolbar__info">
+    <div *ngIf="isDebugMode" class="meds-toolbar__info">
       антибиотики:
       {{ antibioticsCount() }}/{{ antibLimit }} иммунники: {{ immunesCount }}/{{
         immuneLimit

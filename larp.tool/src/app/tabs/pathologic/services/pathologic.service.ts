@@ -5,6 +5,7 @@ import { combineLatest, map, Observable } from 'rxjs';
 import { Medicine } from '../models/medicine-list.model';
 import {
   ALLOWED_SYMPTOMS,
+  PATHOLOGIC_DEBUG_MODE,
   REQUIRED_POWER,
 } from '@app/tabs/pathologic/utils/utils';
 import {
@@ -146,15 +147,15 @@ export class PathologicService {
   private healSymptom(power: number, healingData: HealingTable) {
     if (healingData.requiredPower > 0) {
       if (healingData.requiredPower > power) {
-        healingData.result = `Силы лечения не хватает.
-                    Сила влияния:${power}
-                    Сложность ${healingData.isPair ? 'парного' : ''} симптома ${
-          healingData.symptom
-        }: ${healingData.requiredPower}`;
+        healingData.result = `Силы лечения не хватает.`;
+
+        if(PATHOLOGIC_DEBUG_MODE){
+           healingData.result += `\n Сила влияния: ${power}
+                    Сложность ${healingData.isPair ? 'парного' : ''} 
+                    симптома ${healingData.symptom}: ${healingData.requiredPower}`
+        }
       } else {
-        healingData.result = ` ${
-          healingData.isPair ? 'Парный симптом' : 'Симптом'
-        }${healingData.symptom} вылечен`;
+        healingData.result = ` ${healingData.isPair ? 'Парный симптом' : 'Симптом'} ${healingData.symptom} вылечен`;
         healingData.isHealed = true;
       }
     }

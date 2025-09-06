@@ -2,7 +2,8 @@
 
 <div *ngIf="calculationResult != null">
   <p>{{ calculationResult.isDead ? "Персонаж умер" : "" }}</p>
-  <p>{{ calculationResult.result }}</p>
+  
+  <p *ngIf="isDebugMode">{{ calculationResult.result }}</p>
 
   <div *ngIf="calculationResult.healingTable != null">
     <div *ngFor="let leyer of calculationResult.healingTable; index as i">

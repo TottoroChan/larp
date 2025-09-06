@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import {
   ALLOWED_MEDS,
-  findAllowedMedicineParts,
+  PATHOLOGIC_DEBUG_MODE,
 } from '@app/tabs/pathologic/utils/utils';
 import { Medicine } from '@app/tabs/pathologic/models/medicine-list.model';
 import { MedicineService } from '../../services/medicine.service';
@@ -23,7 +23,8 @@ export class MedicineComponent {
   medPartFirst = '';
   medPartSecond = '';
 
-  //allowedSecondPart = () => findAllowedMedicineParts(this.medPartFirst);
+  isDebugMode = PATHOLOGIC_DEBUG_MODE;
+
   antibioticsCount = () =>
     this.medsList.filter((x) => x.type == 'антибиотик').length;
   antisepticsCount = () =>
