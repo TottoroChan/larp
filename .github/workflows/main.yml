@@ -19,7 +19,7 @@ jobs:
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: larp.tool/www  # Путь до собранного Angular-проекта
-          branch: gh-pages11
+          branch: gh-pages
 
 
   add-html-file:
@@ -27,15 +27,15 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout gh-pages11
+    - name: Checkout gh-pages
       uses: actions/checkout@v3
       with:
-        ref: gh-pages11
-        path: gh-pages11
+        ref: gh-pages
+        path: gh-pages
     
     - name: Create HTML file
       run: |
-        cd gh-pages11
+        cd gh-pages
         cat > 404.html << 'EOF'
         <!DOCTYPE html>
         <script>
@@ -46,9 +46,9 @@ jobs:
     
     - name: Commit and push
       run: |
-        cd gh-pages11
+        cd gh-pages
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git add 404.html
-        git commit -m "Add 404 [ci skip]"
+        git commit -m "Add 404"
         git push
