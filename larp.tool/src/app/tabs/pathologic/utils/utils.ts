@@ -2,7 +2,7 @@ import { MaskitoOptions } from '@maskito/core';
 import { CombinationItem } from '@app/tabs/pathologic/models/combination-item.model';
 import { SymptomTable } from '@app/tabs/pathologic/models/symptom-table.model';
 
-export  const PATHOLOGIC_DEBUG_MODE = true
+export  const PATHOLOGIC_DEBUG_MODE = false
 
 export const validateSymptomCode = (control: any) => {
   const value = control.value;
