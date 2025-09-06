@@ -15,10 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - run: cd larp.tool && npm install && npm run build
+      - run: cd larp.tool && npm install && npm run build --configuration=production
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/larp.tool  # Путь до собранного Angular-проекта
+          folder: larp.tool/www  # Путь до собранного Angular-проекта
           branch: gh-pages11
 
 
